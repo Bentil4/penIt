@@ -1,0 +1,64 @@
+// Colors
+$primary: #3b5bfd;
+$primary-light: #eef2ff;
+$danger: #ef4444;
+$gray-100: #f8fafc;
+$gray-200: #e5e7eb;
+$gray-300: #d1d5db;
+$gray-500: #6b7280;
+$gray-700: #374151;
+$gray-900: #111827;
+$white: #ffffff;
+
+// Typography
+$font-family: "Inter", "Noto Serif", sans-serif;
+
+// Spacing
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 14px;
+
+// Shadows
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+/* COLORS */
+
+/* Neutral Colors */
+$color-neutral-950: #0e121b;
+$color-neutral-900: #191b25;
+$color-neutral-800: #232530;
+$color-neutral-700: #2b303b;
+$color-neutral-600: #525866;
+$color-neutral-500: #717784;
+$color-neutral-400: #99a0ae;
+$color-neutral-300: #cacfd8;
+$color-neutral-200: #e0e4ea;
+$color-neutral-100: #f3f5f8;
+$color-neutral-50: #f5f7fa;
+$color-neutral-0: #ffffff;
+
+/* Blue Colors */
+$color-blue-700: #2547d0;
+$color-blue-500: #335cff;
+$color-blue-50: #ebf1ff;
+
+/* Green Colors */
+$color-green-500: #21c16b;
+$color-green-100: #d1fbe9;
+
+/* Red Colors */
+$color-red-500: #fb3748;
+$color-red-100: #ffd5d8;
+
+$background: $color-neutral-100;
+$foreground: $color-neutral-950;
+$border-light: $color-neutral-200;
+$border: $color-neutral-300;
+$active-border: $color-neutral-950;
+$hover: $color-neutral-50;
+$primary: $color-blue-500;
+$primary-hover: $color-blue-700;
+$ring: $color-neutral-400;
+$separator: $color-neutral-200;
+$surface: $color-neutral-0;

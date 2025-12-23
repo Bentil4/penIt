@@ -1,0 +1,69 @@
+@use "./_variable" as *;
+
+.sidebar {
+  width: 260px;
+  padding: 1.5rem;
+  border-right: 1px solid $gray-200;
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+
+    li {
+      padding: 0.6rem 0.8rem;
+      border-radius: $radius-sm;
+      cursor: pointer;
+      font-weight: 500;
+      color: $gray-700;
+
+      &:hover {
+        background: $primary-light;
+      }
+
+      &.active {
+        background: $primary;
+        color: $white;
+      }
+    }
+  }
+
+  h4 {
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: $gray-500;
+    text-transform: uppercase;
+  }
+
+  .tags {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    .tag {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      padding: 0.3rem 0.6rem;
+      border-radius: $radius-sm;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    .tag-icon {
+      align-self: flex-end;
+    }
+
+    .tag:hover {
+      background: $gray-200;
+    }
+
+    span {
+      &:hover {
+        background: $primary;
+        color: $white;
+      }
+    }
+  }
+}

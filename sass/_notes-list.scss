@@ -1,0 +1,57 @@
+@use "./_variable" as *;
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100vh;
+  padding: 0 1.5rem;
+  overflow-y: auto;
+  border-right: 1px solid $border;
+  scrollbar-width: none;
+
+  #create-note {
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+  }
+  .note-card {
+    padding: 0.75rem;
+    border-radius: $radius-md;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.2s ease;
+
+    h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.95rem;
+    }
+
+    small {
+      color: $gray-500;
+      font-size: 0.7rem;
+    }
+
+    .tags {
+      margin-bottom: 0.3rem;
+
+      span {
+        font-size: 0.65rem;
+        background: $gray-200;
+        padding: 0.2rem 0.4rem;
+        border-radius: $radius-sm;
+        margin-right: 0.3rem;
+      }
+    }
+
+    &:hover {
+      background: $gray-100;
+    }
+
+    &.active {
+      background: $primary-light;
+      border-left: 4px solid $primary;
+    }
+  }
+}
