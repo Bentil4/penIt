@@ -110,3 +110,20 @@
     border: 1px solid gold;
   }
 }
+
+// Tablet View
+@media (min-width: 768px) and (max-width: 1023px) {
+  .note-view-container {
+    flex-direction: column;
+  }
+}
+.note-view {
+  width: 100%;
+  border-right: none;
+  border-bottom: 1px solid $border;
+}
+.right-side-bar {
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+}

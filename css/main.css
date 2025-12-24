@@ -79,6 +79,12 @@ main {
   width: 100%;
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .layout {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .sidebar {
   width: 260px;
   padding: 1.5rem;
@@ -135,6 +141,11 @@ main {
   color: #ffffff;
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .sidebar {
+    display: none;
+  }
+}
 .notes-list {
   display: flex;
   flex-direction: column;
@@ -184,6 +195,12 @@ main {
   border-left: 4px solid #335cff;
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .notes-list {
+    border-right: none;
+    border-bottom: 1px solid #cacfd8;
+  }
+}
 .note-view-container {
   width: 100%;
   display: flex;
@@ -283,6 +300,23 @@ main {
   border: 1px solid gold;
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .note-view-container {
+    flex-direction: column;
+  }
+}
+.note-view {
+  width: 100%;
+  border-right: none;
+  border-bottom: 1px solid #cacfd8;
+}
+
+.right-side-bar {
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .btn {
   padding: 0.55rem 1rem;
   border-radius: 10px;
@@ -309,6 +343,80 @@ main {
 }
 .btn:hover {
   opacity: 0.9;
+}
+
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #f3f5f8;
+  border-top: 1px solid #cacfd8;
+  padding: 0.5rem;
+  z-index: 1000;
+}
+.bottom-nav .nav-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.bottom-nav .nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  border: none;
+  background: none;
+  color: #0e121b;
+  font-size: 0.75rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.bottom-nav .nav-btn img {
+  width: 20px;
+  height: 20px;
+}
+.bottom-nav .nav-btn.active {
+  background: #eef2ff;
+  color: #335cff;
+}
+.bottom-nav .nav-btn:hover {
+  background: #f8fafc;
+}
+.bottom-nav .tags-popup {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background: #f3f5f8;
+  border: 1px solid #cacfd8;
+  border-bottom: none;
+  padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.bottom-nav .tag-item {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #cacfd8;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+.bottom-nav .tag-item:hover {
+  background: #eef2ff;
+}
+
+@media (max-width: 1023px) {
+  .bottom-nav {
+    display: block;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

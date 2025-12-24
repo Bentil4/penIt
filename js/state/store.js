@@ -5,6 +5,7 @@ export const store = {
   activeNote: [],
   activeNoteId: null,
   view: "ALL",
+  tagFilter: null,
 };
 
 export const saveState = () => {

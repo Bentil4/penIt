@@ -2,6 +2,7 @@ import { Sidebar } from "./components/Siderbar.js";
 import { NotesList } from "./components/NoteList.js";
 import { NoteView } from "./components/NoteView.js";
 import { SearchBar } from "./components/SearchBar.js";
+import { BottomNav } from "./components/BottomNav.js";
 import notesData from "./data/notes.js";
 import { store, saveState, loadState } from "./state/store.js";
 import { generateId } from "./utils/helpers.js";
@@ -10,10 +11,15 @@ loadState(notesData);
 
 const app = document.getElementById("app");
 
-const getVisibleNotes = () =>
-  store.notes.filter((note) =>
+const getVisibleNotes = () => {
+  let notes = store.notes.filter((note) =>
     store.view === "ARCHIVED" ? note.isArchived : !note.isArchived
   );
+  if (store.tagFilter) {
+    notes = notes.filter((note) => note.tags.includes(store.tagFilter));
+  }
+  return notes;
+};
 
 const render = () => {
   const notes = getVisibleNotes();
@@ -29,6 +35,7 @@ const render = () => {
         ${NoteView(activeNote, store.view === "ARCHIVED")}
       </div>
     </main>
+    ${BottomNav(allTags, store.view)}
   `;
 
   attachEvents();
@@ -63,8 +70,18 @@ const attachEvents = () => {
     item.onclick = () => {
       store.view = item.dataset.view;
       store.activeNoteId = null;
+      store.tagFilter = null;
       render();
     };
+  });
+
+  // Sidebar tags
+  document.querySelectorAll(".sidebar .tag span").forEach((span) => {
+    span.addEventListener("click", () => {
+      store.tagFilter = span.dataset.tag;
+      store.activeNoteId = null;
+      render();
+    });
   });
 
   document.getElementById("save-note")?.addEventListener("click", () => {
@@ -118,6 +135,30 @@ const attachEvents = () => {
     document.querySelector(".notes-list").innerHTML = filtered
       .map((n) => `<div class="note-card">${n.title}</div>`)
       .join("");
+  });
+
+  // Bottom Nav Events
+  document.querySelectorAll(".nav-btn[data-view]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      store.view = btn.dataset.view;
+      store.activeNoteId = null;
+      store.tagFilter = null;
+      render();
+    });
+  });
+
+  document.getElementById("tags-toggle")?.addEventListener("click", () => {
+    const popup = document.getElementById("tags-popup");
+    popup.style.display = popup.style.display === "none" ? "flex" : "none";
+  });
+
+  document.querySelectorAll(".tag-item").forEach((item) => {
+    item.addEventListener("click", () => {
+      store.tagFilter = item.dataset.tag;
+      store.activeNoteId = null;
+      document.getElementById("tags-popup").style.display = "none";
+      render();
+    });
   });
 };
 
