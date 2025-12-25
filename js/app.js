@@ -138,8 +138,32 @@ const attachEvents = () => {
     );
 
     document.querySelector(".notes-list").innerHTML = filtered
-      .map((n) => `<div class="note-card">${n.title}</div>`)
+      .map(
+        (n) => `
+        <div class="note-card" data-id="${n.id}">
+          <h4>${n.title || "Untitled"}</h4>
+          <small>
+            ${
+              n.tags.length > 0
+                ? `<div class="tags">${n.tags
+                    .map((tag) => `<span>${tag}</span>`)
+                    .join("")}</div>`
+                : ""
+            }
+            ${new Date(n.lastEdited).toLocaleDateString()}
+          </small>
+        </div>
+      `
+      )
       .join("");
+
+    document.querySelectorAll(".notes-list .note-card").forEach((card) => {
+      card.onclick = () => {
+        store.activeNoteId = card.dataset.id;
+        store.showSearchBar = false;
+        render();
+      };
+    });
   });
 
   // Bottom Nav Events
