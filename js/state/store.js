@@ -6,6 +6,8 @@ export const store = {
   activeNoteId: null,
   view: "ALL",
   tagFilter: null,
+  showSidebarOnTablet: false,
+  showSearchBar: false,
 };
 
 export const saveState = () => {

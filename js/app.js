@@ -26,17 +26,21 @@ const render = () => {
   const activeNote = notes.find((n) => n.id === store.activeNoteId);
 
   const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
+  const isMobileOrTablet = window.innerWidth < 1024;
   app.innerHTML = `
     ${Sidebar(allTags, store.view)}
     <main>
-      ${SearchBar()}
+      ${!isMobileOrTablet ? SearchBar() : ""}
       <div class="layout">
+        ${isMobileOrTablet && store.showSearchBar ? SearchBar(true) : ""}
         ${NotesList(notes, store.activeNoteId)}
         ${NoteView(activeNote, store.view === "ARCHIVED")}
       </div>
     </main>
     ${BottomNav(allTags, store.view)}
   `;
+
+  app.className = store.showSidebarOnTablet ? "show-sidebar-tablet" : "";
 
   attachEvents();
 };
@@ -80,6 +84,7 @@ const attachEvents = () => {
     span.addEventListener("click", () => {
       store.tagFilter = span.dataset.tag;
       store.activeNoteId = null;
+      store.showSidebarOnTablet = false;
       render();
     });
   });
@@ -147,9 +152,22 @@ const attachEvents = () => {
     });
   });
 
+  document.getElementById("search-toggle")?.addEventListener("click", () => {
+    store.showSearchBar = !store.showSearchBar;
+    render();
+    if (store.showSearchBar) {
+      setTimeout(() => document.getElementById("search-input")?.focus(), 0);
+    }
+  });
+
   document.getElementById("tags-toggle")?.addEventListener("click", () => {
-    const popup = document.getElementById("tags-popup");
-    popup.style.display = popup.style.display === "none" ? "flex" : "none";
+    if (window.innerWidth >= 768 && window.innerWidth <= 1023) {
+      store.showSidebarOnTablet = !store.showSidebarOnTablet;
+      render();
+    } else {
+      const popup = document.getElementById("tags-popup");
+      popup.style.display = popup.style.display === "none" ? "flex" : "none";
+    }
   });
 
   document.querySelectorAll(".tag-item").forEach((item) => {

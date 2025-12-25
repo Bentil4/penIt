@@ -146,6 +146,17 @@ main {
     display: none;
   }
 }
+.show-sidebar-tablet .sidebar {
+  display: block !important;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1001;
+  background: #f3f5f8;
+}
+
 .notes-list {
   display: flex;
   flex-direction: column;
@@ -354,7 +365,7 @@ main {
   background: #f3f5f8;
   border-top: 1px solid #cacfd8;
   padding: 0.5rem;
-  z-index: 1000;
+  z-index: 1002;
 }
 .bottom-nav .nav-buttons {
   display: flex;
@@ -380,7 +391,6 @@ main {
   height: 20px;
 }
 .bottom-nav .nav-btn.active {
-  background: #eef2ff;
   color: #335cff;
 }
 .bottom-nav .nav-btn:hover {

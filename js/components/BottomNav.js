@@ -9,6 +9,10 @@ export const BottomNav = (tags, activeView) => `
         <img src="./assets/images/icon-home.svg" alt="All Notes" />
         <span>All Notes</span>
       </button>
+      <button class="nav-btn" id="search-toggle">
+        <img src="./assets/images/icon-search.svg" alt="Search" />
+        <span>Search</span>
+      </button>
       <button class="nav-btn ${
         activeView === "ARCHIVED" ? "active" : ""
       }" data-view="ARCHIVED">
