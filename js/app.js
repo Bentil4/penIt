@@ -33,7 +33,11 @@ const render = () => {
       ${!isMobileOrTablet ? SearchBar() : ""}
       <div class="layout">
         ${isMobileOrTablet && store.showSearchBar ? SearchBar(true) : ""}
-        ${NotesList(notes, store.activeNoteId)}
+        ${
+          !isMobileOrTablet || !activeNote
+            ? NotesList(notes, store.activeNoteId)
+            : ""
+        }
         ${NoteView(activeNote, store.view === "ARCHIVED")}
       </div>
     </main>

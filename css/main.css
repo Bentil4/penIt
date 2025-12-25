@@ -85,6 +85,12 @@ main {
     flex-direction: column;
   }
 }
+@media (max-width: 767px) {
+  .layout {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .sidebar {
   width: 260px;
   padding: 1.5rem;
@@ -314,6 +320,7 @@ main {
 @media (min-width: 768px) and (max-width: 1023px) {
   .note-view-container {
     flex-direction: column;
+    height: 80vw;
   }
 }
 .note-view {
@@ -322,12 +329,24 @@ main {
   border-bottom: 1px solid #cacfd8;
 }
 
+.note-view .top-note {
+  height: 80vw;
+}
+
 .right-side-bar {
   width: 100%;
   flex-direction: row;
   justify-content: center;
 }
 
+@media (max-width: 767px) {
+  .note-view-container {
+    height: 80vw;
+  }
+  .note-view .top-note {
+    height: 80vw;
+  }
+}
 .btn {
   padding: 0.55rem 1rem;
   border-radius: 10px;
