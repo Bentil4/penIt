@@ -447,5 +447,210 @@ main {
     display: block;
   }
 }
+* {
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+.login {
+  background-color: #f3f5f8;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login__container {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+}
+.login__card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+.login__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.login__logo {
+  margin-bottom: 0.5rem;
+}
+.login__title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.login__subtitle {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+.login__field {
+  margin-bottom: 1.2rem;
+}
+.login__label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+.login__input {
+  width: 100%;
+  padding: 0.7rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #cacfd8;
+  outline: none;
+}
+.login__input:focus {
+  border-color: red;
+}
+.login__password-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.login__forgot {
+  font-size: 0.8rem;
+  color: #3b5bfd;
+  text-decoration: none;
+}
+.login__password-wrapper {
+  position: relative;
+}
+.login__toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.login__button {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.login__button--primary {
+  background-color: #3b5bfd;
+  color: #fff;
+  border: none;
+}
+.login__button--google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #fff;
+}
+.login__google-icon {
+  font-weight: bold;
+}
+.login__divider {
+  text-align: center;
+  margin: 0.2rem 0;
+  font-size: 0.8rem;
+  background: #cacfd8;
+}
+.login__divider span {
+  background: #f5f7fb;
+  padding: 0 0.5rem;
+  position: relative;
+  top: -0.7rem;
+}
+.login__divider::before {
+  content: "";
+  display: block;
+  border-top: 1px solid #e5e7eb;
+  width: 100%;
+  position: relative;
+  top: -0.5rem;
+  z-index: -1;
+}
+.login__divider__down {
+  text-align: center;
+  margin: 1.5rem 0;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+.login__footer {
+  text-align: center;
+  font-size: 0.85rem;
+}
+.login__signup {
+  color: #3b5bfd;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.forgot {
+  min-height: 100vh;
+  background-color: #f5f7fb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.forgot__container {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+}
+.forgot__card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+.forgot__header {
+  margin-bottom: 2rem;
+}
+.forgot__logo {
+  margin-bottom: 0.75rem;
+}
+.forgot__title {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+.forgot__subtitle {
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+.forgot__field {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+.forgot__label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+.forgot__input {
+  width: 100%;
+  padding: 0.7rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  outline: none;
+}
+.forgot__input:focus {
+  border-color: #3b5bfd;
+}
+.forgot__button {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+}
+.forgot__button--primary {
+  background-color: #3b5bfd;
+  color: #fff;
+}
 
 /*# sourceMappingURL=main.css.map */
