@@ -4,6 +4,7 @@ $primary-color: #3b5bfd;
 $border-color: #e5e7eb;
 $text-muted: #6b7280;
 $bg-color: #f5f7fb;
+$error-color: #ef4444;
 
 * {
   box-sizing: border-box;
@@ -45,7 +46,7 @@ $bg-color: #f5f7fb;
   }
 
   &__subtitle {
-    color: $text-muted;
+    color: $color-neutral-600;
     font-size: 0.9rem;
   }
 
@@ -79,7 +80,7 @@ $bg-color: #f5f7fb;
 
   &__forgot {
     font-size: 0.8rem;
-    color: $primary-color;
+    color: $color-blue-500;
     text-decoration: none;
   }
 
@@ -108,7 +109,7 @@ $bg-color: #f5f7fb;
     margin-bottom: 1rem;
 
     &--primary {
-      background-color: $primary-color;
+      background-color: $color-blue-500;
       color: #fff;
       border: none;
     }
@@ -142,7 +143,7 @@ $bg-color: #f5f7fb;
     &::before {
       content: "";
       display: block;
-      border-top: 1px solid $border-color;
+      border-top: 1px solid $border;
       width: 100%;
       position: relative;
       top: -0.5rem;
@@ -154,7 +155,7 @@ $bg-color: #f5f7fb;
     text-align: center;
     margin: 1.5rem 0;
     font-size: 0.8rem;
-    color: $text-muted;
+    color: $border;
   }
 
   &__footer {
@@ -163,7 +164,7 @@ $bg-color: #f5f7fb;
   }
 
   &__signup {
-    color: $primary-color;
+    color: $color-blue-500;
     text-decoration: none;
     font-weight: 500;
   }
@@ -173,7 +174,7 @@ $bg-color: #f5f7fb;
 
 .forgot {
   min-height: 100vh;
-  background-color: $bg-color;
+  background-color: $background;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -207,7 +208,7 @@ $bg-color: #f5f7fb;
 
   &__subtitle {
     font-size: 0.9rem;
-    color: $text-muted;
+    color: $color-neutral-600;
     line-height: 1.4;
   }
 
@@ -226,11 +227,11 @@ $bg-color: #f5f7fb;
     width: 100%;
     padding: 0.7rem 0.75rem;
     border-radius: 8px;
-    border: 1px solid $border-color;
+    border: 1px solid $border;
     outline: none;
 
     &:focus {
-      border-color: $primary-color;
+      border-color: $color-blue-500;
     }
   }
 
@@ -243,7 +244,118 @@ $bg-color: #f5f7fb;
     border: none;
 
     &--primary {
-      background-color: $primary-color;
+      background-color: $color-blue-500;
+      color: #fff;
+    }
+  }
+}
+
+// Reset Password
+
+.reset {
+  min-height: 100vh;
+  background-color: $background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__container {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
+  }
+
+  &__card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__logo {
+    margin-bottom: 0.75rem;
+  }
+
+  &__title {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  &__subtitle {
+    font-size: 0.9rem;
+    color: $color-neutral-600;
+  }
+
+  &__field {
+    margin-bottom: 1.4rem;
+  }
+
+  &__label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+  }
+
+  &__input-wrapper {
+    position: relative;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0.7rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid $border;
+    outline: none;
+
+    &:focus {
+      border-color: $color-blue-500;
+    }
+
+    &--error {
+      border-color: $error-color;
+    }
+  }
+
+  &__toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__hint {
+    font-size: 0.75rem;
+    color: $color-neutral-600;
+    margin-top: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  &__hint img {
+    width: 20px;
+    filter: brightness(0) saturate(100%) invert(34%) sepia(9%) saturate(392%)
+      hue-rotate(314deg) brightness(96%) contrast(88%);
+  }
+
+  &__button {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+
+    &--primary {
+      background-color: $color-blue-500;
       color: #fff;
     }
   }

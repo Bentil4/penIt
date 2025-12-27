@@ -1,3 +1,4 @@
+// Login files
 const toggleBtn = document.getElementById("togglePassword");
 const passwordInput = document.getElementById("password");
 const toggleIcon = toggleBtn.querySelector("img");
