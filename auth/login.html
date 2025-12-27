@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Notes</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="./script/auth.js" defer></script>
+  </head>
+  <body class="login">
+    <div class="login__container">
+      <div class="login__card">
+        <div class="login__header">
+          <img
+            src="../assets/images/logo.svg"
+            alt="Notes Logo"
+            class="login__logo"
+          />
+          <h1 class="login__title">Welcome to Note</h1>
+          <p class="login__subtitle">Please log in to continue</p>
+        </div>
+
+        <form class="login__form" id="loginForm">
+          <div class="login__field">
+            <label class="login__label">Email Address</label>
+            <input
+              type="email"
+              class="login__input"
+              placeholder="email@example.com"
+              required
+            />
+          </div>
+
+          <div class="login__field">
+            <div class="login__password-header">
+              <label class="login__label">Password</label>
+              <a href="#" class="login__forgot">Forgot</a>
+            </div>
+
+            <div class="login__password-wrapper">
+              <input
+                type="password"
+                class="login__input"
+                id="password"
+                required
+              />
+              <button type="button" class="login__toggle" id="togglePassword">
+                <img
+                  src="../assets/images/icon-show-password.svg"
+                  alt="Toggle Password Visibility"
+                />
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="login__button login__button--primary">
+            Login
+          </button>
+        </form>
+
+        <div class="login__divider">
+          <span>Or log in with:</span>
+        </div>
+
+        <button class="login__button login__button--google">
+          <span class="login__google-icon"
+            ><img src="../assets/images/icon-google.svg"
+          /></span>
+          Google
+        </button>
+
+        <p class="login__footer">
+          No account yet?
+          <a href="#" class="login__signup">Sign Up</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- <script src="scripts/main.js"></script> -->
+  </body>
+</html>
