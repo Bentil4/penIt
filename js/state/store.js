@@ -11,6 +11,8 @@ export const store = {
   showSearchBar: false,
   currentPage: "notes", 
   activeSetting: "color-theme",
+  showSettingsMenu: true,
+  showOnlySettingsMenu: false,
   settings: {
     colorTheme: "light", // "light", "dark", "system"
     fontTheme: "Inter", // "Inter", "Noto-serif", "Source code pro "
@@ -32,7 +34,7 @@ export const loadState = (initialNotes = []) => {
     parsed = null;
   }
 
-  // ✅ GUARANTEE ARRAY
+  // GUARANTEE ARRAY
   if (Array.isArray(parsed)) {
     store.notes = parsed;
   } else {

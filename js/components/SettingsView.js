@@ -22,6 +22,9 @@ const ColorThemeView = (currentTheme = "light") => {
 
   return `
     <div class="settings-view">
+      <button class="settings-view__back" id="settings-back-btn">
+        <img src="../assets/images/icon-arrow-left.svg" alt="Back" />
+      </button>
       <h2 class="settings-view__title">Color Theme</h2>
       <p class="settings-view__description">Choose your color theme:</p>
       
@@ -108,6 +111,9 @@ const FontThemeView = (currentFont = "Inter") => {
 
   return `
     <div class="settings-view">
+      <button class="settings-view__back" id="settings-back-btn">
+        <img src="../assets/images/icon-arrow-left.svg" alt="Back" />
+      </button>
       <h2 class="settings-view__title">Font Theme</h2>
       <p class="settings-view__description">Choose your font theme:</p>
       
@@ -188,6 +194,9 @@ const FontThemeView = (currentFont = "Inter") => {
 const ChangePasswordView = () => {
   return `
     <div class="settings-view">
+      <button class="settings-view__back" id="settings-back-btn">
+        <img src="../assets/images/icon-arrow-left.svg" alt="Back" />
+      </button>
       <h2 class="settings-view__title">Change Password</h2>
       <p class="settings-view__description">Update your account password:</p>
       
@@ -235,6 +244,9 @@ const ChangePasswordView = () => {
 const LogoutView = () => {
   return `
     <div class="settings-view">
+      <button class="settings-view__back" id="settings-back-btn">
+        <img src="../assets/images/icon-arrow-left.svg" alt="Back" />
+      </button>
       <h2 class="settings-view__title">Logout</h2>
       <p class="settings-view__description">Are you sure you want to logout?</p>
       

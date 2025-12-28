@@ -861,8 +861,50 @@ input:focus {
   padding: 0 1rem;
 }
 
+.settings__content--full {
+  width: 100%;
+  padding: 0;
+}
+
+.settings--view-only {
+  width: 100%;
+}
+
+.settings--menu-only {
+  width: 100%;
+  justify-content: flex-start;
+}
+
 .settings-view {
   max-width: 600px;
+  position: relative;
+  width: 100%;
+}
+
+.settings--view-only .settings-view {
+  max-width: 100%;
+  width: 100%;
+}
+
+.settings-view__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.2s ease;
+}
+.settings-view__back:hover {
+  background-color: #f5f7fa;
+}
+.settings-view__back img {
+  width: 20px;
+  height: 20px;
 }
 
 .settings-view__title {

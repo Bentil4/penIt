@@ -20,6 +20,41 @@ if (store.settings.fontTheme) {
 
 const app = document.getElementById("app");
 
+// Global event delegation for settings buttons (attached once)
+document.addEventListener("click", (e) => {
+  // Settings button in search bar
+  if (e.target.closest(".section-settings img[src*='icon-settings']")) {
+    if (store.currentPage === "settings") {
+      // If already on settings page, show only menu
+      store.showOnlySettingsMenu = true;
+      store.showSettingsMenu = true;
+    } else {
+      store.currentPage = "settings";
+      store.activeSetting = "color-theme";
+      store.showSettingsMenu = true;
+      store.showOnlySettingsMenu = true;
+    }
+    render();
+    return;
+  }
+
+  // Settings button in bottom nav
+  if (e.target.closest("#settings-toggle")) {
+    if (store.currentPage === "settings") {
+      // If already on settings page, show only menu
+      store.showOnlySettingsMenu = true;
+      store.showSettingsMenu = true;
+    } else {
+      store.currentPage = "settings";
+      store.activeSetting = "color-theme";
+      store.showSettingsMenu = true;
+      store.showOnlySettingsMenu = true;
+    }
+    render();
+    return;
+  }
+});
+
 const getVisibleNotes = () => {
   let notes = store.notes.filter((note) =>
     store.view === "ARCHIVED" ? note.isArchived : !note.isArchived
@@ -39,7 +74,7 @@ const render = () => {
       <main>
         ${SearchBar()}
         <div class="layout">
-          ${Settings(store.activeSetting)}
+          ${Settings(store.activeSetting, store.showSettingsMenu, store.showOnlySettingsMenu)}
         </div>
       </main>
       ${BottomNav(allTags, store.view)}
@@ -241,8 +276,17 @@ const attachEvents = () => {
     document.querySelectorAll(".settings__item").forEach((item) => {
       item.addEventListener("click", () => {
         store.activeSetting = item.dataset.setting;
+        store.showSettingsMenu = false;
+        store.showOnlySettingsMenu = false;
         render();
       });
+    });
+
+    // Back button to return to settings menu
+    document.getElementById("settings-back-btn")?.addEventListener("click", () => {
+      store.showSettingsMenu = true;
+      store.showOnlySettingsMenu = true;
+      render();
     });
 
     // Color theme radio buttons
@@ -355,15 +399,6 @@ const attachEvents = () => {
     });
   }
 
-  // Settings button in search bar
-  const settingsBtn = document.querySelector(
-    ".section-settings img[src*='icon-settings']"
-  );
-  settingsBtn?.addEventListener("click", () => {
-    store.currentPage = "settings";
-    store.activeSetting = "color-theme";
-    render();
-  });
 
   // Logo click to go back to notes
   document.querySelector(".logo")?.addEventListener("click", () => {
