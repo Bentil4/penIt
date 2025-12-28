@@ -22,7 +22,7 @@
 
       &.active {
         background: $primary;
-        color: $white;
+        color: $foreground;
       }
     }
   }
@@ -62,7 +62,7 @@
     span {
       &:hover {
         background: $primary;
-        color: $white;
+        color: $foreground;
       }
     }
   }

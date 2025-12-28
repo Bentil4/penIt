@@ -1,14 +1,19 @@
 @use "./_variable" as *;
 
-$primary-color: #3b5bfd;
-$border-color: #e5e7eb;
-$text-muted: #6b7280;
-$bg-color: #f5f7fb;
-$error-color: #ef4444;
-
 * {
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: $inter-font, $noto-serif-font, $source-code-font, sans-serif;
+}
+
+input:hover {
+  background: $color-neutral-50;
+  cursor: pointer;
+}
+
+input:focus {
+  border-color: $color-blue-500;
+  outline: 2px solid $color-neutral-600;
+  outline-offset: 2px;
 }
 
 .login {
@@ -65,23 +70,19 @@ $error-color: #ef4444;
     padding: 0.7rem 0.75rem;
     border-radius: 8px;
     border: 1px solid $border;
-    outline: none;
-
-    &:focus {
-      border-color: red;
-    }
   }
 
   &__password-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 0.5rem;
   }
 
   &__forgot {
     font-size: 0.8rem;
-    color: $color-blue-500;
-    text-decoration: none;
+    color: $color-neutral-600;
+    text-decoration: underline;
   }
 
   &__password-wrapper {
@@ -103,7 +104,7 @@ $error-color: #ef4444;
     width: 100%;
     padding: 0.75rem;
     border-radius: 8px;
-    border: 1px solid $border-color;
+    border: 1px solid $border;
     cursor: pointer;
     font-size: 0.9rem;
     margin-bottom: 1rem;
@@ -113,6 +114,15 @@ $error-color: #ef4444;
       color: #fff;
       border: none;
     }
+    &--primary:hover {
+      background-color: $color-blue-700;
+    }
+
+    &--primary:focus {
+      border-color: $color-blue-500;
+      outline: 2px solid $color-neutral-600;
+      outline-offset: 2px;
+    }
 
     &--google {
       display: flex;
@@ -120,6 +130,10 @@ $error-color: #ef4444;
       justify-content: center;
       gap: 0.5rem;
       background: #fff;
+    }
+
+    &--google:hover {
+      background: $color-neutral-50;
     }
   }
 
@@ -134,7 +148,7 @@ $error-color: #ef4444;
     background: $border;
 
     span {
-      background: $bg-color;
+      background: $background;
       padding: 0 0.5rem;
       position: relative;
       top: -0.7rem;
@@ -155,7 +169,7 @@ $error-color: #ef4444;
     text-align: center;
     margin: 1.5rem 0;
     font-size: 0.8rem;
-    color: $border;
+    color: $color-neutral-600;
   }
 
   &__footer {
@@ -164,7 +178,7 @@ $error-color: #ef4444;
   }
 
   &__signup {
-    color: $color-blue-500;
+    color: $color-neutral-950;
     text-decoration: none;
     font-weight: 500;
   }
@@ -317,7 +331,7 @@ $error-color: #ef4444;
     }
 
     &--error {
-      border-color: $error-color;
+      border-color: $color-red-500;
     }
   }
 
@@ -356,7 +370,7 @@ $error-color: #ef4444;
 
     &--primary {
       background-color: $color-blue-500;
-      color: #fff;
+      color: $background;
     }
   }
 }

@@ -8,10 +8,43 @@ $gray-300: #d1d5db;
 $gray-500: #6b7280;
 $gray-700: #374151;
 $gray-900: #111827;
-$white: #ffffff;
 
 // Typography
-$font-family: "Inter", "Noto Serif", sans-serif;
+
+$font-directory: "../assets/fonts/";
+$inter-font: "Inter";
+$noto-serif-font: "Noto Serif";
+$source-code-font: "Source Code Pro";
+
+// Inter font faces
+@font-face {
+  font-family: $inter-font;
+  src: url(#{$font-directory}/inter/Inter-Regular.woff2) format("woff2"),
+    url(#{$font-directory}/inter/Inter-Regular.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+// Noto Serif font faces
+@font-face {
+  font-family: $noto-serif-font;
+  src: url(#{$font-directory}/noto-serif/NotoSerif-Regular.woff2)
+      format("woff2"),
+    url(#{$font-directory}/noto-serif/NotoSerif-Regular.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+// Source Code Pro font faces
+@font-face {
+  font-family: $source-code-font;
+  src: url(#{$font-directory}/source-code-pro/SourceCodePro-Regular.woff2)
+      format("woff2"),
+    url(#{$font-directory}/source-code-pro/SourceCodePro-Regular.woff)
+      format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
 
 // Spacing
 $radius-sm: 6px;
