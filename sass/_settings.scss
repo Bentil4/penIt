@@ -1,5 +1,12 @@
 @use "./_variable" as *;
 
+input {
+  background-color: transparent;
+}
+input:hover {
+  background-color: transparent;
+}
+
 .settings {
   display: flex;
   height: 100%;
@@ -15,7 +22,6 @@
 .settings__title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: $foreground;
   margin: 0 0 1.5rem 0;
 }
 
@@ -62,7 +68,6 @@
 .settings__item-label {
   font-size: 0.95rem;
   font-weight: 500;
-  color: $foreground;
 }
 
 .settings__item-arrow {
@@ -127,13 +132,11 @@
 .settings-view__title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: $foreground;
   margin: 0 0 0.5rem 0;
 }
 
 .settings-view__description {
   font-size: 0.95rem;
-  color: $gray-500;
   margin: 0 0 2rem 0;
 }
 
@@ -153,17 +156,13 @@
   border: 2px solid $border;
   border-radius: $radius-md;
   cursor: pointer;
-  transition: all 0.2s ease;
-  background-color: $surface;
 
   &:hover {
     border-color: $primary;
-    background-color: $primary-light;
   }
 
   &--selected {
     border-color: $primary;
-    background-color: $primary-light;
   }
 }
 
@@ -233,12 +232,10 @@
 .settings-view__option-label {
   font-size: 1rem;
   font-weight: 600;
-  color: $foreground;
 }
 
 .settings-view__option-description {
   font-size: 0.875rem;
-  color: $gray-500;
 }
 
 .settings-view__actions {
@@ -259,7 +256,6 @@
 
   &--primary {
     background-color: $color-blue-500;
-    color: $color-neutral-0;
 
     &:hover {
       background-color: $color-blue-700;
@@ -272,7 +268,6 @@
 
   &--secondary {
     background-color: transparent;
-    color: $foreground;
     border: 1px solid $border;
 
     &:hover {
@@ -296,7 +291,6 @@
 .settings-view__field-label {
   font-size: 0.95rem;
   font-weight: 500;
-  color: $foreground;
 }
 
 .settings-view__field-input {
@@ -304,17 +298,14 @@
   border: 1px solid $border;
   border-radius: $radius-md;
   font-size: 0.95rem;
-  color: $foreground;
-  background-color: $surface;
   transition: border-color 0.2s ease;
 
   &:focus {
-    outline: none;
     border-color: $color-blue-500;
   }
 
   &::placeholder {
-    color: $gray-500;
+    color: $foreground-dark;
   }
 }
 
@@ -350,4 +341,3 @@
     width: 100%;
   }
 }
-

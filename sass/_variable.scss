@@ -1,13 +1,5 @@
 // Colors
-$primary: #3b5bfd;
-$primary-light: #eef2ff;
 $danger: #ef4444;
-$gray-100: #f8fafc;
-$gray-200: #e5e7eb;
-$gray-300: #d1d5db;
-$gray-500: #6b7280;
-$gray-700: #374151;
-$gray-900: #111827;
 
 // Typography
 
@@ -19,7 +11,8 @@ $source-code-font: "Source Code Pro";
 // Inter font faces
 @font-face {
   font-family: $inter-font;
-  src: url(#{$font-directory}/inter/static/Inter_18pt-Regular.ttf) format("truetype");
+  src: url(#{$font-directory}/inter/static/Inter_18pt-Regular.ttf)
+    format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -27,7 +20,8 @@ $source-code-font: "Source Code Pro";
 
 @font-face {
   font-family: $inter-font;
-  src: url(#{$font-directory}/inter/static/Inter_18pt-Medium.ttf) format("truetype");
+  src: url(#{$font-directory}/inter/static/Inter_18pt-Medium.ttf)
+    format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -35,7 +29,8 @@ $source-code-font: "Source Code Pro";
 
 @font-face {
   font-family: $inter-font;
-  src: url(#{$font-directory}/inter/static/Inter_18pt-SemiBold.ttf) format("truetype");
+  src: url(#{$font-directory}/inter/static/Inter_18pt-SemiBold.ttf)
+    format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -43,7 +38,8 @@ $source-code-font: "Source Code Pro";
 
 @font-face {
   font-family: $inter-font;
-  src: url(#{$font-directory}/inter/static/Inter_18pt-Bold.ttf) format("truetype");
+  src: url(#{$font-directory}/inter/static/Inter_18pt-Bold.ttf)
+    format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -52,7 +48,8 @@ $source-code-font: "Source Code Pro";
 // Noto Serif font faces
 @font-face {
   font-family: $noto-serif-font;
-  src: url(#{$font-directory}/noto-serif/static/NotoSerif-Regular.ttf) format("truetype");
+  src: url(#{$font-directory}/noto-serif/static/NotoSerif-Regular.ttf)
+    format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -60,7 +57,8 @@ $source-code-font: "Source Code Pro";
 
 @font-face {
   font-family: $noto-serif-font;
-  src: url(#{$font-directory}/noto-serif/static/NotoSerif-Medium.ttf) format("truetype");
+  src: url(#{$font-directory}/noto-serif/static/NotoSerif-Medium.ttf)
+    format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -68,7 +66,8 @@ $source-code-font: "Source Code Pro";
 
 @font-face {
   font-family: $noto-serif-font;
-  src: url(#{$font-directory}/noto-serif/static/NotoSerif-SemiBold.ttf) format("truetype");
+  src: url(#{$font-directory}/noto-serif/static/NotoSerif-SemiBold.ttf)
+    format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -76,7 +75,8 @@ $source-code-font: "Source Code Pro";
 
 @font-face {
   font-family: $noto-serif-font;
-  src: url(#{$font-directory}/noto-serif/static/NotoSerif-Bold.ttf) format("truetype");
+  src: url(#{$font-directory}/noto-serif/static/NotoSerif-Bold.ttf)
+    format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -85,7 +85,8 @@ $source-code-font: "Source Code Pro";
 // Source Code Pro font faces
 @font-face {
   font-family: $source-code-font;
-  src: url(#{$font-directory}/source-code-pro/static/SourceCodePro-Regular.ttf) format("truetype");
+  src: url(#{$font-directory}/source-code-pro/static/SourceCodePro-Regular.ttf)
+    format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -93,7 +94,8 @@ $source-code-font: "Source Code Pro";
 
 @font-face {
   font-family: $source-code-font;
-  src: url(#{$font-directory}/source-code-pro/static/SourceCodePro-Medium.ttf) format("truetype");
+  src: url(#{$font-directory}/source-code-pro/static/SourceCodePro-Medium.ttf)
+    format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -101,7 +103,8 @@ $source-code-font: "Source Code Pro";
 
 @font-face {
   font-family: $source-code-font;
-  src: url(#{$font-directory}/source-code-pro/static/SourceCodePro-SemiBold.ttf) format("truetype");
+  src: url(#{$font-directory}/source-code-pro/static/SourceCodePro-SemiBold.ttf)
+    format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -109,7 +112,8 @@ $source-code-font: "Source Code Pro";
 
 @font-face {
   font-family: $source-code-font;
-  src: url(#{$font-directory}/source-code-pro/static/SourceCodePro-Bold.ttf) format("truetype");
+  src: url(#{$font-directory}/source-code-pro/static/SourceCodePro-Bold.ttf)
+    format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -153,14 +157,40 @@ $color-green-100: #d1fbe9;
 $color-red-500: #fb3748;
 $color-red-100: #ffd5d8;
 
-$background: $color-neutral-100;
-$foreground: $color-neutral-950;
+// Light theme (default)
+$background-light: $color-neutral-100;
+$foreground-light: $color-neutral-950;
 $border-light: $color-neutral-200;
-$border: $color-neutral-300;
-$active-border: $color-neutral-950;
-$hover: $color-neutral-50;
-$primary: $color-blue-500;
-$primary-hover: $color-blue-700;
-$ring: $color-neutral-400;
-$separator: $color-neutral-200;
-$surface: $color-neutral-0;
+$border-light-color: $color-neutral-300;
+$active-border-light: $color-neutral-950;
+$hover-light: $color-neutral-50;
+$primary-light: $color-blue-500;
+$primary-hover-light: $color-blue-700;
+$ring-light: $color-neutral-400;
+$separator-light: $color-neutral-200;
+$surface-light: $color-neutral-0;
+
+// Dark theme
+$background-dark: $color-neutral-900;
+$foreground-dark: $color-neutral-0;
+$border-dark: $color-neutral-700;
+$border-dark-color: $color-neutral-600;
+$active-border-dark: $color-neutral-0;
+$hover-dark: $color-neutral-800;
+$primary-dark: $color-blue-500;
+$primary-hover-dark: $color-blue-700;
+$ring-dark: $color-neutral-600;
+$separator-dark: $color-neutral-700;
+$surface-dark: $color-neutral-800;
+
+// Default values (light theme)
+$background: $background-light;
+$foreground: $foreground-light;
+$border: $border-light-color;
+$active-border: $active-border-light;
+$hover: $hover-light;
+$primary: $primary-light;
+$primary-hover: $primary-hover-light;
+$ring: $ring-light;
+$separator: $separator-light;
+$surface: $surface-light;

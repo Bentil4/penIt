@@ -48,9 +48,44 @@ const applyFontTheme = (fontName) => {
   void document.body.offsetHeight;
 };
 
+// Function to apply color theme
+const applyColorTheme = (themeName) => {
+  // Set data-theme attribute on html element
+  document.documentElement.setAttribute("data-theme", themeName);
+  
+  // For system theme, listen to prefers-color-scheme changes
+  if (themeName === "system") {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleSystemThemeChange = (e) => {
+      // The CSS will handle the change automatically via media query
+      // But we can trigger a reflow to ensure styles update
+      void document.body.offsetHeight;
+    };
+    
+    // Remove old listener if exists
+    if (window.systemThemeListener) {
+      mediaQuery.removeEventListener("change", window.systemThemeListener);
+    }
+    
+    // Add new listener
+    window.systemThemeListener = handleSystemThemeChange;
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
+  } else {
+    // Remove system theme listener if switching away from system
+    if (window.systemThemeListener) {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      mediaQuery.removeEventListener("change", window.systemThemeListener);
+      window.systemThemeListener = null;
+    }
+  }
+  
+  // Force a reflow to ensure styles are applied
+  void document.body.offsetHeight;
+};
+
 // Apply saved settings on load
 if (store.settings.colorTheme) {
-  document.documentElement.setAttribute("data-theme", store.settings.colorTheme);
+  applyColorTheme(store.settings.colorTheme);
 }
 if (store.settings.fontTheme) {
   applyFontTheme(store.settings.fontTheme);
@@ -370,7 +405,7 @@ const attachEvents = () => {
         store.settings.colorTheme = selectedTheme;
         saveSettings();
         // Apply theme to document
-        document.documentElement.setAttribute("data-theme", selectedTheme);
+        applyColorTheme(selectedTheme);
         // Update selected state visually
         document.querySelectorAll(".settings-view__option").forEach((opt) => {
           opt.classList.remove("settings-view__option--selected");
@@ -378,7 +413,6 @@ const attachEvents = () => {
         document.querySelector('input[name="color-theme"]:checked')
           ?.closest(".settings-view__option")
           ?.classList.add("settings-view__option--selected");
-        alert("Color theme updated successfully!");
       }
     });
 

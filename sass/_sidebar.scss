@@ -3,7 +3,7 @@
 .sidebar {
   width: 260px;
   padding: 1.5rem;
-  border-right: 1px solid $gray-200;
+  border-right: 1px solid $border-light;
   .menu {
     list-style: none;
     padding: 0;
@@ -14,7 +14,7 @@
       border-radius: $radius-sm;
       cursor: pointer;
       font-weight: 500;
-      color: $gray-700;
+      color: $foreground;
 
       &:hover {
         background: $primary-light;
@@ -30,7 +30,7 @@
   h4 {
     margin-bottom: 0.5rem;
     font-size: 0.85rem;
-    color: $gray-500;
+    color: $foreground-light;
     text-transform: uppercase;
   }
 
@@ -56,7 +56,7 @@
     }
 
     .tag:hover {
-      background: $gray-200;
+      background: $border-light;
     }
 
     span {
