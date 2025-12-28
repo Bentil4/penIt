@@ -11,7 +11,7 @@ $gray-900: #111827;
 
 // Typography
 
-$font-directory: "../assets/fonts/";
+$font-directory: "../assets/fonts";
 $inter-font: "Inter";
 $noto-serif-font: "Noto Serif";
 $source-code-font: "Source Code Pro";
@@ -19,31 +19,100 @@ $source-code-font: "Source Code Pro";
 // Inter font faces
 @font-face {
   font-family: $inter-font;
-  src: url(#{$font-directory}/inter/Inter-Regular.woff2) format("woff2"),
-    url(#{$font-directory}/inter/Inter-Regular.woff) format("woff");
+  src: url(#{$font-directory}/inter/static/Inter_18pt-Regular.ttf) format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $inter-font;
+  src: url(#{$font-directory}/inter/static/Inter_18pt-Medium.ttf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $inter-font;
+  src: url(#{$font-directory}/inter/static/Inter_18pt-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $inter-font;
+  src: url(#{$font-directory}/inter/static/Inter_18pt-Bold.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 // Noto Serif font faces
 @font-face {
   font-family: $noto-serif-font;
-  src: url(#{$font-directory}/noto-serif/NotoSerif-Regular.woff2)
-      format("woff2"),
-    url(#{$font-directory}/noto-serif/NotoSerif-Regular.woff) format("woff");
+  src: url(#{$font-directory}/noto-serif/static/NotoSerif-Regular.ttf) format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $noto-serif-font;
+  src: url(#{$font-directory}/noto-serif/static/NotoSerif-Medium.ttf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $noto-serif-font;
+  src: url(#{$font-directory}/noto-serif/static/NotoSerif-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $noto-serif-font;
+  src: url(#{$font-directory}/noto-serif/static/NotoSerif-Bold.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 // Source Code Pro font faces
 @font-face {
   font-family: $source-code-font;
-  src: url(#{$font-directory}/source-code-pro/SourceCodePro-Regular.woff2)
-      format("woff2"),
-    url(#{$font-directory}/source-code-pro/SourceCodePro-Regular.woff)
-      format("woff");
+  src: url(#{$font-directory}/source-code-pro/static/SourceCodePro-Regular.ttf) format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $source-code-font;
+  src: url(#{$font-directory}/source-code-pro/static/SourceCodePro-Medium.ttf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $source-code-font;
+  src: url(#{$font-directory}/source-code-pro/static/SourceCodePro-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $source-code-font;
+  src: url(#{$font-directory}/source-code-pro/static/SourceCodePro-Bold.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 // Spacing

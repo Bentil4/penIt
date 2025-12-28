@@ -10,12 +10,50 @@ import { generateId } from "./utils/helpers.js";
 
 loadState(notesData);
 
+// Function to apply font theme
+const applyFontTheme = (fontName) => {
+  // Set data-font attribute on html element for CSS targeting
+  document.documentElement.setAttribute("data-font", fontName);
+  
+  // Apply font family directly to all elements
+  // Using exact font names that match @font-face declarations
+  const fontMap = {
+    "Inter": '"Inter", sans-serif',
+    "Noto Serif": '"Noto Serif", serif',
+    "Source Code Pro": '"Source Code Pro", monospace'
+  };
+  const fontFamily = fontMap[fontName] || fontMap["Inter"];
+  
+  // Apply to html element (will cascade to all children)
+  document.documentElement.style.setProperty("font-family", fontFamily, "important");
+  
+  // Also apply to body for extra specificity
+  document.body.style.setProperty("font-family", fontFamily, "important");
+  
+  // Apply to all elements using a style tag for maximum coverage
+  let styleElement = document.getElementById("dynamic-font-style");
+  if (!styleElement) {
+    styleElement = document.createElement("style");
+    styleElement.id = "dynamic-font-style";
+    document.head.appendChild(styleElement);
+  }
+  styleElement.textContent = `
+    html[data-font="${fontName}"] *,
+    html[data-font="${fontName}"] {
+      font-family: ${fontFamily} !important;
+    }
+  `;
+  
+  // Force a reflow to ensure styles are applied
+  void document.body.offsetHeight;
+};
+
 // Apply saved settings on load
 if (store.settings.colorTheme) {
   document.documentElement.setAttribute("data-theme", store.settings.colorTheme);
 }
 if (store.settings.fontTheme) {
-  document.documentElement.setAttribute("data-font", store.settings.fontTheme);
+  applyFontTheme(store.settings.fontTheme);
 }
 
 const app = document.getElementById("app");
@@ -353,7 +391,7 @@ const attachEvents = () => {
         store.settings.fontTheme = selectedFont;
         saveSettings();
         // Apply font to document
-        document.documentElement.setAttribute("data-font", selectedFont);
+        applyFontTheme(selectedFont);
         // Update selected state visually
         document.querySelectorAll(".settings-view__option").forEach((opt) => {
           opt.classList.remove("settings-view__option--selected");
@@ -361,7 +399,6 @@ const attachEvents = () => {
         document.querySelector('input[name="font-theme"]:checked')
           ?.closest(".settings-view__option")
           ?.classList.add("settings-view__option--selected");
-        alert("Font theme updated successfully!");
       }
     });
 
@@ -377,8 +414,8 @@ const attachEvents = () => {
         return;
       }
 
-      if (newPassword.length < 6) {
-        alert("Password must be at least 6 characters long!");
+      if (newPassword.length < 8) {
+        alert("Password must be at least 8 characters long!");
         return;
       }
 

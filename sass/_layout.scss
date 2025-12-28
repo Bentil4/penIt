@@ -6,9 +6,26 @@
 
 body {
   margin: 0;
-  // font-family: $font-family;
+  font-family: "Inter", sans-serif;
   background: $background;
   color: $foreground;
+}
+
+// Apply font themes based on data-font attribute
+// These will use the @font-face declarations from _variable.scss
+html[data-font="Inter"] *,
+html[data-font="Inter"] {
+  font-family: "Inter", sans-serif !important;
+}
+
+html[data-font="Noto Serif"] *,
+html[data-font="Noto Serif"] {
+  font-family: "Noto Serif", serif !important;
+}
+
+html[data-font="Source Code Pro"] *,
+html[data-font="Source Code Pro"] {
+  font-family: "Source Code Pro", monospace !important;
 }
 
 #app {

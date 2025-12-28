@@ -1,20 +1,86 @@
 @font-face {
   font-family: "Inter";
-  src: url(../assets/fonts//inter/Inter-Regular.woff2) format("woff2"), url(../assets/fonts//inter/Inter-Regular.woff) format("woff");
+  src: url(../assets/fonts/inter/static/Inter_18pt-Regular.ttf) format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url(../assets/fonts/inter/static/Inter_18pt-Medium.ttf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url(../assets/fonts/inter/static/Inter_18pt-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url(../assets/fonts/inter/static/Inter_18pt-Bold.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "Noto Serif";
-  src: url(../assets/fonts//noto-serif/NotoSerif-Regular.woff2) format("woff2"), url(../assets/fonts//noto-serif/NotoSerif-Regular.woff) format("woff");
+  src: url(../assets/fonts/noto-serif/static/NotoSerif-Regular.ttf) format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Serif";
+  src: url(../assets/fonts/noto-serif/static/NotoSerif-Medium.ttf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Serif";
+  src: url(../assets/fonts/noto-serif/static/NotoSerif-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Serif";
+  src: url(../assets/fonts/noto-serif/static/NotoSerif-Bold.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "Source Code Pro";
-  src: url(../assets/fonts//source-code-pro/SourceCodePro-Regular.woff2) format("woff2"), url(../assets/fonts//source-code-pro/SourceCodePro-Regular.woff) format("woff");
+  src: url(../assets/fonts/source-code-pro/static/SourceCodePro-Regular.ttf) format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Code Pro";
+  src: url(../assets/fonts/source-code-pro/static/SourceCodePro-Medium.ttf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Code Pro";
+  src: url(../assets/fonts/source-code-pro/static/SourceCodePro-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Code Pro";
+  src: url(../assets/fonts/source-code-pro/static/SourceCodePro-Bold.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 /* COLORS */
 /* Neutral Colors */
@@ -27,8 +93,24 @@
 
 body {
   margin: 0;
+  font-family: "Inter", sans-serif;
   background: #f3f5f8;
   color: #0e121b;
+}
+
+html[data-font=Inter] *,
+html[data-font=Inter] {
+  font-family: "Inter", sans-serif !important;
+}
+
+html[data-font="Noto Serif"] *,
+html[data-font="Noto Serif"] {
+  font-family: "Noto Serif", serif !important;
+}
+
+html[data-font="Source Code Pro"] *,
+html[data-font="Source Code Pro"] {
+  font-family: "Source Code Pro", monospace !important;
 }
 
 #app {

@@ -143,7 +143,7 @@ const FontThemeView = (currentFont = "Inter") => {
           <input 
             type="radio" 
             name="font-theme" 
-            value="serif" 
+            value="Noto Serif" 
             class="settings-view__radio"
             ${isSerif ? "checked" : ""}
           />
@@ -164,7 +164,7 @@ const FontThemeView = (currentFont = "Inter") => {
           <input 
             type="radio" 
             name="font-theme" 
-            value="monospace" 
+            value="Source Code Pro" 
             class="settings-view__radio"
             ${isMonospace ? "checked" : ""}
           />
