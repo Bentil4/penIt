@@ -3,11 +3,20 @@ import { NotesList } from "./components/NoteList.js";
 import { NoteView } from "./components/NoteView.js";
 import { SearchBar } from "./components/SearchBar.js";
 import { BottomNav } from "./components/BottomNav.js";
+import { Settings } from "./components/Settings.js";
 import notesData from "./data/notes.js";
-import { store, saveState, loadState } from "./state/store.js";
+import { store, saveState, loadState, saveSettings } from "./state/store.js";
 import { generateId } from "./utils/helpers.js";
 
 loadState(notesData);
+
+// Apply saved settings on load
+if (store.settings.colorTheme) {
+  document.documentElement.setAttribute("data-theme", store.settings.colorTheme);
+}
+if (store.settings.fontTheme) {
+  document.documentElement.setAttribute("data-font", store.settings.fontTheme);
+}
 
 const app = document.getElementById("app");
 
@@ -22,6 +31,25 @@ const getVisibleNotes = () => {
 };
 
 const render = () => {
+  // Render settings page
+  if (store.currentPage === "settings") {
+    const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
+    app.innerHTML = `
+      ${Sidebar(allTags, store.view)}
+      <main>
+        ${SearchBar()}
+        <div class="layout">
+          ${Settings(store.activeSetting)}
+        </div>
+      </main>
+      ${BottomNav(allTags, store.view)}
+    `;
+    app.className = store.showSidebarOnTablet ? "show-sidebar-tablet" : "";
+    attachEvents();
+    return;
+  }
+
+  // Render notes page
   const notes = getVisibleNotes();
   const activeNote = notes.find((n) => n.id === store.activeNoteId);
 
@@ -205,6 +233,144 @@ const attachEvents = () => {
       document.getElementById("tags-popup").style.display = "none";
       render();
     });
+  });
+
+  // Settings page events
+  if (store.currentPage === "settings") {
+    // Settings menu item clicks
+    document.querySelectorAll(".settings__item").forEach((item) => {
+      item.addEventListener("click", () => {
+        store.activeSetting = item.dataset.setting;
+        render();
+      });
+    });
+
+    // Color theme radio buttons
+    document.querySelectorAll('input[name="color-theme"]').forEach((radio) => {
+      radio.addEventListener("change", () => {
+        const selectedOption = document.querySelector(
+          'input[name="color-theme"]:checked'
+        );
+        if (selectedOption) {
+          document
+            .querySelectorAll(".settings-view__option")
+            .forEach((opt) => opt.classList.remove("settings-view__option--selected"));
+          selectedOption.closest(".settings-view__option").classList.add(
+            "settings-view__option--selected"
+          );
+        }
+      });
+    });
+
+    // Font theme radio buttons
+    document.querySelectorAll('input[name="font-theme"]').forEach((radio) => {
+      radio.addEventListener("change", () => {
+        const selectedOption = document.querySelector(
+          'input[name="font-theme"]:checked'
+        );
+        if (selectedOption) {
+          document
+            .querySelectorAll(".settings-view__option")
+            .forEach((opt) => opt.classList.remove("settings-view__option--selected"));
+          selectedOption.closest(".settings-view__option").classList.add(
+            "settings-view__option--selected"
+          );
+        }
+      });
+    });
+
+    // Apply color theme button
+    document.getElementById("apply-color-theme")?.addEventListener("click", () => {
+      const selectedTheme = document.querySelector(
+        'input[name="color-theme"]:checked'
+      )?.value;
+      if (selectedTheme) {
+        store.settings.colorTheme = selectedTheme;
+        saveSettings();
+        // Apply theme to document
+        document.documentElement.setAttribute("data-theme", selectedTheme);
+        // Update selected state visually
+        document.querySelectorAll(".settings-view__option").forEach((opt) => {
+          opt.classList.remove("settings-view__option--selected");
+        });
+        document.querySelector('input[name="color-theme"]:checked')
+          ?.closest(".settings-view__option")
+          ?.classList.add("settings-view__option--selected");
+        alert("Color theme updated successfully!");
+      }
+    });
+
+    // Apply font theme button
+    document.getElementById("apply-font-theme")?.addEventListener("click", () => {
+      const selectedFont = document.querySelector(
+        'input[name="font-theme"]:checked'
+      )?.value;
+      if (selectedFont) {
+        store.settings.fontTheme = selectedFont;
+        saveSettings();
+        // Apply font to document
+        document.documentElement.setAttribute("data-font", selectedFont);
+        // Update selected state visually
+        document.querySelectorAll(".settings-view__option").forEach((opt) => {
+          opt.classList.remove("settings-view__option--selected");
+        });
+        document.querySelector('input[name="font-theme"]:checked')
+          ?.closest(".settings-view__option")
+          ?.classList.add("settings-view__option--selected");
+        alert("Font theme updated successfully!");
+      }
+    });
+
+    // Change password form
+    document.getElementById("change-password-form")?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const currentPassword = document.getElementById("current-password").value;
+      const newPassword = document.getElementById("new-password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
+
+      if (newPassword !== confirmPassword) {
+        alert("New passwords do not match!");
+        return;
+      }
+
+      if (newPassword.length < 6) {
+        alert("Password must be at least 6 characters long!");
+        return;
+      }
+
+      // Here you would typically send this to a backend API
+      alert("Password updated successfully!");
+      e.target.reset();
+    });
+
+    // Logout button
+    document.getElementById("confirm-logout")?.addEventListener("click", () => {
+      if (confirm("Are you sure you want to logout?")) {
+        // Here you would typically clear auth tokens and redirect
+        alert("Logged out successfully!");
+        // For now, just go back to notes
+        store.currentPage = "notes";
+        render();
+      }
+    });
+  }
+
+  // Settings button in search bar
+  const settingsBtn = document.querySelector(
+    ".section-settings img[src*='icon-settings']"
+  );
+  settingsBtn?.addEventListener("click", () => {
+    store.currentPage = "settings";
+    store.activeSetting = "color-theme";
+    render();
+  });
+
+  // Logo click to go back to notes
+  document.querySelector(".logo")?.addEventListener("click", () => {
+    if (store.currentPage === "settings") {
+      store.currentPage = "notes";
+      render();
+    }
   });
 };
 
