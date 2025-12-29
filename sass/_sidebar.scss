@@ -5,6 +5,17 @@
   padding: 1.5rem;
   border-right: 1px solid var(--color-border-light);
   background-color: var(--color-background);
+
+  .logo {
+    transition: opacity 0.3s ease;
+    filter: none !important; // Explicitly prevent logo inversion
+  }
+
+  .tag-icon {
+    filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+    transition: filter 0.3s ease;
+  }
+
   .menu {
     list-style: none;
     padding: 0;

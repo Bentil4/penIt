@@ -65,6 +65,16 @@
     font-size: 0.85rem;
     color: var(--color-foreground);
     margin-right: 0.5rem;
+
+    img {
+      filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+      transition: filter 0.3s ease;
+    }
+  }
+
+  small img {
+    filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+    transition: filter 0.3s ease;
   }
 
   textarea {

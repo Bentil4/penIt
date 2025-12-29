@@ -63,6 +63,8 @@ input:hover {
   width: 20px;
   height: 20px;
   object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
 }
 
 .settings__item-label {
@@ -74,6 +76,8 @@ input:hover {
   width: 16px;
   height: 16px;
   opacity: 0.5;
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
 }
 
 .settings__content {
@@ -221,6 +225,8 @@ input:hover {
   height: 24px;
   object-fit: contain;
   flex-shrink: 0;
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
 }
 
 .settings-view__option-text {

@@ -34,6 +34,8 @@
     img {
       width: 20px;
       height: 20px;
+      filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+      transition: filter 0.3s ease;
     }
 
     &.active {

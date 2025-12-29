@@ -48,6 +48,37 @@ const applyFontTheme = (fontName) => {
   void document.body.offsetHeight;
 };
 
+// Helper function to determine if we're in dark mode
+const isDarkMode = (themeName) => {
+  if (themeName === "dark") return true;
+  if (themeName === "light") return false;
+  if (themeName === "system") {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  return false;
+};
+
+// Function to update logo based on theme
+const updateLogo = (isDark) => {
+  const logos = document.querySelectorAll('.logo, .login__logo, .forgot__logo, .reset__logo');
+  logos.forEach(logo => {
+    if (logo) {
+      const currentSrc = logo.getAttribute('src');
+      if (isDark) {
+        // Change to logo-light.svg for dark mode
+        if (currentSrc && currentSrc.includes('logo.svg')) {
+          logo.setAttribute('src', currentSrc.replace('logo.svg', 'logo-light.svg'));
+        }
+      } else {
+        // Change to logo.svg for light mode
+        if (currentSrc && currentSrc.includes('logo-light.svg')) {
+          logo.setAttribute('src', currentSrc.replace('logo-light.svg', 'logo.svg'));
+        }
+      }
+    }
+  });
+};
+
 // Function to apply color theme
 const applyColorTheme = (themeName) => {
   // Validate theme name
@@ -59,11 +90,17 @@ const applyColorTheme = (themeName) => {
   // Set data-theme attribute on html element
   document.documentElement.setAttribute("data-theme", themeName);
   
+  // Update logo based on theme
+  const darkMode = isDarkMode(themeName);
+  updateLogo(darkMode);
+  
   // For system theme, listen to prefers-color-scheme changes
   if (themeName === "system") {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleSystemThemeChange = (e) => {
       // The CSS will handle the change automatically via media query
+      // Update logo when system preference changes
+      updateLogo(e.matches);
       // Force a reflow to ensure styles update immediately
       void document.body.offsetHeight;
     };
@@ -205,6 +242,11 @@ const render = () => {
   app.className = store.showSidebarOnTablet ? "show-sidebar-tablet" : "";
 
   attachEvents();
+  
+  // Update logo after render to ensure it matches current theme
+  const currentTheme = store.settings.colorTheme || "system";
+  const darkMode = isDarkMode(currentTheme);
+  updateLogo(darkMode);
 };
 
 const attachEvents = () => {

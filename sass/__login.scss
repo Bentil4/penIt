@@ -44,6 +44,8 @@ input:focus {
 
   &__logo {
     margin-bottom: 0.5rem;
+    transition: opacity 0.3s ease;
+    filter: none !important; // Explicitly prevent logo inversion
   }
 
   &__title {
@@ -103,6 +105,11 @@ input:focus {
     border: none;
     cursor: pointer;
     font-size: 1rem;
+
+    img {
+      filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+      transition: filter 0.3s ease;
+    }
   }
 
   &__button {
@@ -146,6 +153,11 @@ input:focus {
 
   &__google-icon {
     font-weight: bold;
+
+    img {
+      filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+      transition: filter 0.3s ease;
+    }
   }
 
   &__divider {
@@ -358,6 +370,11 @@ input:focus {
     background: none;
     border: none;
     cursor: pointer;
+
+    img {
+      filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+      transition: filter 0.3s ease;
+    }
   }
 
   &__hint {
@@ -367,12 +384,12 @@ input:focus {
     display: flex;
     align-items: center;
     gap: 0.3rem;
-  }
 
-  &__hint img {
-    width: 20px;
-    filter: brightness(0) saturate(100%) invert(34%) sepia(9%) saturate(392%)
-      hue-rotate(314deg) brightness(96%) contrast(88%);
+    img {
+      width: 20px;
+      filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+      transition: filter 0.3s ease;
+    }
   }
 
   &__button {
