@@ -71,18 +71,16 @@ main {
 }
 .search-input {
   width: 100%;
-  padding: 0.7rem 1rem;
   border-radius: $radius-md;
   border: none;
   font-size: 0.95rem;
   height: auto;
   outline: none;
-  background: none;
+  background: transparent;
 
-  // &:focus {
-  //   // outline: none;
-  //   // border-color: $primary;
-  // }
+  &:focus {
+    outline: none;
+  }
 }
 
 .section-settings {
@@ -95,6 +93,30 @@ main {
 .section-settings img {
   cursor: pointer;
   width: 24px;
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
+}
+
+// Logo theming - logos should NOT be inverted, only switched between logo.svg and logo-light.svg
+.logo,
+.login__logo,
+.forgot__logo,
+.reset__logo {
+  transition: opacity 0.3s ease;
+  filter: none !important; // Explicitly prevent logo inversion
+}
+
+// SVG icon theming - apply to all SVG icons except logos
+img[src$=".svg"]:not(.logo):not([class*="logo"]),
+img[src*="icon-"]:not(.logo):not([class*="logo"]) {
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
+}
+
+// Search bar icons (excluding logos)
+.search-bar img:not(.logo):not([class*="logo"]) {
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
 }
 
 .section-settings label {

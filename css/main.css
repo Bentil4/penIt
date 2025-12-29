@@ -99,6 +99,7 @@
   --color-ring: #99a0ae;
   --color-separator: #e0e4ea;
   --color-surface: #ffffff;
+  --icon-invert: 0;
 }
 
 [data-theme=light],
@@ -114,6 +115,7 @@ html[data-theme=light] {
   --color-ring: #99a0ae;
   --color-separator: #e0e4ea;
   --color-surface: #ffffff;
+  --icon-invert: 0;
 }
 
 [data-theme=dark],
@@ -129,6 +131,7 @@ html[data-theme=dark] {
   --color-ring: #525866;
   --color-separator: #2b303b;
   --color-surface: #232530;
+  --icon-invert: 1;
 }
 
 [data-theme=system],
@@ -144,6 +147,7 @@ html[data-theme=system] {
   --color-ring: #99a0ae;
   --color-separator: #e0e4ea;
   --color-surface: #ffffff;
+  --icon-invert: 0;
 }
 @media (prefers-color-scheme: dark) {
   [data-theme=system],
@@ -159,6 +163,7 @@ html[data-theme=system] {
     --color-ring: #525866;
     --color-separator: #2b303b;
     --color-surface: #232530;
+    --icon-invert: 1;
   }
 }
 
@@ -233,13 +238,15 @@ main {
 
 .search-input {
   width: 100%;
-  padding: 0.7rem 1rem;
   border-radius: 10px;
   border: none;
   font-size: 0.95rem;
   height: auto;
   outline: none;
-  background: none;
+  background: transparent;
+}
+.search-input:focus {
+  outline: none;
 }
 
 .section-settings {
@@ -252,6 +259,27 @@ main {
 .section-settings img {
   cursor: pointer;
   width: 24px;
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
+}
+
+.logo,
+.login__logo,
+.forgot__logo,
+.reset__logo {
+  transition: opacity 0.3s ease;
+  filter: none !important;
+}
+
+img[src$=".svg"]:not(.logo):not([class*=logo]),
+img[src*=icon-]:not(.logo):not([class*=logo]) {
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
+}
+
+.search-bar img:not(.logo):not([class*=logo]) {
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
 }
 
 .section-settings label {
@@ -278,6 +306,14 @@ main {
   padding: 1.5rem;
   border-right: 1px solid var(--color-border-light);
   background-color: var(--color-background);
+}
+.sidebar .logo {
+  transition: opacity 0.3s ease;
+  filter: none !important;
+}
+.sidebar .tag-icon {
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
 }
 .sidebar .menu {
   list-style: none;
@@ -470,6 +506,14 @@ main {
   color: var(--color-foreground);
   margin-right: 0.5rem;
 }
+.note-view .label-with-icon img {
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
+}
+.note-view small img {
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
+}
 .note-view textarea {
   resize: none;
   height: 90%;
@@ -612,6 +656,8 @@ main {
 .bottom-nav .nav-btn img {
   width: 20px;
   height: 20px;
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
 }
 .bottom-nav .nav-btn.active {
   color: var(--color-primary);
@@ -694,6 +740,8 @@ input:focus {
 }
 .login__logo {
   margin-bottom: 0.5rem;
+  transition: opacity 0.3s ease;
+  filter: none !important;
 }
 .login__title {
   margin: 0;
@@ -745,6 +793,10 @@ input:focus {
   cursor: pointer;
   font-size: 1rem;
 }
+.login__toggle img {
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
+}
 .login__button {
   width: 100%;
   padding: 0.75rem;
@@ -781,6 +833,10 @@ input:focus {
 }
 .login__google-icon {
   font-weight: bold;
+}
+.login__google-icon img {
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
 }
 .login__divider {
   text-align: center;
@@ -959,6 +1015,10 @@ input:focus {
   border: none;
   cursor: pointer;
 }
+.reset__toggle img {
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
+}
 .reset__hint {
   font-size: 0.75rem;
   color: #525866;
@@ -969,7 +1029,8 @@ input:focus {
 }
 .reset__hint img {
   width: 20px;
-  filter: brightness(0) saturate(100%) invert(34%) sepia(9%) saturate(392%) hue-rotate(314deg) brightness(96%) contrast(88%);
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
 }
 .reset__button {
   width: 100%;
@@ -1046,6 +1107,8 @@ input:hover {
   width: 20px;
   height: 20px;
   object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
 }
 
 .settings__item-label {
@@ -1057,6 +1120,8 @@ input:hover {
   width: 16px;
   height: 16px;
   opacity: 0.5;
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
 }
 
 .settings__content {
@@ -1196,6 +1261,8 @@ input:hover {
   height: 24px;
   object-fit: contain;
   flex-shrink: 0;
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
 }
 
 .settings-view__option-text {
