@@ -4,6 +4,7 @@ import { NoteView, NoteActionsSidebar } from "./components/NoteView.js";
 import { SearchBar } from "./components/SearchBar.js";
 import { BottomNav } from "./components/BottomNav.js";
 import { Settings } from "./components/Settings.js";
+import { showModal } from "./components/Modal.js";
 import notesData from "./data/notes.js";
 import { store, saveState, loadState, saveSettings } from "./state/store.js";
 import { generateId } from "./utils/helpers.js";
@@ -353,20 +354,36 @@ const attachEvents = () => {
   });
 
   document.getElementById("delete-note")?.addEventListener("click", () => {
-    store.notes = store.notes.filter((n) => n.id !== store.activeNoteId);
-    store.activeNoteId = null;
-
-    saveState();
-    render();
+    showModal(
+      "delete",
+      "Delete Note",
+      "Are you sure you want to permanently delete this note? This action cannot be undone.",
+      "../assets/images/icon-delete.svg",
+      "Delete Note",
+      () => {
+        store.notes = store.notes.filter((n) => n.id !== store.activeNoteId);
+        store.activeNoteId = null;
+        saveState();
+        render();
+      }
+    );
   });
 
   document.getElementById("archive-note")?.addEventListener("click", () => {
-    const note = store.notes.find((n) => n.id === store.activeNoteId);
-    note.isArchived = true;
-
-    store.activeNoteId = null;
-    saveState();
-    render();
+    showModal(
+      "archive",
+      "Archive Note",
+      "Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime.",
+      "../assets/images/icon-archive.svg",
+      "Archive Note",
+      () => {
+        const note = store.notes.find((n) => n.id === store.activeNoteId);
+        note.isArchived = true;
+        store.activeNoteId = null;
+        saveState();
+        render();
+      }
+    );
   });
 
   document.getElementById("search-input")?.addEventListener("input", (e) => {
