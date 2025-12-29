@@ -1,0 +1,151 @@
+@use "./_variable" as *;
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  backdrop-filter: blur(4px);
+
+  &--active {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background-color: var(--color-surface);
+  border-radius: $radius-lg;
+  padding: 2rem;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  transform: scale(0.95);
+  transition: transform 0.2s ease;
+  color: var(--color-foreground);
+
+  .modal-overlay--active & {
+    transform: scale(1);
+  }
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal__icon {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+  transition: filter 0.3s ease;
+  flex-shrink: 0;
+}
+
+.modal__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-foreground);
+}
+
+.modal__description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-foreground);
+  opacity: 0.8;
+  margin: 0 0 1.5rem 0;
+  padding-left: 2.5rem; // Align with title (icon width + gap)
+}
+
+.modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.modal__button {
+  padding: 0.75rem 1.5rem;
+  border-radius: $radius-md;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 100px;
+
+  &--secondary {
+    background-color: var(--color-separator);
+    color: var(--color-foreground);
+
+    &:hover {
+      background-color: var(--color-hover);
+    }
+  }
+
+  &--primary {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+
+    &:hover {
+      background-color: var(--color-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &--danger {
+    background-color: $danger;
+    color: var(--color-surface);
+
+    &:hover {
+      background-color: #dc2626; // Darker red for hover
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Mobile responsive
+@media (max-width: 767px) {
+  .modal {
+    padding: 1.5rem;
+    width: 95%;
+    max-width: none;
+  }
+
+  .modal__description {
+    padding-left: 0;
+    margin-left: 2.5rem;
+  }
+
+  .modal__actions {
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+
+    .modal__button {
+      width: 100%;
+    }
+  }
+}
+
