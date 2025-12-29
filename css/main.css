@@ -276,7 +276,8 @@ main {
 .sidebar {
   width: 260px;
   padding: 1.5rem;
-  border-right: 1px solid #e0e4ea;
+  border-right: 1px solid var(--color-border-light);
+  background-color: var(--color-background);
 }
 .sidebar .menu {
   list-style: none;
@@ -288,19 +289,21 @@ main {
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
-  color: #0e121b;
+  color: var(--color-foreground);
+  transition: background-color 0.2s ease;
 }
 .sidebar .menu li:hover {
-  background: #335cff;
+  background: var(--color-hover);
 }
 .sidebar .menu li.active {
-  background: #335cff;
-  color: #0e121b;
+  background: var(--color-primary);
+  color: var(--color-surface);
 }
 .sidebar h4 {
   margin-bottom: 0.5rem;
   font-size: 0.85rem;
-  color: #0e121b;
+  color: var(--color-foreground);
+  opacity: 0.7;
   text-transform: uppercase;
 }
 .sidebar .tags {
@@ -317,16 +320,17 @@ main {
   border-radius: 6px;
   font-size: 0.75rem;
   cursor: pointer;
+  color: var(--color-foreground);
 }
 .sidebar .tags .tag-icon {
   align-self: flex-end;
 }
 .sidebar .tags .tag:hover {
-  background: #e0e4ea;
+  background: var(--color-hover);
 }
 .sidebar .tags span:hover {
-  background: #335cff;
-  color: #0e121b;
+  background: var(--color-primary);
+  color: var(--color-surface);
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -342,7 +346,7 @@ main {
   left: 0;
   height: 100vh;
   z-index: 1001;
-  background: #f3f5f8;
+  background: var(--color-background);
 }
 
 .notes-list {
@@ -353,8 +357,9 @@ main {
   height: 100vh;
   padding: 0 1.5rem;
   overflow-y: auto;
-  border-right: 1px solid #cacfd8;
+  border-right: 1px solid var(--color-border);
   scrollbar-width: none;
+  background-color: var(--color-background);
 }
 .notes-list #create-note {
   padding: 1rem;
@@ -366,14 +371,17 @@ main {
   border-radius: 10px;
   cursor: pointer;
   margin-top: 0.5rem;
-  transition: background 0.2s ease;
+  transition: background-color 0.2s ease;
+  color: var(--color-foreground);
 }
 .notes-list .note-card h4 {
   margin: 0 0 0.3rem;
   font-size: 0.95rem;
+  color: var(--color-foreground);
 }
 .notes-list .note-card small {
-  color: #0e121b;
+  color: var(--color-foreground);
+  opacity: 0.6;
   font-size: 0.7rem;
 }
 .notes-list .note-card .tags {
@@ -381,23 +389,24 @@ main {
 }
 .notes-list .note-card .tags span {
   font-size: 0.65rem;
-  background: #2b303b;
+  background: var(--color-separator);
+  color: var(--color-foreground);
   padding: 0.2rem 0.4rem;
   border-radius: 6px;
   margin-right: 0.3rem;
 }
 .notes-list .note-card:hover {
-  background: #232530;
+  background: var(--color-hover);
 }
 .notes-list .note-card.active {
-  background: #335cff;
-  border-left: 4px solid #335cff;
+  background: var(--color-hover);
+  border-left: 4px solid var(--color-primary);
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .notes-list {
     border-right: none;
-    border-bottom: 1px solid #cacfd8;
+    border-bottom: 1px solid var(--color-border);
   }
 }
 .note-view-container {
@@ -411,13 +420,15 @@ main {
   flex-direction: column;
   gap: 1rem;
   width: 70%;
-  border-right: 1px solid #cacfd8;
+  border-right: 1px solid var(--color-border);
+  background-color: var(--color-background);
 }
 .note-view.empty {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0e121b;
+  color: var(--color-foreground);
+  opacity: 0.6;
   font-size: 0.95rem;
 }
 .note-view .top-note {
@@ -433,17 +444,19 @@ main {
   border: none;
   font-size: 0.9rem;
   background: none;
+  color: var(--color-foreground);
 }
 .note-view input:focus,
 .note-view textarea:focus {
   outline: none;
-  border-color: #335cff;
+  border-color: var(--color-primary);
 }
 .note-view #note-title::placeholder {
   font-size: 1.2rem;
   font-weight: 900;
   margin-bottom: 0.5rem;
-  color: #0e121b;
+  color: var(--color-foreground);
+  opacity: 0.5;
 }
 .note-view .note-tags {
   display: flex;
@@ -454,7 +467,7 @@ main {
   align-items: center;
   gap: 0.5rem;
   font-size: 0.85rem;
-  color: #0e121b;
+  color: var(--color-foreground);
   margin-right: 0.5rem;
 }
 .note-view textarea {
@@ -463,17 +476,24 @@ main {
   line-height: 1.6;
   scrollbar-width: none;
   background: none;
+  color: var(--color-foreground);
+}
+.note-view textarea::placeholder {
+  color: var(--color-foreground);
+  opacity: 0.5;
 }
 .note-view small {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: var(--color-foreground);
+  opacity: 0.6;
 }
 .note-view small span {
   padding-left: 1.3rem;
 }
 .note-view .spacer {
-  background: #cacfd8;
+  background: var(--color-border);
   width: 100%;
   height: 1px;
 }
@@ -508,7 +528,7 @@ main {
 .note-view {
   width: 100%;
   border-right: none;
-  border-bottom: 1px solid #cacfd8;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .note-view .top-note {
@@ -536,22 +556,24 @@ main {
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 500;
+  transition: all 0.2s ease;
 }
 .btn--primary {
-  background: #335cff;
-  color: #ffffff;
+  background: var(--color-primary);
+  color: var(--color-surface);
 }
 .btn--secondary {
-  background: #e0e4ea;
-  color: #0e121b;
+  background: var(--color-separator);
+  color: var(--color-foreground);
 }
 .btn--danger {
   background: #ef4444;
-  color: #0e121b;
+  color: var(--color-surface);
 }
 .btn--ghost {
   background: transparent;
-  color: #0e121b;
+  color: var(--color-foreground);
+  opacity: 0.7;
 }
 .btn:hover {
   opacity: 0.9;
@@ -563,8 +585,8 @@ main {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #f3f5f8;
-  border-top: 1px solid #cacfd8;
+  background: var(--color-background);
+  border-top: 1px solid var(--color-border);
   padding: 0.5rem;
   z-index: 1002;
 }
@@ -581,29 +603,29 @@ main {
   padding: 0.5rem;
   border: none;
   background: none;
-  color: #0e121b;
+  color: var(--color-foreground);
   font-size: 0.75rem;
   cursor: pointer;
   border-radius: 6px;
-  transition: background 0.2s;
+  transition: background-color 0.2s ease;
 }
 .bottom-nav .nav-btn img {
   width: 20px;
   height: 20px;
 }
 .bottom-nav .nav-btn.active {
-  color: #335cff;
+  color: var(--color-primary);
 }
 .bottom-nav .nav-btn:hover {
-  background: #f5f7fa;
+  background: var(--color-hover);
 }
 .bottom-nav .tags-popup {
   position: absolute;
   bottom: 100%;
   left: 0;
   right: 0;
-  background: #f3f5f8;
-  border: 1px solid #cacfd8;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
   border-bottom: none;
   padding: 0.5rem;
   display: flex;
@@ -614,14 +636,16 @@ main {
 }
 .bottom-nav .tag-item {
   padding: 0.25rem 0.5rem;
-  border: 1px solid #cacfd8;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   background: none;
   cursor: pointer;
   font-size: 0.75rem;
+  color: var(--color-foreground);
+  transition: background-color 0.2s ease;
 }
 .bottom-nav .tag-item:hover {
-  background: #335cff;
+  background: var(--color-hover);
 }
 
 @media (max-width: 1023px) {
@@ -646,7 +670,7 @@ input:focus {
 }
 
 .login {
-  background-color: #f3f5f8;
+  background-color: var(--color-background);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -658,10 +682,11 @@ input:focus {
   padding: 1rem;
 }
 .login__card {
-  background: #fff;
+  background: var(--color-surface);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  color: var(--color-foreground);
 }
 .login__header {
   text-align: center;
@@ -673,6 +698,7 @@ input:focus {
 .login__title {
   margin: 0;
   font-size: 1.5rem;
+  color: var(--color-foreground);
 }
 .login__subtitle {
   color: #525866;
@@ -685,12 +711,15 @@ input:focus {
   display: block;
   font-size: 0.85rem;
   margin-bottom: 0.4rem;
+  color: var(--color-foreground);
 }
 .login__input {
   width: 100%;
   padding: 0.7rem 0.75rem;
   border-radius: 8px;
-  border: 1px solid #cacfd8;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-foreground);
 }
 .login__password-header {
   display: flex;
@@ -720,18 +749,20 @@ input:focus {
   width: 100%;
   padding: 0.75rem;
   border-radius: 8px;
-  border: 1px solid #cacfd8;
+  border: 1px solid var(--color-border);
   cursor: pointer;
   font-size: 0.9rem;
   margin-bottom: 1rem;
+  background-color: var(--color-surface);
+  color: var(--color-foreground);
 }
 .login__button--primary {
-  background-color: #335cff;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-surface);
   border: none;
 }
 .login__button--primary:hover {
-  background-color: #2547d0;
+  background-color: var(--color-primary-hover);
 }
 .login__button--primary:focus {
   border-color: #335cff;
@@ -755,18 +786,19 @@ input:focus {
   text-align: center;
   margin: 0.2rem 0;
   font-size: 0.8rem;
-  background: #cacfd8;
+  background: var(--color-border);
 }
 .login__divider span {
-  background: #f3f5f8;
+  background: var(--color-background);
   padding: 0 0.5rem;
   position: relative;
   top: -0.7rem;
+  color: var(--color-foreground);
 }
 .login__divider::before {
   content: "";
   display: block;
-  border-top: 1px solid #cacfd8;
+  border-top: 1px solid var(--color-border);
   width: 100%;
   position: relative;
   top: -0.5rem;
@@ -790,7 +822,7 @@ input:focus {
 
 .forgot {
   min-height: 100vh;
-  background-color: #f3f5f8;
+  background-color: var(--color-background);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -830,16 +862,19 @@ input:focus {
   display: block;
   font-size: 0.85rem;
   margin-bottom: 0.4rem;
+  color: var(--color-foreground);
 }
 .forgot__input {
   width: 100%;
   padding: 0.7rem 0.75rem;
   border-radius: 8px;
-  border: 1px solid #cacfd8;
+  border: 1px solid var(--color-border);
   outline: none;
+  background-color: var(--color-surface);
+  color: var(--color-foreground);
 }
 .forgot__input:focus {
-  border-color: #335cff;
+  border-color: var(--color-primary);
 }
 .forgot__button {
   width: 100%;
@@ -856,7 +891,7 @@ input:focus {
 
 .reset {
   min-height: 100vh;
-  background-color: #f3f5f8;
+  background-color: var(--color-background);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -867,10 +902,11 @@ input:focus {
   padding: 1rem;
 }
 .reset__card {
-  background: #fff;
+  background: var(--color-surface);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  color: var(--color-foreground);
 }
 .reset__header {
   text-align: center;
@@ -894,6 +930,7 @@ input:focus {
   display: block;
   font-size: 0.85rem;
   margin-bottom: 0.4rem;
+  color: var(--color-foreground);
 }
 .reset__input-wrapper {
   position: relative;
@@ -902,11 +939,13 @@ input:focus {
   width: 100%;
   padding: 0.7rem 0.75rem;
   border-radius: 8px;
-  border: 1px solid #cacfd8;
+  border: 1px solid var(--color-border);
   outline: none;
+  background-color: var(--color-surface);
+  color: var(--color-foreground);
 }
 .reset__input:focus {
-  border-color: #335cff;
+  border-color: var(--color-primary);
 }
 .reset__input--error {
   border-color: #fb3748;
@@ -941,8 +980,8 @@ input:focus {
   cursor: pointer;
 }
 .reset__button--primary {
-  background-color: #335cff;
-  color: #f3f5f8;
+  background-color: var(--color-primary);
+  color: var(--color-surface);
 }
 
 input {
@@ -991,10 +1030,10 @@ input:hover {
   background-color: transparent;
 }
 .settings__item:hover {
-  background-color: #f5f7fa;
+  background-color: var(--color-hover);
 }
 .settings__item--active {
-  background-color: #f5f7fa;
+  background-color: var(--color-hover);
 }
 
 .settings__item-content {
@@ -1064,7 +1103,7 @@ input:hover {
   transition: background-color 0.2s ease;
 }
 .settings-view__back:hover {
-  background-color: #f5f7fa;
+  background-color: var(--color-hover);
 }
 .settings-view__back img {
   width: 20px;
@@ -1095,15 +1134,15 @@ input:hover {
   justify-content: space-between;
   gap: 1rem;
   padding: 1.25rem;
-  border: 2px solid #cacfd8;
+  border: 2px solid var(--color-border);
   border-radius: 10px;
   cursor: pointer;
 }
 .settings-view__option:hover {
-  border-color: #335cff;
+  border-color: var(--color-primary);
 }
 .settings-view__option--selected {
-  border-color: #335cff;
+  border-color: var(--color-primary);
 }
 
 .settings-view__radio {
@@ -1112,9 +1151,9 @@ input:hover {
   -moz-appearance: none;
   width: 20px;
   height: 20px;
-  border: 2px solid #cacfd8;
+  border: 2px solid var(--color-border);
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   cursor: pointer;
   position: relative;
   flex-shrink: 0;
@@ -1124,7 +1163,7 @@ input:hover {
   transition: all 0.2s ease;
 }
 .settings-view__radio:checked {
-  background-color: #335cff;
+  background-color: var(--color-primary);
 }
 .settings-view__radio:checked::after {
   content: "";
@@ -1135,10 +1174,10 @@ input:hover {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
 }
 .settings-view__radio:hover {
-  border-color: #335cff;
+  border-color: var(--color-primary);
 }
 .settings-view__radio:focus {
   outline: none;
@@ -1191,20 +1230,22 @@ input:hover {
   transition: all 0.2s ease;
 }
 .settings-view__button--primary {
-  background-color: #335cff;
+  background-color: var(--color-primary);
+  color: var(--color-surface);
 }
 .settings-view__button--primary:hover {
-  background-color: #2547d0;
+  background-color: var(--color-primary-hover);
 }
 .settings-view__button--primary:active {
   transform: scale(0.98);
 }
 .settings-view__button--secondary {
   background-color: transparent;
-  border: 1px solid #cacfd8;
+  border: 1px solid var(--color-border);
+  color: var(--color-foreground);
 }
 .settings-view__button--secondary:hover {
-  background-color: #f5f7fa;
+  background-color: var(--color-hover);
 }
 
 .settings-view__form {
@@ -1226,16 +1267,20 @@ input:hover {
 
 .settings-view__field-input {
   padding: 0.75rem 1rem;
-  border: 1px solid #cacfd8;
+  border: 1px solid var(--color-border);
   border-radius: 10px;
   font-size: 0.95rem;
   transition: border-color 0.2s ease;
+  background-color: var(--color-surface);
+  color: var(--color-foreground);
 }
 .settings-view__field-input:focus {
-  border-color: #335cff;
+  border-color: var(--color-primary);
+  outline: none;
 }
 .settings-view__field-input::placeholder {
-  color: #ffffff;
+  color: var(--color-foreground);
+  opacity: 0.5;
 }
 
 @media (max-width: 1023px) {

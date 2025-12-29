@@ -3,7 +3,8 @@
 .sidebar {
   width: 260px;
   padding: 1.5rem;
-  border-right: 1px solid $border-light;
+  border-right: 1px solid var(--color-border-light);
+  background-color: var(--color-background);
   .menu {
     list-style: none;
     padding: 0;
@@ -14,15 +15,16 @@
       border-radius: $radius-sm;
       cursor: pointer;
       font-weight: 500;
-      color: $foreground;
+      color: var(--color-foreground);
+      transition: background-color 0.2s ease;
 
       &:hover {
-        background: $primary-light;
+        background: var(--color-hover);
       }
 
       &.active {
-        background: $primary;
-        color: $foreground;
+        background: var(--color-primary);
+        color: var(--color-surface);
       }
     }
   }
@@ -30,7 +32,8 @@
   h4 {
     margin-bottom: 0.5rem;
     font-size: 0.85rem;
-    color: $foreground-light;
+    color: var(--color-foreground);
+    opacity: 0.7;
     text-transform: uppercase;
   }
 
@@ -49,6 +52,7 @@
       border-radius: $radius-sm;
       font-size: 0.75rem;
       cursor: pointer;
+      color: var(--color-foreground);
     }
 
     .tag-icon {
@@ -56,13 +60,13 @@
     }
 
     .tag:hover {
-      background: $border-light;
+      background: var(--color-hover);
     }
 
     span {
       &:hover {
-        background: $primary;
-        color: $foreground;
+        background: var(--color-primary);
+        color: var(--color-surface);
       }
     }
   }
@@ -82,5 +86,5 @@
   left: 0;
   height: 100vh;
   z-index: 1001;
-  background: $background;
+  background: var(--color-background);
 }

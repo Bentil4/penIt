@@ -50,6 +50,12 @@ const applyFontTheme = (fontName) => {
 
 // Function to apply color theme
 const applyColorTheme = (themeName) => {
+  // Validate theme name
+  const validThemes = ["light", "dark", "system"];
+  if (!validThemes.includes(themeName)) {
+    themeName = "system"; // Default to system if invalid
+  }
+  
   // Set data-theme attribute on html element
   document.documentElement.setAttribute("data-theme", themeName);
   
@@ -58,7 +64,7 @@ const applyColorTheme = (themeName) => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleSystemThemeChange = (e) => {
       // The CSS will handle the change automatically via media query
-      // But we can trigger a reflow to ensure styles update
+      // Force a reflow to ensure styles update immediately
       void document.body.offsetHeight;
     };
     
@@ -70,6 +76,9 @@ const applyColorTheme = (themeName) => {
     // Add new listener
     window.systemThemeListener = handleSystemThemeChange;
     mediaQuery.addEventListener("change", handleSystemThemeChange);
+    
+    // Trigger initial check
+    handleSystemThemeChange(mediaQuery);
   } else {
     // Remove system theme listener if switching away from system
     if (window.systemThemeListener) {
@@ -83,12 +92,25 @@ const applyColorTheme = (themeName) => {
   void document.body.offsetHeight;
 };
 
-// Apply saved settings on load
-if (store.settings.colorTheme) {
-  applyColorTheme(store.settings.colorTheme);
-}
-if (store.settings.fontTheme) {
-  applyFontTheme(store.settings.fontTheme);
+// Initialize theme on page load
+// This runs after loadState which calls loadSettings
+const initializeTheme = () => {
+  // Get theme from store, default to "system" if not set
+  const theme = store.settings.colorTheme || "system";
+  applyColorTheme(theme);
+  
+  // Apply font theme if set
+  if (store.settings.fontTheme) {
+    applyFontTheme(store.settings.fontTheme);
+  }
+};
+
+// Apply theme initialization after DOM is ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeTheme);
+} else {
+  // DOM is already ready
+  initializeTheme();
 }
 
 const app = document.getElementById("app");
