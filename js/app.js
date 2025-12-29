@@ -5,6 +5,7 @@ import { SearchBar } from "./components/SearchBar.js";
 import { BottomNav } from "./components/BottomNav.js";
 import { Settings } from "./components/Settings.js";
 import { showModal } from "./components/Modal.js";
+import { showToast } from "./components/Toast.js";
 import notesData from "./data/notes.js";
 import { store, saveState, loadState, saveSettings } from "./state/store.js";
 import { generateId } from "./utils/helpers.js";
@@ -318,6 +319,7 @@ const attachEvents = () => {
 
     saveState();
     render();
+    showToast("Note saved successfully!");
   };
 
   document.getElementById("save-note")?.addEventListener("click", saveNote);
@@ -365,6 +367,7 @@ const attachEvents = () => {
         store.activeNoteId = null;
         saveState();
         render();
+        showToast("Note permanently deleted.");
       }
     );
   });
@@ -382,6 +385,15 @@ const attachEvents = () => {
         store.activeNoteId = null;
         saveState();
         render();
+        showToast(
+          "Note archived.",
+          true,
+          "Archived Notes",
+          () => {
+            store.view = "ARCHIVED";
+            render();
+          }
+        );
       }
     );
   });
@@ -536,6 +548,7 @@ const attachEvents = () => {
         document.querySelector('input[name="color-theme"]:checked')
           ?.closest(".settings-view__option")
           ?.classList.add("settings-view__option--selected");
+        showToast("Settings updated successfully!");
       }
     });
 
@@ -556,6 +569,7 @@ const attachEvents = () => {
         document.querySelector('input[name="font-theme"]:checked')
           ?.closest(".settings-view__option")
           ?.classList.add("settings-view__option--selected");
+        showToast("Settings updated successfully!");
       }
     });
 
@@ -577,7 +591,7 @@ const attachEvents = () => {
       }
 
       // Here you would typically send this to a backend API
-      alert("Password updated successfully!");
+      showToast("Password changed successfully!");
       e.target.reset();
     });
 
