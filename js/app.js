@@ -1,6 +1,6 @@
 import { Sidebar } from "./components/Siderbar.js";
 import { NotesList } from "./components/NoteList.js";
-import { NoteView } from "./components/NoteView.js";
+import { NoteView, NoteActionsSidebar } from "./components/NoteView.js";
 import { SearchBar } from "./components/SearchBar.js";
 import { BottomNav } from "./components/BottomNav.js";
 import { Settings } from "./components/Settings.js";
@@ -233,7 +233,8 @@ const render = () => {
             ? NotesList(notes, store.activeNoteId)
             : ""
         }
-        ${NoteView(activeNote, store.view === "ARCHIVED")}
+        ${NoteView(activeNote)}
+        ${!isMobileOrTablet ? NoteActionsSidebar(activeNote) : ""}
       </div>
     </main>
     ${BottomNav(allTags, store.view)}
