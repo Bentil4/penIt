@@ -48,6 +48,7 @@ html[data-theme="dark"] {
 }
 
 // System theme - uses prefers-color-scheme
+// Default to light, then override with dark if system prefers dark
 [data-theme="system"],
 html[data-theme="system"] {
   --color-background: #{$background-light};
