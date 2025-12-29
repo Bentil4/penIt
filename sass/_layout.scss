@@ -79,9 +79,16 @@ main {
   height: auto;
   outline: none;
   background: transparent;
+  padding: 0.6rem 0.8rem;
+  color: var(--color-foreground);
 
   &:focus {
     outline: none;
+  }
+
+  &::placeholder {
+    color: var(--color-foreground);
+    opacity: 0.5;
   }
 }
 
@@ -105,7 +112,7 @@ main {
 .forgot__logo,
 .reset__logo {
   transition: opacity 0.3s ease;
-  filter: none !important; // Explicitly prevent logo inversion
+  filter: none !important;
 }
 
 // SVG icon theming - apply to all SVG icons except logos

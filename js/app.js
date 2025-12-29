@@ -294,14 +294,22 @@ const attachEvents = () => {
     });
   });
 
-  document.getElementById("save-note")?.addEventListener("click", () => {
+  // Save note function
+  const saveNote = () => {
     const note = store.notes.find((n) => n.id === store.activeNoteId);
+    
+    if (!note) return;
 
-    note.title = document.getElementById("note-title").value;
-    note.content = document.getElementById("note-content").value;
-    note.tags = document
-      .getElementById("note-tags")
-      .value.split(",")
+    // Get current values from inputs
+    const title = document.getElementById("note-title")?.value || "";
+    const content = document.getElementById("note-content")?.value || "";
+    const tagsInput = document.getElementById("note-tags")?.value || "";
+    
+    // Update note
+    note.title = title;
+    note.content = content;
+    note.tags = tagsInput
+      .split(",")
       .map((t) => t.trim())
       .filter(Boolean);
 
@@ -309,6 +317,39 @@ const attachEvents = () => {
 
     saveState();
     render();
+  };
+
+  document.getElementById("save-note")?.addEventListener("click", saveNote);
+
+  document.getElementById("cancel-note")?.addEventListener("click", () => {
+    // Cancel editing - just deselect the note to discard changes
+    // The note will revert to its saved state when re-selected
+    store.activeNoteId = null;
+    render();
+  });
+
+  // Keyboard shortcuts for note editing
+  document.addEventListener("keydown", (e) => {
+    // Only handle shortcuts when a note is active
+    if (!store.activeNoteId) return;
+    
+    const target = e.target;
+    const isInput = target.tagName === "INPUT" || target.tagName === "TEXTAREA";
+    
+    // Ctrl+S or Cmd+S to save (when in input fields)
+    if ((e.ctrlKey || e.metaKey) && e.key === "s") {
+      if (isInput) {
+        e.preventDefault();
+        saveNote();
+      }
+    }
+    
+    // Escape to cancel (when in input fields)
+    if (e.key === "Escape" && isInput) {
+      e.preventDefault();
+      store.activeNoteId = null;
+      render();
+    }
   });
 
   document.getElementById("delete-note")?.addEventListener("click", () => {

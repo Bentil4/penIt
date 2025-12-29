@@ -30,6 +30,19 @@ export const NoteView = (note) => {
 
         <textarea id="note-content">${note.content}</textarea>
       </section>
+      <span class="spacer"></span>
+      <div class="actions">
+        ${Button({
+          label: "Save Note",
+          id: "save-note",
+          variant: "primary",
+        })}
+        ${Button({
+          label: "Cancel",
+          id: "cancel-note",
+          variant: "secondary",
+        })}
+      </div>
     </section>
   `;
 };
