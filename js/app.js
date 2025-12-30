@@ -62,7 +62,7 @@ const isDarkMode = (themeName) => {
 
 // Function to update logo based on theme
 const updateLogo = (isDark) => {
-  const logos = document.querySelectorAll('.logo, .login__logo, .forgot__logo, .reset__logo, .notes-list__logo');
+  const logos = document.querySelectorAll('.logo, .login__logo, .forgot__logo, .reset__logo, .notes-list__logo, .note-view__logo');
   logos.forEach(logo => {
     if (logo) {
       const currentSrc = logo.getAttribute('src');
@@ -284,6 +284,108 @@ const attachEvents = () => {
       store.activeNoteId = card.dataset.id;
       render();
     };
+  });
+
+  // Note view back button (mobile/tablet)
+  document.getElementById("note-view-back")?.addEventListener("click", () => {
+    store.activeNoteId = null;
+    render();
+  });
+
+  // Header action buttons (mobile/tablet)
+  document.getElementById("delete-note-header")?.addEventListener("click", () => {
+    // Trigger the same delete flow as the regular delete button
+    const deleteBtn = document.getElementById("delete-note");
+    if (deleteBtn) {
+      deleteBtn.click();
+    } else {
+      // If delete button doesn't exist (mobile), trigger delete modal directly
+      showModal(
+        "delete",
+        "Delete Note",
+        "Are you sure you want to permanently delete this note? This action cannot be undone.",
+        "../assets/images/icon-delete.svg",
+        "Delete Note",
+        () => {
+          store.notes = store.notes.filter((n) => n.id !== store.activeNoteId);
+          store.activeNoteId = null;
+          saveState();
+          render();
+          showToast("Note permanently deleted.");
+        }
+      );
+    }
+  });
+
+  document.getElementById("archive-note-header")?.addEventListener("click", () => {
+    // Trigger the same archive flow as the regular archive button
+    const archiveBtn = document.getElementById("archive-note");
+    if (archiveBtn) {
+      archiveBtn.click();
+    } else {
+      // If archive button doesn't exist (mobile), trigger archive modal directly
+      const note = store.notes.find((n) => n.id === store.activeNoteId);
+      if (note && !note.isArchived) {
+        showModal(
+          "archive",
+          "Archive Note",
+          "Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime.",
+          "../assets/images/icon-archive.svg",
+          "Archive Note",
+          () => {
+            note.isArchived = true;
+            store.activeNoteId = null;
+            saveState();
+            render();
+            showToast(
+              "Note archived.",
+              true,
+              "Archived Notes",
+              () => {
+                store.view = "ARCHIVED";
+                render();
+              }
+            );
+          }
+        );
+      }
+    }
+  });
+
+  document.getElementById("cancel-note-header")?.addEventListener("click", () => {
+    // Cancel editing - deselect the note to discard changes
+    store.activeNoteId = null;
+    render();
+  });
+
+  document.getElementById("save-note-header")?.addEventListener("click", () => {
+    // Trigger save note - try to click the button first, otherwise call saveNote directly
+    const saveBtn = document.getElementById("save-note");
+    if (saveBtn) {
+      saveBtn.click();
+    } else {
+      // Call saveNote function directly if button doesn't exist (mobile/tablet)
+      // Note: saveNote is defined later in this function, so we'll duplicate the logic here
+      const note = store.notes.find((n) => n.id === store.activeNoteId);
+      if (!note) return;
+
+      const title = document.getElementById("note-title")?.value || "";
+      const content = document.getElementById("note-content")?.value || "";
+      const tagsInput = document.getElementById("note-tags")?.value || "";
+      
+      note.title = title;
+      note.content = content;
+      note.tags = tagsInput
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean);
+
+      note.lastEdited = new Date().toISOString();
+
+      saveState();
+      render();
+      showToast("Note saved successfully!");
+    }
   });
 
   document.querySelectorAll(".menu li").forEach((item) => {
