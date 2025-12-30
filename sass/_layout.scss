@@ -40,6 +40,10 @@ main {
   padding: 1.5rem 0;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 1023px) {
+    padding: 0;
+  }
 }
 
 .layout {
@@ -110,7 +114,8 @@ main {
 .logo,
 .login__logo,
 .forgot__logo,
-.reset__logo {
+.reset__logo,
+.notes-list__logo {
   transition: opacity 0.3s ease;
   filter: none !important;
 }

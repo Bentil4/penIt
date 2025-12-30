@@ -13,7 +13,7 @@
   --color-ring: #{$ring-light};
   --color-separator: #{$separator-light};
   --color-surface: #{$surface-light};
-  --icon-invert: 0; // Icons stay dark in light mode
+  --icon-invert: 0; // 
 }
 
 // Light theme
@@ -30,7 +30,7 @@ html[data-theme="light"] {
   --color-ring: #{$ring-light};
   --color-separator: #{$separator-light};
   --color-surface: #{$surface-light};
-  --icon-invert: 0; // Icons stay dark in light mode
+  --icon-invert: 0; // 
 }
 
 // Dark theme
@@ -47,7 +47,7 @@ html[data-theme="dark"] {
   --color-ring: #{$ring-dark};
   --color-separator: #{$separator-dark};
   --color-surface: #{$surface-dark};
-  --icon-invert: 1; // Invert icons to light in dark mode
+  --icon-invert: 1; // 
 }
 
 // System theme - uses prefers-color-scheme

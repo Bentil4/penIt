@@ -62,7 +62,7 @@ const isDarkMode = (themeName) => {
 
 // Function to update logo based on theme
 const updateLogo = (isDark) => {
-  const logos = document.querySelectorAll('.logo, .login__logo, .forgot__logo, .reset__logo');
+  const logos = document.querySelectorAll('.logo, .login__logo, .forgot__logo, .reset__logo, .notes-list__logo');
   logos.forEach(logo => {
     if (logo) {
       const currentSrc = logo.getAttribute('src');
@@ -232,7 +232,7 @@ const render = () => {
         ${isMobileOrTablet && store.showSearchBar ? SearchBar(true) : ""}
         ${
           !isMobileOrTablet || !activeNote
-            ? NotesList(notes, store.activeNoteId)
+            ? NotesList(notes, store.activeNoteId, store.view)
             : ""
         }
         ${NoteView(activeNote)}
@@ -253,7 +253,8 @@ const render = () => {
 };
 
 const attachEvents = () => {
-  document.getElementById("create-note")?.addEventListener("click", () => {
+  // Create note handlers (both desktop button and mobile FAB)
+  const createNoteHandler = () => {
     const newNote = {
       id: crypto.randomUUID(),
       title: "",
@@ -268,7 +269,15 @@ const attachEvents = () => {
 
     saveState();
     render();
-  });
+    
+    // Focus on title input after creating new note
+    setTimeout(() => {
+      document.getElementById("note-title")?.focus();
+    }, 0);
+  };
+
+  document.getElementById("create-note")?.addEventListener("click", createNoteHandler);
+  document.getElementById("create-note-fab")?.addEventListener("click", createNoteHandler);
 
   document.querySelectorAll(".note-card").forEach((card) => {
     card.onclick = () => {
