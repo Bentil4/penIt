@@ -203,7 +203,7 @@ const render = () => {
   // Render settings page
   if (store.currentPage === "settings") {
     const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
-    const isTagsActive = store.showSidebarOnTablet || store.showTagsPopup;
+    const isTagsActive = store.showSidebarOnTablet || store.showTagsPopup || store.tagFilter !== null;
     app.innerHTML = `
       ${Sidebar(allTags, store.view)}
       <main>
@@ -225,7 +225,7 @@ const render = () => {
 
   const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
   const isMobileOrTablet = window.innerWidth < 1024;
-  const isTagsActive = store.showSidebarOnTablet || store.showTagsPopup;
+  const isTagsActive = store.showSidebarOnTablet || store.showTagsPopup || store.tagFilter !== null;
   app.innerHTML = `
     ${Sidebar(allTags, store.view)}
     <main>
