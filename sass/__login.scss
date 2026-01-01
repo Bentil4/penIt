@@ -17,7 +17,7 @@ input:focus {
 }
 
 .login {
-  background-color: var(--color-background);
+  background-color: var(--color-surface);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -30,7 +30,7 @@ input:focus {
   }
 
   &__card {
-    background: var(--color-surface);
+    background: var(--color-background);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
@@ -39,14 +39,33 @@ input:focus {
 
   &__header {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 2rem;
   }
 
   &__logo {
-    margin-bottom: 0.5rem;
+    display: block;
+    width: 80px;
+    height: auto;
+    margin: 0 auto 1rem auto;
     transition: opacity 0.3s ease;
-    filter: none !important; // Explicitly prevent logo inversion
+    filter: none !important;
+    opacity: 1;
   }
+
+  // &__logo img {
+  //   // display: block;
+  //   width: 48px;
+  //   height: auto;
+  //   margin-bottom: 0.5rem;
+  //   padding: 0;
+  //   margin: 0;
+  //   transition: opacity 0.3s ease;
+  //   filter: none !important;
+  // }
 
   &__title {
     margin: 0;
@@ -55,7 +74,7 @@ input:focus {
   }
 
   &__subtitle {
-    color: $color-neutral-600;
+    color: var(--color-foreground);
     font-size: 0.9rem;
   }
 
@@ -125,7 +144,7 @@ input:focus {
 
     &--primary {
       background-color: var(--color-primary);
-      color: var(--color-surface);
+      color: $color-neutral-0;
       border: none;
     }
     &--primary:hover {
@@ -143,7 +162,6 @@ input:focus {
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      background: #fff;
     }
 
     &--google:hover {
@@ -198,7 +216,7 @@ input:focus {
   }
 
   &__signup {
-    color: $color-neutral-950;
+    color: var(--color-foreground);
     text-decoration: none;
     font-weight: 500;
   }
@@ -208,7 +226,8 @@ input:focus {
 
 .forgot {
   min-height: 100vh;
-  background-color: var(--color-background);
+  background-color: var(--color-surface);
+  color: var(--color-foreground);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -220,7 +239,7 @@ input:focus {
   }
 
   &__card {
-    background: #fff;
+    background: var(--color-background);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
@@ -228,11 +247,18 @@ input:focus {
   }
 
   &__header {
+    text-align: center;
     margin-bottom: 2rem;
   }
 
   &__logo {
-    margin-bottom: 0.75rem;
+    display: block;
+    width: 80px;
+    height: auto;
+    margin: 0 auto 1rem auto;
+    transition: opacity 0.3s ease;
+    filter: none !important;
+    opacity: 1;
   }
 
   &__title {
@@ -242,7 +268,6 @@ input:focus {
 
   &__subtitle {
     font-size: 0.9rem;
-    color: $color-neutral-600;
     line-height: 1.4;
   }
 
@@ -255,7 +280,6 @@ input:focus {
     display: block;
     font-size: 0.85rem;
     margin-bottom: 0.4rem;
-    color: var(--color-foreground);
   }
 
   &__input {
@@ -265,7 +289,6 @@ input:focus {
     border: 1px solid var(--color-border);
     outline: none;
     background-color: var(--color-surface);
-    color: var(--color-foreground);
 
     &:focus {
       border-color: var(--color-primary);
@@ -282,7 +305,7 @@ input:focus {
 
     &--primary {
       background-color: $color-blue-500;
-      color: #fff;
+      color: $color-neutral-0;
     }
   }
 }
@@ -316,7 +339,13 @@ input:focus {
   }
 
   &__logo {
-    margin-bottom: 0.75rem;
+    display: block;
+    width: 80px;
+    height: auto;
+    margin: 0 auto 1rem auto;
+    transition: opacity 0.3s ease;
+    filter: none !important;
+    opacity: 1;
   }
 
   &__title {
@@ -326,7 +355,7 @@ input:focus {
 
   &__subtitle {
     font-size: 0.9rem;
-    color: $color-neutral-600;
+    color: var(--color-foreground);
   }
 
   &__field {
@@ -402,7 +431,7 @@ input:focus {
 
     &--primary {
       background-color: var(--color-primary);
-      color: var(--color-surface);
+      color: $color-neutral-0;
     }
   }
 }

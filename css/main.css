@@ -1128,7 +1128,7 @@ input:focus {
 }
 
 .login {
-  background-color: var(--color-background);
+  background-color: var(--color-surface);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -1140,7 +1140,7 @@ input:focus {
   padding: 1rem;
 }
 .login__card {
-  background: var(--color-surface);
+  background: var(--color-background);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
@@ -1148,12 +1148,20 @@ input:focus {
 }
 .login__header {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 2rem;
 }
 .login__logo {
-  margin-bottom: 0.5rem;
+  display: block;
+  width: 80px;
+  height: auto;
+  margin: 0 auto 1rem auto;
   transition: opacity 0.3s ease;
   filter: none !important;
+  opacity: 1;
 }
 .login__title {
   margin: 0;
@@ -1161,7 +1169,7 @@ input:focus {
   color: var(--color-foreground);
 }
 .login__subtitle {
-  color: #525866;
+  color: var(--color-foreground);
   font-size: 0.9rem;
 }
 .login__field {
@@ -1222,7 +1230,7 @@ input:focus {
 }
 .login__button--primary {
   background-color: var(--color-primary);
-  color: var(--color-surface);
+  color: #ffffff;
   border: none;
 }
 .login__button--primary:hover {
@@ -1238,7 +1246,6 @@ input:focus {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #fff;
 }
 .login__button--google:hover {
   background: #f5f7fa;
@@ -1283,14 +1290,15 @@ input:focus {
   font-size: 0.85rem;
 }
 .login__signup {
-  color: #0e121b;
+  color: var(--color-foreground);
   text-decoration: none;
   font-weight: 500;
 }
 
 .forgot {
   min-height: 100vh;
-  background-color: var(--color-background);
+  background-color: var(--color-surface);
+  color: var(--color-foreground);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1301,17 +1309,24 @@ input:focus {
   padding: 1rem;
 }
 .forgot__card {
-  background: #fff;
+  background: var(--color-background);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   text-align: center;
 }
 .forgot__header {
+  text-align: center;
   margin-bottom: 2rem;
 }
 .forgot__logo {
-  margin-bottom: 0.75rem;
+  display: block;
+  width: 80px;
+  height: auto;
+  margin: 0 auto 1rem auto;
+  transition: opacity 0.3s ease;
+  filter: none !important;
+  opacity: 1;
 }
 .forgot__title {
   font-size: 1.4rem;
@@ -1319,7 +1334,6 @@ input:focus {
 }
 .forgot__subtitle {
   font-size: 0.9rem;
-  color: #525866;
   line-height: 1.4;
 }
 .forgot__field {
@@ -1330,7 +1344,6 @@ input:focus {
   display: block;
   font-size: 0.85rem;
   margin-bottom: 0.4rem;
-  color: var(--color-foreground);
 }
 .forgot__input {
   width: 100%;
@@ -1339,7 +1352,6 @@ input:focus {
   border: 1px solid var(--color-border);
   outline: none;
   background-color: var(--color-surface);
-  color: var(--color-foreground);
 }
 .forgot__input:focus {
   border-color: var(--color-primary);
@@ -1354,7 +1366,7 @@ input:focus {
 }
 .forgot__button--primary {
   background-color: #335cff;
-  color: #fff;
+  color: #ffffff;
 }
 
 .reset {
@@ -1381,7 +1393,13 @@ input:focus {
   margin-bottom: 2rem;
 }
 .reset__logo {
-  margin-bottom: 0.75rem;
+  display: block;
+  width: 80px;
+  height: auto;
+  margin: 0 auto 1rem auto;
+  transition: opacity 0.3s ease;
+  filter: none !important;
+  opacity: 1;
 }
 .reset__title {
   font-size: 1.4rem;
@@ -1389,7 +1407,7 @@ input:focus {
 }
 .reset__subtitle {
   font-size: 0.9rem;
-  color: #525866;
+  color: var(--color-foreground);
 }
 .reset__field {
   margin-bottom: 1.4rem;
@@ -1454,7 +1472,7 @@ input:focus {
 }
 .reset__button--primary {
   background-color: var(--color-primary);
-  color: var(--color-surface);
+  color: #ffffff;
 }
 
 input {
