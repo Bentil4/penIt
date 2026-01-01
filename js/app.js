@@ -203,7 +203,7 @@ const render = () => {
   // Render settings page
   if (store.currentPage === "settings") {
     const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
-    const isTagsActive = store.showSidebarOnTablet || store.showTagsPopup || store.tagFilter !== null;
+    const isTagsActive = store.showSidebarOnTablet || store.tagFilter !== null;
     app.innerHTML = `
       ${Sidebar(allTags, store.view)}
       <main>
@@ -225,7 +225,7 @@ const render = () => {
 
   const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
   const isMobileOrTablet = window.innerWidth < 1024;
-  const isTagsActive = store.showSidebarOnTablet || store.showTagsPopup || store.tagFilter !== null;
+  const isTagsActive = store.showSidebarOnTablet || store.tagFilter !== null;
   app.innerHTML = `
     ${Sidebar(allTags, store.view)}
     <main>
@@ -573,22 +573,10 @@ const attachEvents = () => {
   });
 
   document.getElementById("tags-toggle")?.addEventListener("click", () => {
-    if (window.innerWidth >= 768 && window.innerWidth <= 1023) {
+    if (window.innerWidth < 1024) {
       store.showSidebarOnTablet = !store.showSidebarOnTablet;
       render();
-    } else {
-      store.showTagsPopup = !store.showTagsPopup;
-      render();
     }
-  });
-
-  document.querySelectorAll(".tag-item").forEach((item) => {
-    item.addEventListener("click", () => {
-      store.tagFilter = item.dataset.tag;
-      store.activeNoteId = null;
-      store.showTagsPopup = false;
-      render();
-    });
   });
 
   // Settings page events
