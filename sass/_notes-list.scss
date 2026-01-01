@@ -34,12 +34,42 @@
     transition: opacity 0.3s ease;
   }
 
+  &__back {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: $radius-md;
+    margin-bottom: 1.5rem;
+    transition: background-color 0.2s ease;
+
+    img {
+      width: 16px;
+      height: 16px;
+      filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
   &__title {
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0 0 1rem 0;
     padding: 0;
     color: var(--color-foreground);
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: var(--color-foreground);
+    opacity: 0.6;
+    margin: -0.5rem 0 1rem 0;
+    padding: 0;
   }
 
   .note-card {
@@ -95,9 +125,9 @@
 
 // Floating Action Button (FAB) for mobile/tablet
 .fab {
-  display: none; // Hidden on desktop
+  display: none;
   position: fixed;
-  bottom: 5.5rem; // Above bottom nav
+  bottom: 5.5rem;
   right: 1.5rem;
   width: 56px;
   height: 56px;
@@ -142,6 +172,18 @@
     &__logo {
       height: 28px;
     }
+    // &__back {
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    //   width: 40px;
+    //   height: 40px;
+    //   border: none;
+    //   background: transparent;
+    //   cursor: pointer;
+    //   border-radius: $radius-md;
+    //   margin-bottom: 1.5rem;
+    //   transition: background-color 0.2s ease;
 
     &__title {
       font-size: 1.25rem;
@@ -188,6 +230,19 @@
     &__logo {
       height: 28px;
     }
+
+    // &__back {
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    //   width: 40px;
+    //   height: 40px;
+    //   border: none;
+    //   background: transparent;
+    //   cursor: pointer;
+    //   border-radius: $radius-md;
+    //   margin-bottom: 1.5rem;
+    //   transition: background-color 0.2s ease;
 
     &__title {
       font-size: 1.25rem;

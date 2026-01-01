@@ -234,10 +234,10 @@ const render = () => {
         ${isMobileOrTablet && store.showSearchBar ? SearchBar(true) : ""}
         ${
           !isMobileOrTablet || !activeNote
-            ? NotesList(notes, store.activeNoteId, store.view)
+            ? NotesList(notes, store.activeNoteId, store.view, store.tagFilter)
             : ""
         }
-        ${NoteView(activeNote)}
+        ${isMobileOrTablet && !activeNote ? "" : NoteView(activeNote)}
         ${!isMobileOrTablet ? NoteActionsSidebar(activeNote) : ""}
       </div>
     </main>
@@ -397,6 +397,14 @@ const attachEvents = () => {
       store.tagFilter = null;
       render();
     };
+  });
+
+  // Go back button in notes list (mobile/tablet)
+  document.getElementById("notes-list-go-back")?.addEventListener("click", () => {
+    store.tagFilter = null;
+    store.view = "ALL";
+    store.activeNoteId = null;
+    render();
   });
 
   // Sidebar tags
