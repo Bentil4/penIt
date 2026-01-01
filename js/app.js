@@ -203,6 +203,7 @@ const render = () => {
   // Render settings page
   if (store.currentPage === "settings") {
     const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
+    const isTagsActive = store.showSidebarOnTablet || store.showTagsPopup;
     app.innerHTML = `
       ${Sidebar(allTags, store.view)}
       <main>
@@ -211,7 +212,7 @@ const render = () => {
           ${Settings(store.activeSetting, store.showSettingsMenu, store.showOnlySettingsMenu)}
         </div>
       </main>
-      ${BottomNav(allTags, store.view)}
+      ${BottomNav(allTags, store.view, isTagsActive)}
     `;
     app.className = store.showSidebarOnTablet ? "show-sidebar-tablet" : "";
     attachEvents();
@@ -224,6 +225,7 @@ const render = () => {
 
   const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
   const isMobileOrTablet = window.innerWidth < 1024;
+  const isTagsActive = store.showSidebarOnTablet || store.showTagsPopup;
   app.innerHTML = `
     ${Sidebar(allTags, store.view)}
     <main>
@@ -239,7 +241,7 @@ const render = () => {
         ${!isMobileOrTablet ? NoteActionsSidebar(activeNote) : ""}
       </div>
     </main>
-    ${BottomNav(allTags, store.view)}
+    ${BottomNav(allTags, store.view, isTagsActive)}
   `;
 
   app.className = store.showSidebarOnTablet ? "show-sidebar-tablet" : "";
@@ -575,8 +577,8 @@ const attachEvents = () => {
       store.showSidebarOnTablet = !store.showSidebarOnTablet;
       render();
     } else {
-      const popup = document.getElementById("tags-popup");
-      popup.style.display = popup.style.display === "none" ? "flex" : "none";
+      store.showTagsPopup = !store.showTagsPopup;
+      render();
     }
   });
 
@@ -584,7 +586,7 @@ const attachEvents = () => {
     item.addEventListener("click", () => {
       store.tagFilter = item.dataset.tag;
       store.activeNoteId = null;
-      document.getElementById("tags-popup").style.display = "none";
+      store.showTagsPopup = false;
       render();
     });
   });

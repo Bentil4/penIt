@@ -1,6 +1,6 @@
 import { Button } from "./Button.js";
 
-export const BottomNav = (tags, activeView) => `
+export const BottomNav = (tags, activeView, isTagsActive) => `
   <nav class="bottom-nav">
     <div class="nav-buttons">
       <button class="nav-btn ${
@@ -19,7 +19,7 @@ export const BottomNav = (tags, activeView) => `
         <img src="./assets/images/icon-archive.svg" alt="Archived" />
         <span>Archived</span>
       </button>
-      <button class="nav-btn tags-btn" id="tags-toggle">
+      <button class="nav-btn tags-btn ${isTagsActive ? "active" : ""}" id="tags-toggle">
         <img src="./assets/images/icon-tag.svg" alt="Tags" />
         <span>Tags</span>
       </button>
@@ -28,7 +28,7 @@ export const BottomNav = (tags, activeView) => `
         <span>Settings</span>
       </button>
     </div>
-    <div class="tags-popup" id="tags-popup" style="display: none;">
+    <div class="tags-popup" id="tags-popup" style="display: ${isTagsActive ? "flex" : "none"};">
       ${tags
         .map(
           (tag) => `<button class="tag-item" data-tag="${tag}">${tag}</button>`
