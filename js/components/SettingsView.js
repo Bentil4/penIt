@@ -13,7 +13,6 @@ export const SettingsView = (activeSetting, currentSettings = {}) => {
   }
 };
 
-
 // Theme View
 const ColorThemeView = (currentTheme = "light") => {
   const isLight = currentTheme === "light";
@@ -24,12 +23,15 @@ const ColorThemeView = (currentTheme = "light") => {
     <div class="settings-view">
       <button class="settings-view__back" id="settings-back-btn">
         <img src="../assets/images/icon-arrow-left.svg" alt="Back" />
+        <p>Settings</p>
       </button>
       <h2 class="settings-view__title">Color Theme</h2>
       <p class="settings-view__description">Choose your color theme:</p>
       
       <div class="settings-view__options">
-        <label class="settings-view__option ${isLight ? "settings-view__option--selected" : ""}">
+        <label class="settings-view__option ${
+          isLight ? "settings-view__option--selected" : ""
+        }">
           <input 
             type="radio" 
             name="color-theme" 
@@ -50,7 +52,9 @@ const ColorThemeView = (currentTheme = "light") => {
           </div>
         </label>
 
-        <label class="settings-view__option ${isDark ? "settings-view__option--selected" : ""}">
+        <label class="settings-view__option ${
+          isDark ? "settings-view__option--selected" : ""
+        }">
           <input 
             type="radio" 
             name="color-theme" 
@@ -71,7 +75,9 @@ const ColorThemeView = (currentTheme = "light") => {
           </div>
         </label>
 
-        <label class="settings-view__option ${isSystem ? "settings-view__option--selected" : ""}">
+        <label class="settings-view__option ${
+          isSystem ? "settings-view__option--selected" : ""
+        }">
           <input 
             type="radio" 
             name="color-theme" 
@@ -102,7 +108,6 @@ const ColorThemeView = (currentTheme = "light") => {
   `;
 };
 
-
 //Font View
 const FontThemeView = (currentFont = "Inter") => {
   const isSansSerif = currentFont === "Inter";
@@ -113,12 +118,16 @@ const FontThemeView = (currentFont = "Inter") => {
     <div class="settings-view">
       <button class="settings-view__back" id="settings-back-btn">
         <img src="../assets/images/icon-arrow-left.svg" alt="Back" />
+        <p>Settings</p>
+
       </button>
       <h2 class="settings-view__title">Font Theme</h2>
       <p class="settings-view__description">Choose your font theme:</p>
       
       <div class="settings-view__options">
-        <label class="settings-view__option ${isSansSerif ? "settings-view__option--selected" : ""}">
+        <label class="settings-view__option ${
+          isSansSerif ? "settings-view__option--selected" : ""
+        }">
           <input 
             type="radio" 
             name="font-theme" 
@@ -139,7 +148,9 @@ const FontThemeView = (currentFont = "Inter") => {
           </div>
         </label>
 
-        <label class="settings-view__option ${isSerif ? "settings-view__option--selected" : ""}">
+        <label class="settings-view__option ${
+          isSerif ? "settings-view__option--selected" : ""
+        }">
           <input 
             type="radio" 
             name="font-theme" 
@@ -160,7 +171,9 @@ const FontThemeView = (currentFont = "Inter") => {
           </div>
         </label>
 
-        <label class="settings-view__option ${isMonospace ? "settings-view__option--selected" : ""}">
+        <label class="settings-view__option ${
+          isMonospace ? "settings-view__option--selected" : ""
+        }">
           <input 
             type="radio" 
             name="font-theme" 
@@ -196,6 +209,8 @@ const ChangePasswordView = () => {
     <div class="settings-view">
       <button class="settings-view__back" id="settings-back-btn">
         <img src="../assets/images/icon-arrow-left.svg" alt="Back" />
+        <p>Settings</p>
+
       </button>
       <h2 class="settings-view__title">Change Password</h2>
       <p class="settings-view__description">Update your account password:</p>
@@ -246,6 +261,7 @@ const LogoutView = () => {
     <div class="settings-view">
       <button class="settings-view__back" id="settings-back-btn">
         <img src="../assets/images/icon-arrow-left.svg" alt="Back" />
+        <p>Settings</p>
       </button>
       <h2 class="settings-view__title">Logout</h2>
       <p class="settings-view__description">Are you sure you want to logout?</p>
@@ -258,4 +274,3 @@ const LogoutView = () => {
     </div>
   `;
 };
-

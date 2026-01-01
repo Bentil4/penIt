@@ -158,15 +158,26 @@ const app = document.getElementById("app");
 document.addEventListener("click", (e) => {
   // Settings button in search bar
   if (e.target.closest(".section-settings img[src*='icon-settings']")) {
+    const isDesktop = window.innerWidth >= 1024;
     if (store.currentPage === "settings") {
-      // If already on settings page, show only menu
-      store.showOnlySettingsMenu = true;
-      store.showSettingsMenu = true;
+      // If already on settings page, show menu (and view on desktop)
+      if (isDesktop) {
+        store.showSettingsMenu = true;
+        store.showOnlySettingsMenu = false;
+      } else {
+        store.showOnlySettingsMenu = true;
+        store.showSettingsMenu = true;
+      }
     } else {
       store.currentPage = "settings";
       store.activeSetting = "color-theme";
-      store.showSettingsMenu = true;
-      store.showOnlySettingsMenu = true;
+      if (isDesktop) {
+        store.showSettingsMenu = true;
+        store.showOnlySettingsMenu = false;
+      } else {
+        store.showSettingsMenu = true;
+        store.showOnlySettingsMenu = true;
+      }
     }
     render();
     return;
@@ -174,15 +185,26 @@ document.addEventListener("click", (e) => {
 
   // Settings button in bottom nav
   if (e.target.closest("#settings-toggle")) {
+    const isDesktop = window.innerWidth >= 1024;
     if (store.currentPage === "settings") {
-      // If already on settings page, show only menu
-      store.showOnlySettingsMenu = true;
-      store.showSettingsMenu = true;
+      // If already on settings page, show menu (and view on desktop)
+      if (isDesktop) {
+        store.showSettingsMenu = true;
+        store.showOnlySettingsMenu = false;
+      } else {
+        store.showOnlySettingsMenu = true;
+        store.showSettingsMenu = true;
+      }
     } else {
       store.currentPage = "settings";
       store.activeSetting = "color-theme";
-      store.showSettingsMenu = true;
-      store.showOnlySettingsMenu = true;
+      if (isDesktop) {
+        store.showSettingsMenu = true;
+        store.showOnlySettingsMenu = false;
+      } else {
+        store.showSettingsMenu = true;
+        store.showOnlySettingsMenu = true;
+      }
     }
     render();
     return;
@@ -593,8 +615,15 @@ const attachEvents = () => {
     document.querySelectorAll(".settings__item").forEach((item) => {
       item.addEventListener("click", () => {
         store.activeSetting = item.dataset.setting;
-        store.showSettingsMenu = false;
-        store.showOnlySettingsMenu = false;
+        // On desktop (>= 1024px), show both menu and view side by side
+        const isDesktop = window.innerWidth >= 1024;
+        if (isDesktop) {
+          store.showSettingsMenu = true;
+          store.showOnlySettingsMenu = false;
+        } else {
+          store.showSettingsMenu = false;
+          store.showOnlySettingsMenu = false;
+        }
         render();
       });
     });

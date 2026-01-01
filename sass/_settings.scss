@@ -12,11 +12,21 @@ input:hover {
   height: 100%;
   gap: 2rem;
   padding: 2rem;
+
+  // Desktop layout - side by side
+  @media (min-width: 1024px) {
+    gap: 3rem;
+    padding: 2rem 3rem;
+  }
 }
 
 .settings__menu {
   width: 280px;
   flex-shrink: 0;
+
+  @media (min-width: 1024px) {
+    width: 300px;
+  }
 }
 
 .settings__title {
@@ -80,9 +90,23 @@ input:hover {
   transition: filter 0.3s ease;
 }
 
+.settings__separator {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: 0.5rem 0;
+  list-style: none;
+  padding: 0;
+}
+
 .settings__content {
   flex: 1;
   padding: 0 1rem;
+
+  @media (min-width: 1024px) {
+    padding: 0 2rem;
+    display: flex;
+    align-items: flex-start;
+  }
 }
 
 .settings__content--full {
@@ -103,6 +127,11 @@ input:hover {
   max-width: 600px;
   position: relative;
   width: 100%;
+
+  @media (min-width: 1024px) {
+    max-width: 700px;
+    width: 100%;
+  }
 }
 
 .settings--view-only .settings-view {
@@ -111,7 +140,7 @@ input:hover {
 }
 
 .settings-view__back {
-  display: flex;
+  display: none; // Hidden on desktop by default
   align-items: center;
   justify-content: center;
   width: 40px;
@@ -122,6 +151,13 @@ input:hover {
   border-radius: $radius-md;
   margin-bottom: 1.5rem;
   transition: background-color 0.2s ease;
+  gap: 0.5rem;
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
 
   &:hover {
     background-color: var(--color-hover);
@@ -131,17 +167,34 @@ input:hover {
     width: 20px;
     height: 20px;
   }
+
+  // Show on mobile/tablet
+  @media (max-width: 1023px) {
+    display: flex;
+  }
 }
 
 .settings-view__title {
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0 0 0.5rem 0;
+
+  // On desktop, add top margin when back button is hidden
+  @media (min-width: 1024px) {
+    margin-top: 0;
+  }
 }
 
 .settings-view__description {
   font-size: 0.95rem;
   margin: 0 0 2rem 0;
+  color: var(--color-foreground);
+  opacity: 0.7;
+}
+
+.settings-view__back p {
+  font-size: 0.95rem;
+  color: var(--color-foreground);
 }
 
 .settings-view__options {
@@ -160,6 +213,8 @@ input:hover {
   border: 2px solid var(--color-border);
   border-radius: $radius-md;
   cursor: pointer;
+  background-color: var(--color-surface);
+  transition: all 0.2s ease;
 
   &:hover {
     border-color: var(--color-primary);
@@ -167,6 +222,7 @@ input:hover {
 
   &--selected {
     border-color: var(--color-primary);
+    background-color: var(--color-surface);
   }
 }
 
@@ -189,6 +245,7 @@ input:hover {
 
   &:checked {
     background-color: var(--color-primary);
+    border-color: var(--color-primary);
 
     &::after {
       content: "";
@@ -238,10 +295,13 @@ input:hover {
 .settings-view__option-label {
   font-size: 1rem;
   font-weight: 600;
+  color: var(--color-foreground);
 }
 
 .settings-view__option-description {
   font-size: 0.875rem;
+  color: var(--color-foreground);
+  opacity: 0.7;
 }
 
 .settings-view__actions {
@@ -249,6 +309,10 @@ input:hover {
   justify-content: flex-end;
   gap: 1rem;
   margin-top: 2rem;
+
+  @media (min-width: 1024px) {
+    margin-top: 3rem;
+  }
 }
 
 .settings-view__button {

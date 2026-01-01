@@ -33,6 +33,24 @@ export const Settings = (activeSetting = "color-theme", showMenu = true, showOnl
           <h2 class="settings__title">Settings</h2>
           <ul class="settings__list">
             ${settingsMenu
+              .slice(0, 3)
+              .map(
+                (item) => `
+              <li class="settings__item ${
+                activeSetting === item.id ? "settings__item--active" : ""
+              }" data-setting="${item.id}">
+                <div class="settings__item-content">
+                  <img src="${item.icon}" alt="${item.label}" class="settings__item-icon" />
+                  <span class="settings__item-label">${item.label}</span>
+                </div>
+                <img src="../assets/images/icon-chevron-right.svg" alt="Arrow" class="settings__item-arrow" />
+              </li>
+            `
+              )
+              .join("")}
+            <li class="settings__separator"></li>
+            ${settingsMenu
+              .slice(3)
               .map(
                 (item) => `
               <li class="settings__item ${
@@ -71,6 +89,24 @@ export const Settings = (activeSetting = "color-theme", showMenu = true, showOnl
         <h2 class="settings__title">Settings</h2>
         <ul class="settings__list">
           ${settingsMenu
+            .slice(0, 3)
+            .map(
+              (item) => `
+            <li class="settings__item ${
+              activeSetting === item.id ? "settings__item--active" : ""
+            }" data-setting="${item.id}">
+              <div class="settings__item-content">
+                <img src="${item.icon}" alt="${item.label}" class="settings__item-icon" />
+                <span class="settings__item-label">${item.label}</span>
+              </div>
+              <img src="../assets/images/icon-chevron-right.svg" alt="Arrow" class="settings__item-arrow" />
+            </li>
+          `
+            )
+            .join("")}
+          <li class="settings__separator"></li>
+          ${settingsMenu
+            .slice(3)
             .map(
               (item) => `
             <li class="settings__item ${
