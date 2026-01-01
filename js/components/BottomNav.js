@@ -28,12 +28,5 @@ export const BottomNav = (tags, activeView, isTagsActive) => `
         <span>Settings</span>
       </button>
     </div>
-    <div class="tags-popup" id="tags-popup" style="display: ${isTagsActive ? "flex" : "none"};">
-      ${tags
-        .map(
-          (tag) => `<button class="tag-item" data-tag="${tag}">${tag}</button>`
-        )
-        .join("")}
-    </div>
   </nav>
 `;
