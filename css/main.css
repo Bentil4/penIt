@@ -1603,12 +1603,12 @@ input:hover {
   align-items: center;
   justify-content: center;
   width: 40px;
-  height: 40px;
   border: none;
   background: transparent;
   cursor: pointer;
   border-radius: 10px;
   margin-bottom: 1.5rem;
+  margin-left: 1rem;
   transition: background-color 0.2s ease;
   gap: 0.5rem;
 }
@@ -1777,7 +1777,7 @@ input:hover {
 }
 .settings-view__button--primary {
   background-color: var(--color-primary);
-  color: var(--color-surface);
+  color: #ffffff;
 }
 .settings-view__button--primary:hover {
   background-color: var(--color-primary-hover);
