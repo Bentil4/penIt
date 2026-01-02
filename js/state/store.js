@@ -9,6 +9,7 @@ export const store = {
   tagFilter: null,
   showSidebarOnTablet: false,
   showSearchBar: false,
+  searchQuery: "",
   showTagsPopup: false,
   currentPage: "notes", 
   activeSetting: "color-theme",

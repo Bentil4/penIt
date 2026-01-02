@@ -2,6 +2,7 @@ import { Sidebar } from "./components/Siderbar.js";
 import { NotesList } from "./components/NoteList.js";
 import { NoteView, NoteActionsSidebar } from "./components/NoteView.js";
 import { SearchBar } from "./components/SearchBar.js";
+import { SearchView } from "./components/SearchView.js";
 import { BottomNav } from "./components/BottomNav.js";
 import { Settings } from "./components/Settings.js";
 import { showModal } from "./components/Modal.js";
@@ -62,7 +63,7 @@ const isDarkMode = (themeName) => {
 
 // Function to update logo based on theme
 const updateLogo = (isDark) => {
-  const logos = document.querySelectorAll('.logo, .login__logo, .forgot__logo, .reset__logo, .notes-list__logo, .note-view__logo');
+  const logos = document.querySelectorAll('.logo, .login__logo, .forgot__logo, .reset__logo, .notes-list__logo, .note-view__logo, .search-view__logo');
   logos.forEach(logo => {
     if (logo) {
       const currentSrc = logo.getAttribute('src');
@@ -234,7 +235,7 @@ const render = () => {
           ${Settings(store.activeSetting, store.showSettingsMenu, store.showOnlySettingsMenu)}
         </div>
       </main>
-      ${BottomNav(allTags, store.view, isTagsActive)}
+      ${BottomNav(allTags, store.view, isTagsActive, false)}
     `;
     app.className = store.showSidebarOnTablet ? "show-sidebar-tablet" : "";
     attachEvents();
@@ -248,12 +249,42 @@ const render = () => {
   const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
   const isMobileOrTablet = window.innerWidth < 1024;
   const isTagsActive = store.showSidebarOnTablet || store.tagFilter !== null;
+  
+  // Get filtered notes for search
+  const getFilteredNotes = () => {
+    if (!store.searchQuery) return [];
+    const q = store.searchQuery.toLowerCase();
+    const source = store.view === "ARCHIVED" 
+      ? store.notes.filter(n => n.isArchived)
+      : store.notes.filter(n => !n.isArchived);
+    
+    return source.filter(
+      (n) =>
+        n.title.toLowerCase().includes(q) ||
+        n.content.toLowerCase().includes(q) ||
+        n.tags.some((t) => t.toLowerCase().includes(q))
+    );
+  };
+  
+  // If search bar is active on mobile/tablet, show SearchView
+  if (isMobileOrTablet && store.showSearchBar) {
+    const filteredNotes = getFilteredNotes();
+    app.innerHTML = `
+      <main>
+        ${SearchView(store.searchQuery, filteredNotes)}
+      </main>
+      ${BottomNav(allTags, store.view, isTagsActive, true)}
+    `;
+    app.className = "";
+    attachEvents();
+    return;
+  }
+  
   app.innerHTML = `
     ${Sidebar(allTags, store.view)}
     <main>
       ${!isMobileOrTablet ? SearchBar() : ""}
       <div class="layout">
-        ${isMobileOrTablet && store.showSearchBar ? SearchBar(true) : ""}
         ${
           !isMobileOrTablet || !activeNote
             ? NotesList(notes, store.activeNoteId, store.view, store.tagFilter)
@@ -263,7 +294,7 @@ const render = () => {
         ${!isMobileOrTablet ? NoteActionsSidebar(activeNote) : ""}
       </div>
     </main>
-    ${BottomNav(allTags, store.view, isTagsActive)}
+    ${BottomNav(allTags, store.view, isTagsActive, store.showSearchBar)}
   `;
 
   app.className = store.showSidebarOnTablet ? "show-sidebar-tablet" : "";
@@ -306,6 +337,11 @@ const attachEvents = () => {
   document.querySelectorAll(".note-card").forEach((card) => {
     card.onclick = () => {
       store.activeNoteId = card.dataset.id;
+      // If in search view, close it
+      if (store.showSearchBar && window.innerWidth < 1024) {
+        store.showSearchBar = false;
+        store.searchQuery = "";
+      }
       render();
     };
   });
@@ -541,48 +577,68 @@ const attachEvents = () => {
     );
   });
 
-  document.getElementById("search-input")?.addEventListener("input", (e) => {
-    const q = e.target.value.toLowerCase();
+  // Handle search input - works for both desktop search bar and mobile search view
+  const handleSearchInput = (e) => {
+    const q = e.target.value;
+    store.searchQuery = q;
     store.activeNoteId = null;
-
-    const source =
-      store.view === "ARCHIVED" ? store.archivedNotes : store.notes;
+    
+    const isMobileOrTablet = window.innerWidth < 1024;
+    
+    // If on mobile/tablet and search bar is active, re-render to show SearchView
+    if (isMobileOrTablet && store.showSearchBar) {
+      render();
+      return;
+    }
+    
+    // Desktop search - update notes list inline
+    const qLower = q.toLowerCase();
+    const source = store.view === "ARCHIVED" 
+      ? store.notes.filter(n => n.isArchived)
+      : store.notes.filter(n => !n.isArchived);
 
     const filtered = source.filter(
       (n) =>
-        n.title.toLowerCase().includes(q) ||
-        n.content.toLowerCase().includes(q) ||
-        n.tags.some((t) => t.toLowerCase().includes(q))
+        n.title.toLowerCase().includes(qLower) ||
+        n.content.toLowerCase().includes(qLower) ||
+        n.tags.some((t) => t.toLowerCase().includes(qLower))
     );
 
-    document.querySelector(".notes-list").innerHTML = filtered
-      .map(
-        (n) => `
-        <div class="note-card" data-id="${n.id}">
-          <h4>${n.title || "Untitled"}</h4>
-          <small>
-            ${
-              n.tags.length > 0
-                ? `<div class="tags">${n.tags
-                    .map((tag) => `<span>${tag}</span>`)
-                    .join("")}</div>`
-                : ""
-            }
-            ${new Date(n.lastEdited).toLocaleDateString()}
-          </small>
-        </div>
-      `
-      )
-      .join("");
+    const notesList = document.querySelector(".notes-list");
+    if (notesList) {
+      notesList.innerHTML = filtered
+        .map(
+          (n) => `
+          <div class="note-card" data-id="${n.id}">
+            <h4>${n.title || "Untitled"}</h4>
+            <small>
+              ${
+                n.tags.length > 0
+                  ? `<div class="tags">${n.tags
+                      .map((tag) => `<span>${tag}</span>`)
+                      .join("")}</div>`
+                  : ""
+              }
+              ${new Date(n.lastEdited).toLocaleDateString()}
+            </small>
+          </div>
+        `
+        )
+        .join("");
 
-    document.querySelectorAll(".notes-list .note-card").forEach((card) => {
-      card.onclick = () => {
-        store.activeNoteId = card.dataset.id;
-        store.showSearchBar = false;
-        render();
-      };
-    });
-  });
+      document.querySelectorAll(".notes-list .note-card").forEach((card) => {
+        card.onclick = () => {
+          store.activeNoteId = card.dataset.id;
+          store.showSearchBar = false;
+          store.searchQuery = "";
+          render();
+        };
+      });
+    }
+  };
+
+  document.getElementById("search-input")?.addEventListener("input", handleSearchInput);
+  document.getElementById("search-view-input")?.addEventListener("input", handleSearchInput);
 
   // Bottom Nav Events
   document.querySelectorAll(".nav-btn[data-view]").forEach((btn) => {
@@ -595,10 +651,27 @@ const attachEvents = () => {
   });
 
   document.getElementById("search-toggle")?.addEventListener("click", () => {
-    store.showSearchBar = !store.showSearchBar;
-    render();
-    if (store.showSearchBar) {
-      setTimeout(() => document.getElementById("search-input")?.focus(), 0);
+    const isMobileOrTablet = window.innerWidth < 1024;
+    if (isMobileOrTablet) {
+      // On mobile/tablet, toggle search view
+      store.showSearchBar = !store.showSearchBar;
+      if (!store.showSearchBar) {
+        store.searchQuery = "";
+      }
+      render();
+      if (store.showSearchBar) {
+        setTimeout(() => {
+          const searchInput = document.getElementById("search-view-input") || document.getElementById("search-input");
+          searchInput?.focus();
+        }, 0);
+      }
+    } else {
+      // On desktop, toggle search bar
+      store.showSearchBar = !store.showSearchBar;
+      render();
+      if (store.showSearchBar) {
+        setTimeout(() => document.getElementById("search-input")?.focus(), 0);
+      }
     }
   });
 
