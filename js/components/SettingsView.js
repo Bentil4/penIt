@@ -210,7 +210,6 @@ const ChangePasswordView = () => {
       <button class="settings-view__back" id="settings-back-btn">
         <img src="../assets/images/icon-arrow-left.svg" alt="Back" />
         <p>Settings</p>
-
       </button>
       <h2 class="settings-view__title">Change Password</h2>
       <p class="settings-view__description">Update your account password:</p>
