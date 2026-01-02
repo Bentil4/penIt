@@ -1,6 +1,6 @@
 import { Button } from "./Button.js";
 
-export const BottomNav = (tags, activeView, isTagsActive) => `
+export const BottomNav = (tags, activeView, isTagsActive, isSearchActive = false) => `
   <nav class="bottom-nav">
     <div class="nav-buttons">
       <button class="nav-btn ${
@@ -9,7 +9,7 @@ export const BottomNav = (tags, activeView, isTagsActive) => `
         <img src="./assets/images/icon-home.svg" alt="All Notes" />
         <span>All Notes</span>
       </button>
-      <button class="nav-btn" id="search-toggle">
+      <button class="nav-btn search-btn ${isSearchActive ? "active" : ""}" id="search-toggle">
         <img src="./assets/images/icon-search.svg" alt="Search" />
         <span>Search</span>
       </button>
