@@ -4,10 +4,10 @@ export const SearchView = (searchQuery = "", filteredNotes = []) => {
   const isMobileOrTablet = window.innerWidth < 1024;
 
   return `
-    <section class="search-view">
-      <div role="heading" aria-level="1" class="search-view__header">
+    <div role="heading" aria-level="1" class="mobile-view__header">
         <img src="./assets/images/logo-light.svg" alt="Logo" class="search-view__logo" />
-      </div>
+    </div>
+    <section class="search-view">
       
       <h2 role="heading" aria-level="2" class="search-view__title">Search</h2>
       

@@ -1,6 +1,8 @@
 export const Sidebar = (tags, activeView) => `
 <aside class="sidebar">
-  <img src=".././assets/images/logo.svg" alt="Logo" class="logo" />
+  <div role="heading" aria-level="1" class="mobile-view__header">
+        <img src="./assets/images/logo-light.svg" alt="Logo" class="search-view__logo" />
+    </div>
 
   <ul class="menu">
     <li data-view="ALL" class="${activeView === "ALL" ? "active" : ""}">

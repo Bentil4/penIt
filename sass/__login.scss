@@ -6,7 +6,7 @@
 }
 
 input:hover {
-  background: $color-neutral-50;
+  background: $color-neutral-700;
   cursor: pointer;
 }
 
@@ -83,7 +83,7 @@ input:focus {
     padding: 0.7rem 0.75rem;
     border-radius: 8px;
     border: 1px solid var(--color-border);
-    background-color: var(--color-surface);
+    // background-color: var(--color-surface);
     color: var(--color-foreground);
   }
 
@@ -154,7 +154,7 @@ input:focus {
     }
 
     &--google:hover {
-      background: $color-neutral-50;
+      background: $color-neutral-700;
     }
   }
 

@@ -117,6 +117,7 @@ html[data-theme=light] {
   --color-ring: #99a0ae;
   --color-separator: #e0e4ea;
   --color-surface: #ffffff;
+  --color-surface-light: #cacfd8;
   --icon-invert: 0;
 }
 
@@ -134,6 +135,7 @@ html[data-theme=dark] {
   --color-ring: #525866;
   --color-separator: #2b303b;
   --color-surface: #232530;
+  --color-surface-light: #232530;
   --icon-invert: 1;
 }
 
@@ -1127,7 +1129,7 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
 }
 
 input:hover {
-  background: #f5f7fa;
+  background: #2b303b;
   cursor: pointer;
 }
 
@@ -1196,7 +1198,6 @@ input:focus {
   padding: 0.7rem 0.75rem;
   border-radius: 8px;
   border: 1px solid var(--color-border);
-  background-color: var(--color-surface);
   color: var(--color-foreground);
 }
 .login__password-header {
@@ -1258,7 +1259,7 @@ input:focus {
   gap: 0.5rem;
 }
 .login__button--google:hover {
-  background: #f5f7fa;
+  background: #2b303b;
 }
 .login__google-icon {
   font-weight: bold;
@@ -1486,10 +1487,6 @@ input:focus {
 }
 
 input {
-  background-color: transparent;
-}
-
-input:hover {
   background-color: transparent;
 }
 
@@ -2127,6 +2124,14 @@ input:hover {
     font-size: 0.85rem;
   }
 }
+.mobile-view__header {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 2rem 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+  background: var(--color-surface-light);
+}
+
 .search-view {
   display: flex;
   flex-direction: column;
@@ -2136,13 +2141,6 @@ input:hover {
   overflow-y: auto;
   background-color: var(--color-background);
   position: relative;
-}
-.search-view__header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 0 0.5rem 0;
-  margin-bottom: 0.5rem;
 }
 .search-view__logo {
   height: 32px;
