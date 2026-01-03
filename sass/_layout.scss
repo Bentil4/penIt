@@ -145,6 +145,14 @@ img[src*="icon-"]:not(.logo):not([class*="logo"]) {
   .layout {
     grid-template-columns: 1fr !important;
   }
+
+  .search-bar {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
 }
 @media (max-width: 767px) {
   .layout {

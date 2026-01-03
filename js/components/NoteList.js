@@ -25,16 +25,7 @@ export const NotesList = (notes, activeId, view = "ALL", tagFilter = null) => {
     <div role="heading" aria-level="1" class="mobile-view__header">
         <img src="./assets/images/logo-light.svg" alt="Logo" class="search-view__logo" />
     </div>
-    ${
-      showGoBack
-        ? `
-      <button class="notes-list__back" id="notes-list-go-back">
-        <img src="../assets/images/icon-arrow-left.svg" alt="Go back" />
-        <span>Go Back</span>
-      </button>
-    `
-        : ""
-    }
+    
     <h2 class="notes-list__title">${viewTitle}</h2>
     ${
       tagFilter

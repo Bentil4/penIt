@@ -1,7 +1,11 @@
 import { SettingsView } from "./SettingsView.js";
 import { store } from "../state/store.js";
 
-export const Settings = (activeSetting = "color-theme", showMenu = true, showOnlyMenu = false) => {
+export const Settings = (
+  activeSetting = "color-theme",
+  showMenu = true,
+  showOnlyMenu = false
+) => {
   const settingsMenu = [
     {
       id: "color-theme",
@@ -29,6 +33,9 @@ export const Settings = (activeSetting = "color-theme", showMenu = true, showOnl
   if (showOnlyMenu) {
     return `
       <div class="settings settings--menu-only">
+       <div role="heading" aria-level="1" class="mobile-view__header">
+        <img src="./assets/images/logo-light.svg" alt="Logo" class="search-view__logo" />
+       </div>
         <div class="settings__menu">
           <h2 class="settings__title">Settings</h2>
           <ul class="settings__list">
@@ -40,7 +47,9 @@ export const Settings = (activeSetting = "color-theme", showMenu = true, showOnl
                 activeSetting === item.id ? "settings__item--active" : ""
               }" data-setting="${item.id}">
                 <div class="settings__item-content">
-                  <img src="${item.icon}" alt="${item.label}" class="settings__item-icon" />
+                  <img src="${item.icon}" alt="${
+                  item.label
+                }" class="settings__item-icon" />
                   <span class="settings__item-label">${item.label}</span>
                 </div>
                 <img src="../assets/images/icon-chevron-right.svg" alt="Arrow" class="settings__item-arrow" />
@@ -57,7 +66,9 @@ export const Settings = (activeSetting = "color-theme", showMenu = true, showOnl
                 activeSetting === item.id ? "settings__item--active" : ""
               }" data-setting="${item.id}">
                 <div class="settings__item-content">
-                  <img src="${item.icon}" alt="${item.label}" class="settings__item-icon" />
+                  <img src="${item.icon}" alt="${
+                  item.label
+                }" class="settings__item-icon" />
                   <span class="settings__item-label">${item.label}</span>
                 </div>
                 <img src="../assets/images/icon-chevron-right.svg" alt="Arrow" class="settings__item-arrow" />
@@ -73,8 +84,14 @@ export const Settings = (activeSetting = "color-theme", showMenu = true, showOnl
 
   // Show only view (no menu)
   if (!showMenu) {
+    const isMobileOrTablet = window.innerWidth < 1024;
     return `
       <div class="settings settings--view-only">
+        ${isMobileOrTablet ? `
+          <div role="heading" aria-level="1" class="mobile-view__header">
+            <img src="./assets/images/logo-light.svg" alt="Logo" class="search-view__logo" />
+          </div>
+        ` : ''}
         <div class="settings__content settings__content--full">
           ${SettingsView(activeSetting, store.settings)}
         </div>
@@ -96,7 +113,9 @@ export const Settings = (activeSetting = "color-theme", showMenu = true, showOnl
               activeSetting === item.id ? "settings__item--active" : ""
             }" data-setting="${item.id}">
               <div class="settings__item-content">
-                <img src="${item.icon}" alt="${item.label}" class="settings__item-icon" />
+                <img src="${item.icon}" alt="${
+                item.label
+              }" class="settings__item-icon" />
                 <span class="settings__item-label">${item.label}</span>
               </div>
               <img src="../assets/images/icon-chevron-right.svg" alt="Arrow" class="settings__item-arrow" />
@@ -113,7 +132,9 @@ export const Settings = (activeSetting = "color-theme", showMenu = true, showOnl
               activeSetting === item.id ? "settings__item--active" : ""
             }" data-setting="${item.id}">
               <div class="settings__item-content">
-                <img src="${item.icon}" alt="${item.label}" class="settings__item-icon" />
+                <img src="${item.icon}" alt="${
+                item.label
+              }" class="settings__item-icon" />
                 <span class="settings__item-label">${item.label}</span>
               </div>
               <img src="../assets/images/icon-chevron-right.svg" alt="Arrow" class="settings__item-arrow" />
@@ -129,4 +150,3 @@ export const Settings = (activeSetting = "color-theme", showMenu = true, showOnl
     </div>
   `;
 };
-
