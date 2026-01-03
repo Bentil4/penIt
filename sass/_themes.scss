@@ -14,6 +14,7 @@
   --color-ring: #{$ring-light};
   --color-separator: #{$separator-light};
   --color-surface: #{$surface-light};
+  --color-light-surface: #{$surface-light};
   --icon-invert: 0;
 }
 
@@ -33,6 +34,8 @@ html[data-theme="light"] {
   --color-separator: #{$separator-light};
   --color-surface: #{$surface-light};
   --color-surface-light: #{$color-neutral-300};
+  --color-light-surface: #{$surface-light};
+
   --icon-invert: 0;
 }
 
@@ -52,6 +55,7 @@ html[data-theme="dark"] {
   --color-separator: #{$separator-dark};
   --color-surface: #{$surface-dark};
   --color-surface-light: #{$color-neutral-800};
+  --color-light-surface: #{$surface-dark-light};
 
   --icon-invert: 1;
 }

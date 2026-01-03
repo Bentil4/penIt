@@ -99,7 +99,8 @@
   --color-primary-light: #ebf1ff;
   --color-ring: #99a0ae;
   --color-separator: #e0e4ea;
-  --color-surface: #ffffff;
+  --color-surface: #f3f5f8;
+  --color-light-surface: #f3f5f8;
   --icon-invert: 0;
 }
 
@@ -116,8 +117,9 @@ html[data-theme=light] {
   --color-primary-light: #ebf1ff;
   --color-ring: #99a0ae;
   --color-separator: #e0e4ea;
-  --color-surface: #ffffff;
+  --color-surface: #f3f5f8;
   --color-surface-light: #cacfd8;
+  --color-light-surface: #f3f5f8;
   --icon-invert: 0;
 }
 
@@ -136,6 +138,7 @@ html[data-theme=dark] {
   --color-separator: #2b303b;
   --color-surface: #232530;
   --color-surface-light: #232530;
+  --color-light-surface: #232530;
   --icon-invert: 1;
 }
 
@@ -152,7 +155,7 @@ html[data-theme=system] {
   --color-primary-light: #ebf1ff;
   --color-ring: #99a0ae;
   --color-separator: #e0e4ea;
-  --color-surface: #ffffff;
+  --color-surface: #f3f5f8;
   --icon-invert: 0;
 }
 @media (prefers-color-scheme: dark) {
@@ -384,11 +387,7 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
   align-self: flex-end;
 }
 .sidebar .tags .tag:hover {
-  background: var(--color-hover);
-}
-.sidebar .tags span:hover {
-  background: var(--color-primary);
-  color: var(--color-surface);
+  background: var(--color-light-surface);
 }
 
 @media (max-width: 1023px) {
