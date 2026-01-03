@@ -394,6 +394,13 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
   .sidebar {
     display: none;
   }
+  .menu {
+    display: none;
+  }
+  .sidebar h4 {
+    opacity: 1;
+    font-size: larger;
+  }
 }
 .show-sidebar-tablet .sidebar {
   display: block !important;
@@ -1062,37 +1069,15 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
 }
 .bottom-nav .nav-btn.active {
   color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 .bottom-nav .nav-btn.active img {
-  filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(2598%) hue-rotate(221deg) brightness(101%) contrast(101%);
-}
-.bottom-nav .nav-btn.tags-btn.active {
-  background: var(--color-primary-light);
-  color: var(--color-primary);
-  padding-top: 0.875rem;
-  padding-bottom: 0.625rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  margin-top: -0.375rem;
-  border-radius: 10px;
-}
-.bottom-nav .nav-btn.tags-btn.active img {
-  filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(2598%) hue-rotate(221deg) brightness(101%) contrast(101%);
-}
-.bottom-nav .nav-btn.search-btn.active {
-  background: var(--color-primary-light);
-  color: var(--color-primary);
-}
-.bottom-nav .nav-btn.search-btn.active img {
   filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(2598%) hue-rotate(221deg) brightness(101%) contrast(101%);
 }
 .bottom-nav .nav-btn:hover {
   background: var(--color-hover);
 }
-.bottom-nav .nav-btn.tags-btn.active:hover {
-  background: var(--color-primary-light);
-}
-.bottom-nav .nav-btn.search-btn.active:hover {
+.bottom-nav .nav-btn.active:hover {
   background: var(--color-primary-light);
 }
 .bottom-nav .tags-popup {
@@ -1503,6 +1488,13 @@ input {
   padding: 2rem;
   position: relative;
 }
+@media (max-width: 1023px) {
+  .settings {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+  }
+}
 .settings .settings .mobile-view__header {
   position: fixed;
   top: 0;
@@ -1892,6 +1884,7 @@ input {
   }
   .settings-view {
     max-width: 100%;
+    margin-top: 5rem;
   }
 }
 @media (max-width: 767px) {
@@ -2334,6 +2327,9 @@ input {
   .search-view .note-card.active {
     background: var(--color-hover);
     border-left: 4px solid var(--color-primary);
+  }
+  .desktop-view__header {
+    display: none;
   }
 }
 

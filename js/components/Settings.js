@@ -87,11 +87,15 @@ export const Settings = (
     const isMobileOrTablet = window.innerWidth < 1024;
     return `
       <div class="settings settings--view-only">
-        ${isMobileOrTablet ? `
+        ${
+          isMobileOrTablet
+            ? `
           <div role="heading" aria-level="1" class="mobile-view__header">
             <img src="./assets/images/logo-light.svg" alt="Logo" class="search-view__logo" />
           </div>
-        ` : ''}
+        `
+            : ""
+        }
         <div class="settings__content settings__content--full">
           ${SettingsView(activeSetting, store.settings)}
         </div>

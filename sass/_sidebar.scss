@@ -75,6 +75,15 @@
   .sidebar {
     display: none;
   }
+
+  .menu {
+    display: none;
+  }
+
+  .sidebar h4 {
+    opacity: 1;
+    font-size: larger;
+  }
 }
 
 .show-sidebar-tablet .sidebar {
