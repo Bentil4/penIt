@@ -315,6 +315,12 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
   .layout {
     grid-template-columns: 1fr !important;
   }
+  .search-bar {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
 }
 @media (max-width: 767px) {
   .layout {
@@ -397,6 +403,7 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
   top: 0;
   left: 0;
   height: 100vh;
+  margin-top: 5rem;
   z-index: 1001;
   background: var(--color-background);
 }
@@ -555,7 +562,7 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
   }
   .notes-list__title {
     font-size: 1.25rem;
-    margin: 0 0 0.75rem 0;
+    margin: 6rem 0 0.75rem 0;
   }
   .notes-list .note-card {
     padding: 1rem 0.75rem;
@@ -1495,6 +1502,15 @@ input {
   height: 100%;
   gap: 2rem;
   padding: 2rem;
+  position: relative;
+}
+.settings .settings .mobile-view__header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 @media (min-width: 1024px) {
   .settings {
@@ -1510,6 +1526,11 @@ input {
 @media (min-width: 1024px) {
   .settings__menu {
     width: 300px;
+  }
+}
+@media (max-width: 1023px) {
+  .settings__menu {
+    padding-top: 5rem;
   }
 }
 
@@ -1589,6 +1610,11 @@ input {
     padding: 0 2rem;
     display: flex;
     align-items: flex-start;
+  }
+}
+@media (max-width: 1023px) {
+  .settings__content {
+    padding-top: 5rem;
   }
 }
 
@@ -2127,9 +2153,25 @@ input {
 .mobile-view__header {
   display: flex;
   align-items: center;
-  padding: 1.5rem 2rem 1.5rem 2rem;
-  margin-bottom: 1.5rem;
+  padding: 1.5rem 2rem;
   background: var(--color-surface-light);
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.mobile-view__header .search-view__logo {
+  height: 32px;
+  width: auto;
+  filter: none !important;
+  transition: opacity 0.3s ease;
+}
+@media (min-width: 1024px) {
+  .mobile-view__header {
+    display: none;
+  }
 }
 
 .search-view {
@@ -2137,7 +2179,7 @@ input {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 0 1rem;
+  padding: 5rem 1rem 0;
   overflow-y: auto;
   background-color: var(--color-background);
   position: relative;
@@ -2277,7 +2319,7 @@ input {
   }
   .search-view__title {
     font-size: 1.25rem;
-    margin: 0 0 0.75rem 0;
+    margin: 6rem 0 0.75rem 0;
   }
   .search-view .note-card {
     padding: 1rem 0.75rem;
