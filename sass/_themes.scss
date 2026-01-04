@@ -76,6 +76,8 @@ html[data-theme="system"] {
   --color-ring: #{$ring-light};
   --color-separator: #{$separator-light};
   --color-surface: #{$surface-light};
+  --color-surface-light: #{$color-neutral-300};
+  --color-light-surface: #{$surface-light};
   --icon-invert: 0;
 
   @media (prefers-color-scheme: dark) {
@@ -91,6 +93,8 @@ html[data-theme="system"] {
     --color-ring: #{$ring-dark};
     --color-separator: #{$separator-dark};
     --color-surface: #{$surface-dark};
+    --color-surface-light: #{$color-neutral-800};
+    --color-light-surface: #{$surface-dark-light};
     --icon-invert: 1;
   }
 }
