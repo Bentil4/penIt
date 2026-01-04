@@ -1492,6 +1492,7 @@ input {
   padding: 2rem;
   position: relative;
 }
+
 @media (max-width: 1023px) {
   .settings {
     flex-direction: column;

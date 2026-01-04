@@ -96,6 +96,7 @@ export const Settings = (
         `
             : ""
         }
+
         <div class="settings__content settings__content--full">
           ${SettingsView(activeSetting, store.settings)}
         </div>
