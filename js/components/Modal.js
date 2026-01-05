@@ -2,7 +2,7 @@ export const Modal = ({ type, title, description, icon, confirmText, cancelText 
   const modalId = `modal-${type}`;
   
   return `
-    <div class="modal-overlay" id="${modalId}-overlay">
+    <section class="modal-overlay" id="${modalId}-overlay">
       <div class="modal">
         <div class="modal__header">
           <img src="${icon}" alt="${title}" class="modal__icon" />
@@ -18,12 +18,12 @@ export const Modal = ({ type, title, description, icon, confirmText, cancelText 
           </button>
         </div>
       </div>
-    </div>
+    </section>
   `;
 };
 
 export const showModal = (type, title, description, icon, confirmText, onConfirm) => {
-  // Remove any existing modal
+  // Removing any existing modal
   const existingModal = document.querySelector('.modal-overlay');
   if (existingModal) {
     existingModal.remove();
@@ -68,7 +68,7 @@ export const showModal = (type, title, description, icon, confirmText, onConfirm
     }
   });
 
-  // Close on Escape key
+  // Close with Escape key
   const handleEscape = (e) => {
     if (e.key === 'Escape') {
       hideModal(modalId);
@@ -89,7 +89,7 @@ export const hideModal = (modalId) => {
     overlay.classList.remove('modal-overlay--active');
     setTimeout(() => {
       overlay.remove();
-    }, 200); // Wait for animation
+    }, 200);
   }
 };
 

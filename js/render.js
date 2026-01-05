@@ -11,7 +11,7 @@ import { attachEvents } from "./events.js";
 
 const app = document.getElementById("app");
 
-// Helper function to get visible notes
+// Getting visible notes
 const getVisibleNotes = () => {
   let notes = store.notes;
 
@@ -22,13 +22,15 @@ const getVisibleNotes = () => {
     notes = notes.filter((n) => !n.isArchived);
   }
 
-  // Filter by tag if set
+  // Filter by tag
   if (store.tagFilter) {
     notes = notes.filter((n) => n.tags.includes(store.tagFilter));
   }
 
-  // Sort by last edited (newest first)
-  notes.sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited));
+  // Sort by last edited
+  notes.sort(
+    (first, last) => new Date(last.lastEdited) - new Date(first.lastEdited)
+  );
 
   return notes;
 };
@@ -82,7 +84,7 @@ export const render = () => {
     );
   };
 
-  // If search bar is active on mobile/tablet, show SearchView
+  // show SearchView if search bar is active on mobile/tablet,
   if (isMobileOrTablet && store.showSearchBar) {
     const filteredNotes = getFilteredNotes();
     app.innerHTML = `
@@ -117,7 +119,7 @@ export const render = () => {
 
   attachEvents();
 
-  // Update logo after render to ensure it matches current theme
+  // Updating logo icon to matches current theme
   const currentTheme = store.settings.colorTheme || "system";
   const darkMode = isDarkMode(currentTheme);
   updateLogo(darkMode);

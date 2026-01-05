@@ -1,12 +1,10 @@
 import { store } from "./state/store.js";
 
-// Function to apply font theme
+// applying font theme
 export const applyFontTheme = (fontName) => {
-  // Set data-font attribute on html element for CSS targeting
   document.documentElement.setAttribute("data-font", fontName);
 
-  // Apply font family directly to all elements
-  // Using exact font names that match @font-face declarations
+  // Applying font family to all elements
   const fontMap = {
     Inter: '"Inter", sans-serif',
     "Noto Serif": '"Noto Serif", serif',
@@ -14,17 +12,11 @@ export const applyFontTheme = (fontName) => {
   };
   const fontFamily = fontMap[fontName] || fontMap["Inter"];
 
-  // Apply to html element (will cascade to all children)
-  document.documentElement.style.setProperty(
-    "font-family",
-    fontFamily,
-    "important"
-  );
+  document.documentElement.style.setProperty("font-family", fontFamily);
 
-  // Also apply to body for extra specificity
-  document.body.style.setProperty("font-family", fontFamily, "important");
+  document.body.style.setProperty("font-family", fontFamily);
 
-  // Apply to all elements using a style tag for maximum coverage
+  // Applying to all elements using a style tag for maximum coverage
   let styleElement = document.getElementById("dynamic-font-style");
   if (!styleElement) {
     styleElement = document.createElement("style");
@@ -34,15 +26,14 @@ export const applyFontTheme = (fontName) => {
   styleElement.textContent = `
     html[data-font="${fontName}"] *,
     html[data-font="${fontName}"] {
-      font-family: ${fontFamily} !important;
+      font-family: ${fontFamily};
     }
   `;
 
-  // Force a reflow to ensure styles are applied
   void document.body.offsetHeight;
 };
 
-// Helper function to determine if we're in dark mode
+// checking if page is in dark mode
 export const isDarkMode = (themeName) => {
   if (themeName === "dark") return true;
   if (themeName === "light") return false;
@@ -52,7 +43,7 @@ export const isDarkMode = (themeName) => {
   return false;
 };
 
-// Function to update logo based on theme
+// updating logo to match theme
 export const updateLogo = (isDark) => {
   const logos = document.querySelectorAll(
     ".logo, .login__logo, .forgot__logo, .reset__logo, .notes-list__logo, .note-view__logo, .search-view__logo"
@@ -61,7 +52,6 @@ export const updateLogo = (isDark) => {
     if (logo) {
       const currentSrc = logo.getAttribute("src");
       if (isDark) {
-        // Change to logo-light.svg for dark mode
         if (currentSrc && currentSrc.includes("logo.svg")) {
           logo.setAttribute(
             "src",
@@ -69,7 +59,6 @@ export const updateLogo = (isDark) => {
           );
         }
       } else {
-        // Change to logo.svg for light mode
         if (currentSrc && currentSrc.includes("logo-light.svg")) {
           logo.setAttribute(
             "src",
@@ -81,9 +70,8 @@ export const updateLogo = (isDark) => {
   });
 };
 
-// Function to apply color theme
+//applying color theme
 export const applyColorTheme = (themeName) => {
-  // Validate theme name
   const validThemes = ["light", "dark", "system"];
   if (!validThemes.includes(themeName)) {
     console.warn(
@@ -92,7 +80,7 @@ export const applyColorTheme = (themeName) => {
     themeName = "system";
   }
 
-  // Remove existing theme classes
+  // Removing existing theme classes
   document.documentElement.classList.remove(
     "theme-light",
     "theme-dark",
@@ -120,13 +108,11 @@ export const applyColorTheme = (themeName) => {
   updateLogo(darkMode);
 };
 
-// Function to initialize theme
+//initialize theme
 export const initializeTheme = () => {
-  // Get theme from store, default to "system" if not set
   const theme = store.settings.colorTheme || "system";
   applyColorTheme(theme);
 
-  // Apply font theme if set
   if (store.settings.fontTheme) {
     applyFontTheme(store.settings.fontTheme);
   }

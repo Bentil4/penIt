@@ -16,8 +16,8 @@ export const store = {
   showSettingsMenu: true,
   showOnlySettingsMenu: false,
   settings: {
-    colorTheme: "light", // "light", "dark", "system"
-    fontTheme: "Inter", // "Inter", "Noto-serif", "Source code pro "
+    colorTheme: "light", 
+    fontTheme: "Inter", 
   },
 };
 
