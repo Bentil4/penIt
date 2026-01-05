@@ -100,7 +100,7 @@ export const render = () => {
     ${Sidebar(allTags, store.view)}
     <main>
       ${!isMobileOrTablet ? SearchBar() : ""}
-      <div class="layout">
+      <section class="layout">
         ${
           !isMobileOrTablet || !activeNote
             ? NotesList(notes, store.activeNoteId, store.view, store.tagFilter)
@@ -108,7 +108,7 @@ export const render = () => {
         }
         ${isMobileOrTablet && !activeNote ? "" : NoteView(activeNote)}
         ${!isMobileOrTablet ? NoteActionsSidebar(activeNote) : ""}
-      </div>
+      </section>
     </main>
     ${BottomNav(allTags, store.view, isTagsActive, store.showSearchBar)}
   `;

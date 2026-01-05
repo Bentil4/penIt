@@ -8,11 +8,15 @@ export const NoteView = (note) => {
   const isMobileOrTablet = window.innerWidth < 1024;
 
   return `
-    ${isMobileOrTablet ? `
+    ${
+      isMobileOrTablet
+        ? `
       <div role="heading" aria-level="1" class="mobile-view__header">
         <img src="./assets/images/logo-light.svg" alt="Logo" class="search-view__logo" />
       </div>
-    ` : ''}
+    `
+        : ""
+    }
     <section class="note-view">
       ${
         isMobileOrTablet
@@ -74,7 +78,6 @@ export const NoteView = (note) => {
       ${
         !isMobileOrTablet
           ? `
-        <span class="spacer"></span>
         <div class="actions">
           ${Button({
             label: "Save Note",
