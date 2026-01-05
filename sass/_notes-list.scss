@@ -118,12 +118,11 @@
 
     &.active {
       background: var(--color-hover);
-      border-left: 4px solid var(--color-primary);
     }
   }
 }
 
-// Floating Action Button (FAB) for mobile/tablet
+// Floating Action Button for mobile/tablet
 .fab {
   display: none;
   position: fixed;

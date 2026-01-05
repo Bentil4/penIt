@@ -9,18 +9,7 @@ export const SearchBar = (isMobile = false) => {
     </div>
     </section>
     `;
-    // `
-    // <section class="search-bar mobile">
-    //   <label for="search-input">
-    //     <img src="${searchImg}"/>
-    //     <input
-    //       id="search-input"
-    //       class="search-input"
-    //       placeholder="Search by title, content, or tags..."
-    //     />
-    //   </label>
-    // </section>
-    //  `;
+  
   } else {
     return `
 <section class="search-bar">
