@@ -64,7 +64,7 @@
   color: var(--color-foreground);
   opacity: 0.8;
   margin: 0 0 1.5rem 0;
-  padding-left: 2.5rem; // Align with title (icon width + gap)
+  padding-left: 2.5rem;
 }
 
 .modal__actions {
@@ -115,7 +115,7 @@
     color: var(--color-surface);
 
     &:hover {
-      background-color: #dc2626; // Darker red for hover
+      background-color: $color-red-500;
       transform: translateY(-1px);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
@@ -148,4 +148,3 @@
     }
   }
 }
-

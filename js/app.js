@@ -5,21 +5,20 @@ import { render } from "./render.js";
 
 loadState(notesData);
 
-// Apply theme initialization after DOM is ready
+// Applying theme initialization
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initializeTheme);
 } else {
-  // DOM is already ready
   initializeTheme();
 }
 
-// Global event delegation for settings buttons (attached once)
+// Global event delegation for settings buttons
 document.addEventListener("click", (e) => {
   // Settings button in search bar
   if (e.target.closest(".section-settings img[src*='icon-settings']")) {
     const isDesktop = window.innerWidth >= 1024;
     if (store.currentPage === "settings") {
-      // If already on settings page, show menu (and view on desktop)
+      // show menu and view on desktop on settings page,
       if (isDesktop) {
         store.showSettingsMenu = true;
         store.showOnlySettingsMenu = false;
@@ -46,7 +45,7 @@ document.addEventListener("click", (e) => {
   if (e.target.closest("#settings-toggle")) {
     const isDesktop = window.innerWidth >= 1024;
     if (store.currentPage === "settings") {
-      // If already on settings page, show menu (and view on desktop)
+      // show menu and view on desktop on settings page,
       if (isDesktop) {
         store.showSettingsMenu = true;
         store.showOnlySettingsMenu = false;

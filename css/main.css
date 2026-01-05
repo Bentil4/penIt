@@ -537,7 +537,7 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
   height: 56px;
   border-radius: 50%;
   background-color: var(--color-primary);
-  color: var(--color-surface);
+  color: #ffffff;
   border: none;
   cursor: pointer;
   align-items: center;
@@ -554,10 +554,10 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
 .fab:active {
   transform: scale(0.95);
 }
-.fab svg {
+.fab img {
   width: 24px;
   height: 24px;
-  stroke: currentColor;
+  filter: brightness(0) invert(1);
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -2016,7 +2016,7 @@ input {
   color: var(--color-surface);
 }
 .modal__button--danger:hover {
-  background-color: #dc2626;
+  background-color: #fb3748;
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }

@@ -132,7 +132,7 @@
   height: 56px;
   border-radius: 50%;
   background-color: var(--color-primary);
-  color: var(--color-surface);
+  color: $color-neutral-0;
   border: none;
   cursor: pointer;
   align-items: center;
@@ -151,10 +151,10 @@
     transform: scale(0.95);
   }
 
-  svg {
+  img {
     width: 24px;
     height: 24px;
-    stroke: currentColor;
+    filter: brightness(0) invert(1);
   }
 }
 
