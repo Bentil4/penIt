@@ -216,7 +216,7 @@ html[data-font="Source Code Pro"] {
 
 main {
   flex: 1;
-  padding: 1.5rem 0;
+  padding-top: 1.5rem;
   display: flex;
   flex-direction: column;
 }
@@ -230,7 +230,6 @@ main {
   flex: 1;
   display: grid;
   grid-template-columns: 320px 1fr 280px;
-  padding-top: 1rem;
   border-top: solid 1px var(--color-border);
   overflow-y: auto;
   gap: 0;
@@ -316,6 +315,10 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
   border: 1px solid var(--color-border);
   border-radius: 10px;
   width: 100%;
+}
+
+.section-settings label:hover {
+  background-color: var(--color-hover);
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -424,7 +427,7 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
   justify-content: flex-start;
   width: 100%;
   height: 100%;
-  padding: 0 1.5rem;
+  padding: 1.5rem 1.5rem;
   overflow-y: auto;
   border-right: 1px solid var(--color-border);
   scrollbar-width: none;
@@ -1015,7 +1018,7 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
 }
 .btn--primary {
   background: var(--color-primary);
-  color: var(--color-foreground);
+  color: #ffffff;
 }
 .btn--secondary {
   background: var(--color-separator);
@@ -1124,7 +1127,7 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
 }
 
 input:hover {
-  background: #2b303b;
+  background: var(--color-hover);
   cursor: pointer;
 }
 
@@ -1289,16 +1292,22 @@ input:focus {
   text-align: center;
   margin: 1.5rem 0;
   font-size: 0.8rem;
-  color: #525866;
+  color: #cacfd8;
 }
 .login__footer {
   text-align: center;
   font-size: 0.85rem;
+  color: #cacfd8;
 }
 .login__signup {
   color: var(--color-foreground);
   text-decoration: none;
   font-weight: 500;
+}
+
+.login__signup:hover,
+.login__forgot:hover {
+  color: var(--color-primary-hover);
 }
 
 .forgot {
@@ -1492,7 +1501,6 @@ input {
   padding: 2rem;
   position: relative;
 }
-
 @media (max-width: 1023px) {
   .settings {
     flex-direction: column;

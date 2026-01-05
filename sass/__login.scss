@@ -6,7 +6,7 @@
 }
 
 input:hover {
-  background: $color-neutral-700;
+  background: var(--color-hover);
   cursor: pointer;
 }
 
@@ -196,12 +196,13 @@ input:focus {
     text-align: center;
     margin: 1.5rem 0;
     font-size: 0.8rem;
-    color: $color-neutral-600;
+    color: $color-neutral-300;
   }
 
   &__footer {
     text-align: center;
     font-size: 0.85rem;
+    color: $color-neutral-300;
   }
 
   &__signup {
@@ -209,6 +210,11 @@ input:focus {
     text-decoration: none;
     font-weight: 500;
   }
+}
+
+.login__signup:hover,
+.login__forgot:hover {
+  color: var(--color-primary-hover);
 }
 
 // Forget Password
