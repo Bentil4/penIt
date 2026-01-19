@@ -8,6 +8,7 @@ import { Settings } from "./components/Settings.js";
 import { store } from "./state/store.js";
 import { isDarkMode, updateLogo } from "./themes.js";
 import { attachEvents } from "./events.js";
+import { stripHtml } from "./utils/text.js";
 
 const app = document.getElementById("app");
 
@@ -29,7 +30,7 @@ const getVisibleNotes = () => {
 
   // Sort by last edited
   notes.sort(
-    (first, last) => new Date(last.lastEdited) - new Date(first.lastEdited)
+    (first, last) => new Date(last.lastEdited) - new Date(first.lastEdited),
   );
 
   return notes;
@@ -48,7 +49,7 @@ export const render = () => {
           ${Settings(
             store.activeSetting,
             store.showSettingsMenu,
-            store.showOnlySettingsMenu
+            store.showOnlySettingsMenu,
           )}
         </div>
       </main>
@@ -76,12 +77,14 @@ export const render = () => {
         ? store.notes.filter((n) => n.isArchived)
         : store.notes.filter((n) => !n.isArchived);
 
-    return source.filter(
-      (n) =>
+    return source.filter((n) => {
+      const body = stripHtml(n.content || "").toLowerCase();
+      return (
         n.title.toLowerCase().includes(q) ||
-        n.content.toLowerCase().includes(q) ||
+        body.includes(q) ||
         n.tags.some((t) => t.toLowerCase().includes(q))
-    );
+      );
+    });
   };
 
   // show SearchView if search bar is active on mobile/tablet,

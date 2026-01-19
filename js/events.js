@@ -4,7 +4,7 @@ import { showToast } from "./components/Toast.js";
 import { render } from "./render.js";
 import { applyColorTheme, applyFontTheme } from "./themes.js";
 import { setupRichTextEditor, getEditorHtml } from "./features/richtext.js";
-import { stripHTML } from "./utils/html.js";
+import { stripHtml } from "./utils/text.js";
 
 export const attachEvents = () => {
   // Create note handlers (both desktop button and mobile FAB)
