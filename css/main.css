@@ -279,7 +279,6 @@ main {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  width: 30%;
 }
 
 .section-settings img {
@@ -305,7 +304,7 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
   transition: filter 0.3s ease;
 }
 
-.search-bar img:not(.logo):not([class*=logo]) {
+.settings-icon img:not(.logo):not([class*=logo]) {
   filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
   transition: filter 0.3s ease;
 }
@@ -315,6 +314,12 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
   border: 1px solid var(--color-border);
   border-radius: 10px;
   width: 100%;
+  padding-left: 10px;
+}
+
+.search-bar .search-icon img {
+  stroke: white;
+  color: white;
 }
 
 .section-settings label:hover {
@@ -731,7 +736,7 @@ img[src*=icon-]:not(.logo):not([class*=logo]) {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 35rem;
+  gap: 34rem;
   flex-shrink: 0;
 }
 .note-view__action-buttons {
@@ -1974,6 +1979,44 @@ input {
 }
 .modal-overlay--active {
   opacity: 1;
+}
+
+/* --- Input field styles for input-modal --- */
+.modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.modal__label {
+  font-size: 0.9rem;
+  color: var(--color-foreground);
+  opacity: 0.85;
+}
+
+.modal__input {
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-foreground);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.modal__input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(51, 92, 255, 0.15);
+}
+.modal__input::placeholder {
+  color: var(--color-foreground);
+  opacity: 0.5;
+}
+
+.modal__input--error {
+  border-color: #fb3748;
+  box-shadow: 0 0 0 3px rgba(251, 55, 72, 0.15);
 }
 
 .modal {

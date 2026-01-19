@@ -36,6 +36,9 @@ export const NoteView = (note) => {
               <button class="note-view__action-icon" id="delete-note-header" aria-label="Delete note">
                 <img src="../assets/images/icon-delete.svg" alt="Delete" />
               </button>
+              <button class="note-view__action-icon" id="delete-note-header" aria-label="Import note">
+                <img src="../assets/images/icon-upload.svg" alt="Upload" />
+              </button>
               ${
                 !note.isArchived
                   ? `
@@ -68,6 +71,28 @@ export const NoteView = (note) => {
             placeholder="Add tags separated by commas (e.g. Work, Planning)"
           />
         </span>
+
+
+<span class="note-category">
+     <span class="label-with-icon">
+       <img src=".././assets/images/icon-tag.svg" alt="Category" />
+       <label for="note-category">Category</label>
+     </span>
+     ${(() => {
+       const list = Array.isArray(store.categories)
+         ? [...store.categories]
+         : [];
+       if (note.category && !list.includes(note.category)) {
+         list.unshift(note.category);
+       }
+       const options = ['<option value="">Uncategorized</option>']
+         .concat(list.map((c) => `<option value="${c}">${c}</option>`))
+         .join("");
+       return `<select id="note-category">${options}</select>`;
+     })()}
+    </span>
+
+
         <small>
           <img src=".././assets/images/icon-clock.svg" alt="Last edited" />
           Last edited <span>${new Date(note.lastEdited).toLocaleString()}</span>
@@ -140,6 +165,13 @@ export const NoteActionsSidebar = (note) => {
           id: "delete-note",
           variant: "secondary",
         })}
+        
+        ${Button({
+          label: `<img src=".././assets/images/icon-upload.svg" alt="Import" /><p>Import from JSON</p>`,
+          id: "import-notes",
+          variant: "secondary",
+        })}
+
       </div>
     </section>
   `;
