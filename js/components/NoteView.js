@@ -1,5 +1,5 @@
 import { Button } from "./Button.js";
-
+import { store } from "../state/store.js";
 export const NoteView = (note) => {
   if (!note) {
     return `<section class="note-view empty">Select a note</section>`;
@@ -71,6 +71,28 @@ export const NoteView = (note) => {
             placeholder="Add tags separated by commas (e.g. Work, Planning)"
           />
         </span>
+
+
+<span class="note-category">
+     <span class="label-with-icon">
+       <img src=".././assets/images/icon-tag.svg" alt="Category" />
+       <label for="note-category">Category</label>
+     </span>
+     ${(() => {
+       const list = Array.isArray(store.categories)
+         ? [...store.categories]
+         : [];
+       if (note.category && !list.includes(note.category)) {
+         list.unshift(note.category);
+       }
+       const options = ['<option value="">Uncategorized</option>']
+         .concat(list.map((c) => `<option value="${c}">${c}</option>`))
+         .join("");
+       return `<select id="note-category">${options}</select>`;
+     })()}
+    </span>
+
+
         <small>
           <img src=".././assets/images/icon-clock.svg" alt="Last edited" />
           Last edited <span>${new Date(note.lastEdited).toLocaleString()}</span>
