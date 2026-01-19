@@ -8,7 +8,10 @@ import { showModal, showInputModal } from "./components/Modal.js";
 import { showToast } from "./components/Toast.js";
 import { render } from "./render.js";
 import { applyColorTheme, applyFontTheme } from "./themes.js";
-
+import {
+  exportNotesToJSON,
+  openImportFilePicker,
+} from "./features/exportImport.js";
 export const attachEvents = () => {
   // Create note handlers (both desktop button and mobile FAB)
   const createNoteHandler = () => {
@@ -575,5 +578,20 @@ export const attachEvents = () => {
         render();
       },
     });
+  // Export / Import – Feature 1
+  // Desktop right sidebar buttons
+  document.getElementById("export-notes")?.addEventListener("click", () => {
+    exportNotesToJSON();
+  });
+  document.getElementById("import-notes")?.addEventListener("click", () => {
+    openImportFilePicker();
+  });
+
+  // SearchBar quick actions (desktop)
+  document.getElementById("export-notes-top")?.addEventListener("click", () => {
+    exportNotesToJSON();
+  });
+  document.getElementById("import-notes-top")?.addEventListener("click", () => {
+    openImportFilePicker();
   });
 };

@@ -36,6 +36,9 @@ export const NoteView = (note) => {
               <button class="note-view__action-icon" id="delete-note-header" aria-label="Delete note">
                 <img src="../assets/images/icon-delete.svg" alt="Delete" />
               </button>
+              <button class="note-view__action-icon" id="delete-note-header" aria-label="Import note">
+                <img src="../assets/images/icon-upload.svg" alt="Upload" />
+              </button>
               ${
                 !note.isArchived
                   ? `
@@ -141,6 +144,13 @@ export const NoteActionsSidebar = (note) => {
           id: "delete-note",
           variant: "secondary",
         })}
+        
+        ${Button({
+          label: `<img src=".././assets/images/icon-upload.svg" alt="Import" /><p>Import from JSON</p>`,
+          id: "import-notes",
+          variant: "secondary",
+        })}
+
       </div>
     </section>
   `;
