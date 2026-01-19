@@ -1,4 +1,9 @@
-import { store, saveState, saveSettings } from "./state/store.js";
+import {
+  store,
+  saveState,
+  saveSettings,
+  saveCategories,
+} from "./state/store.js";
 import { showModal } from "./components/Modal.js";
 import { showToast } from "./components/Toast.js";
 import { render } from "./render.js";
@@ -71,13 +76,13 @@ export const attachEvents = () => {
           "Delete Note",
           () => {
             store.notes = store.notes.filter(
-              (n) => n.id !== store.activeNoteId
+              (n) => n.id !== store.activeNoteId,
             );
             store.activeNoteId = null;
             saveState();
             render();
             showToast("Note permanently deleted.");
-          }
+          },
         );
       }
     });
@@ -107,7 +112,7 @@ export const attachEvents = () => {
                 store.view = "ARCHIVED";
                 render();
               });
-            }
+            },
           );
         }
       }
@@ -134,6 +139,8 @@ export const attachEvents = () => {
       const title = document.getElementById("note-title")?.value || "";
       const content = document.getElementById("note-content")?.value || "";
       const tagsInput = document.getElementById("note-tags")?.value || "";
+      const categorySel = document.getElementById("note-category");
+      const categoryVal = categorySel ? categorySel.value || null : null;
 
       note.title = title;
       note.content = content;
@@ -143,7 +150,7 @@ export const attachEvents = () => {
         .filter(Boolean);
 
       note.lastEdited = new Date().toISOString();
-
+      note.category = categoryVal;
       saveState();
       render();
       showToast("Note saved successfully!");
@@ -175,6 +182,10 @@ export const attachEvents = () => {
       store.tagFilter = span.dataset.tag;
       store.activeNoteId = null;
       store.showSidebarOnTablet = false;
+
+      // clear category filter when a tag is chosen
+      store.categoryFilter = null;
+
       render();
     });
   });
@@ -189,6 +200,8 @@ export const attachEvents = () => {
     const title = document.getElementById("note-title")?.value || "";
     const content = document.getElementById("note-content")?.value || "";
     const tagsInput = document.getElementById("note-tags")?.value || "";
+    const categorySel = document.getElementById("note-category");
+    const categoryVal = categorySel ? categorySel.value || null : null;
 
     // Updating note
     note.title = title;
@@ -199,7 +212,7 @@ export const attachEvents = () => {
       .filter(Boolean);
 
     note.lastEdited = new Date().toISOString();
-
+    note.category = categoryVal;
     saveState();
     render();
     showToast("Note saved successfully!");
@@ -251,7 +264,7 @@ export const attachEvents = () => {
         saveState();
         render();
         showToast("Note permanently deleted.");
-      }
+      },
     );
   });
 
@@ -273,7 +286,7 @@ export const attachEvents = () => {
           store.view = "ARCHIVED";
           render();
         });
-      }
+      },
     );
   });
 
@@ -302,7 +315,7 @@ export const attachEvents = () => {
       (note) =>
         note.title.toLowerCase().includes(queryLower) ||
         note.content.toLowerCase().includes(queryLower) ||
-        note.tags.some((t) => t.toLowerCase().includes(queryLower))
+        note.tags.some((t) => t.toLowerCase().includes(queryLower)),
     );
 
     // Update notes list
@@ -324,7 +337,7 @@ export const attachEvents = () => {
               ${new Date(n.lastEdited).toLocaleDateString()}
             </small>
           </div>
-        `
+        `,
         )
         .join("");
 
@@ -430,13 +443,13 @@ export const attachEvents = () => {
     document.querySelectorAll('input[name="color-theme"]').forEach((radio) => {
       radio.addEventListener("change", () => {
         const selectedOption = document.querySelector(
-          'input[name="color-theme"]:checked'
+          'input[name="color-theme"]:checked',
         );
         if (selectedOption) {
           document
             .querySelectorAll(".settings-view__option")
             .forEach((opt) =>
-              opt.classList.remove("settings-view__option--selected")
+              opt.classList.remove("settings-view__option--selected"),
             );
           selectedOption
             .closest(".settings-view__option")
@@ -449,13 +462,13 @@ export const attachEvents = () => {
     document.querySelectorAll('input[name="font-theme"]').forEach((radio) => {
       radio.addEventListener("change", () => {
         const selectedOption = document.querySelector(
-          'input[name="font-theme"]:checked'
+          'input[name="font-theme"]:checked',
         );
         if (selectedOption) {
           document
             .querySelectorAll(".settings-view__option")
             .forEach((opt) =>
-              opt.classList.remove("settings-view__option--selected")
+              opt.classList.remove("settings-view__option--selected"),
             );
           selectedOption
             .closest(".settings-view__option")
@@ -469,7 +482,7 @@ export const attachEvents = () => {
       .getElementById("apply-color-theme")
       ?.addEventListener("click", () => {
         const selectedTheme = document.querySelector(
-          'input[name="color-theme"]:checked'
+          'input[name="color-theme"]:checked',
         )?.value;
         if (selectedTheme) {
           store.settings.colorTheme = selectedTheme;
@@ -494,7 +507,7 @@ export const attachEvents = () => {
       .getElementById("apply-font-theme")
       ?.addEventListener("click", () => {
         const selectedFont = document.querySelector(
-          'input[name="font-theme"]:checked'
+          'input[name="font-theme"]:checked',
         )?.value;
         if (selectedFont) {
           store.settings.fontTheme = selectedFont;
@@ -520,5 +533,35 @@ export const attachEvents = () => {
       store.currentPage = "notes";
       render();
     }
+  });
+
+  // Categories – create/select
+  document.querySelectorAll(".sidebar .category span").forEach((span) => {
+    span.addEventListener("click", () => {
+      const cat = span.dataset.category;
+      store.categoryFilter = cat || null;
+      // clear tag filter when a category is chosen
+      store.tagFilter = null;
+      store.activeNoteId = null;
+      store.showSidebarOnTablet = false;
+      render();
+    });
+  });
+
+  // Create a new category (simple prompt for now)
+  document.getElementById("add-category-btn")?.addEventListener("click", () => {
+    const name = (window.prompt("New category name") || "").trim();
+    if (!name) return;
+    const exists = (store.categories || []).some(
+      (c) => c.toLowerCase() === name.toLowerCase(),
+    );
+    if (exists) {
+      showToast("Category already exists.");
+      return;
+    }
+    store.categories = [...(store.categories || []), name];
+    saveCategories();
+    showToast(`Category "${name}" created.`);
+    render();
   });
 };
