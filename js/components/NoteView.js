@@ -98,7 +98,28 @@ export const NoteView = (note) => {
           Last edited <span>${new Date(note.lastEdited).toLocaleString()}</span>
         </small>
 
-        <textarea id="note-content">${note.content}</textarea>
+        
+          <!-- Rich text toolbar -->
+          <div class="rt-toolbar" role="toolbar" aria-label="Note formatting">
+            <div class="rt-group">
+              <button id="rt-bold" class="rt-btn" type="button" aria-label="Bold"><strong>B</strong></button>
+              <button id="rt-italic" class="rt-btn" type="button" aria-label="Italic"><em>I</em></button>
+              <button id="rt-underline" class="rt-btn" type="button" aria-label="Underline"><u>U</u></button>
+            </div>
+            <div class="rt-sep"></div>
+            <div class="rt-group">
+              <button id="rt-ul" class="rt-btn" type="button" aria-label="Bulleted list">• List</button>
+              <button id="rt-ol" class="rt-btn" type="button" aria-label="Numbered list">1. List</button>
+          </div>
+        </div>
+        <!-- Contenteditable editor -->
+        <div id="note-editor"
+              class="note-editor"
+              contenteditable="true"
+              aria-label="Note content (rich text)">
+          ${note.content || "<p><br></p>"}
+        </div>
+
       </section>
       ${
         !isMobileOrTablet

@@ -200,6 +200,53 @@
     transition: filter 0.3s ease;
   }
 
+  /* Rich text toolbar */
+  .rt-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: $radius-md;
+    margin: 0.25rem 0 0.5rem;
+  }
+  .rt-group {
+    display: flex;
+    gap: 0.25rem;
+  }
+  .rt-sep {
+    height: 18px;
+    width: 1px;
+    background: var(--color-border);
+    margin: 0 0.25rem;
+  }
+  .rt-btn {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-foreground);
+    border-radius: $radius-sm;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    &:hover {
+      background: var(--color-hover);
+    }
+  }
+
+  /* Editor area */
+  .note-editor {
+    min-height: 55vh;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: $radius-md;
+    line-height: 1.6;
+    background: transparent;
+    color: var(--color-foreground);
+    overflow-y: auto;
+  }
+
   textarea {
     resize: none;
     height: 90%;

@@ -8,6 +8,9 @@ import { showModal, showInputModal } from "./components/Modal.js";
 import { showToast } from "./components/Toast.js";
 import { render } from "./render.js";
 import { applyColorTheme, applyFontTheme } from "./themes.js";
+import { setupRichTextEditor, getEditorHtml } from "./features/richtext.js";
+import { stripHtml } from "./utils/text.js";
+
 import {
   exportNotesToJSON,
   openImportFilePicker,
@@ -54,6 +57,11 @@ export const attachEvents = () => {
       render();
     };
   });
+
+  // Initialize rich text editor (if the editor is present on this render)
+  if (document.getElementById("note-editor")) {
+    setupRichTextEditor();
+  }
 
   // Note view back button for mobile/tablet viww
   document.getElementById("note-view-back")?.addEventListener("click", () => {
@@ -140,7 +148,7 @@ export const attachEvents = () => {
       if (!note) return;
 
       const title = document.getElementById("note-title")?.value || "";
-      const content = document.getElementById("note-content")?.value || "";
+      const content = getEditorHtml || "";
       const tagsInput = document.getElementById("note-tags")?.value || "";
       const categorySel = document.getElementById("note-category");
       const categoryVal = categorySel ? categorySel.value || null : null;
@@ -201,7 +209,7 @@ export const attachEvents = () => {
 
     // Getting current values from inputs
     const title = document.getElementById("note-title")?.value || "";
-    const content = document.getElementById("note-content")?.value || "";
+    const content = getEditorHtml() || "";
     const tagsInput = document.getElementById("note-tags")?.value || "";
     const categorySel = document.getElementById("note-category");
     const categoryVal = categorySel ? categorySel.value || null : null;
@@ -314,12 +322,14 @@ export const attachEvents = () => {
         ? store.notes.filter((n) => n.isArchived)
         : store.notes.filter((n) => !n.isArchived);
 
-    const filtered = source.filter(
-      (note) =>
+    const filtered = source.filter((note) => {
+      const body = stripHtml(note.content || "").toLowerCase();
+      return (
         note.title.toLowerCase().includes(queryLower) ||
-        note.content.toLowerCase().includes(queryLower) ||
-        note.tags.some((t) => t.toLowerCase().includes(queryLower)),
-    );
+        body.includes(queryLower) ||
+        note.tags.some((t) => t.toLowerCase().includes(queryLower))
+      );
+    });
 
     // Update notes list
     const notesList = document.querySelector(".notes-list");
