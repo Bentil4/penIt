@@ -9,7 +9,9 @@ body {
   font-family: "Inter", sans-serif;
   background-color: var(--color-background);
   color: var(--color-foreground);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 // Apply font themes based on data-font attribute
@@ -99,7 +101,6 @@ main {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  width: 30%;
 }
 
 .section-settings img {
@@ -128,7 +129,7 @@ img[src*="icon-"]:not(.logo):not([class*="logo"]) {
 }
 
 // Search bar icons (excluding logos)
-.search-bar img:not(.logo):not([class*="logo"]) {
+.settings-icon img:not(.logo):not([class*="logo"]) {
   filter: brightness(0) saturate(100%) invert(var(--icon-invert, 0));
   transition: filter 0.3s ease;
 }
@@ -138,8 +139,14 @@ img[src*="icon-"]:not(.logo):not([class*="logo"]) {
   border: 1px solid var(--color-border);
   border-radius: 10px;
   width: 100%;
+  padding-left: 10px;
 }
 
+.search-bar .search-icon img {
+  // filter: none;
+  stroke: white;
+  color: white;
+}
 .section-settings label:hover {
   background-color: var(--color-hover);
 }

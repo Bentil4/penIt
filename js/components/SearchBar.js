@@ -9,21 +9,25 @@ export const SearchBar = (isMobile = false) => {
     </div>
     </section>
     `;
-  
   } else {
     return `
 <section class="search-bar">
 <p>All Note</p>
 <section class="section-settings">
+<button id="export-notes-top" class="btn btn--secondary" style="margin-left:.5rem;">Export</button>
+ <button id="import-notes-top" class="btn btn--secondary" style="margin-left:.25rem;">Import</button>
   <label for="search-input">
-    <img src="${searchImg}"/>
+    <img src="${searchImg}" class="search-icon"/>
     <input
       id="search-input"
       class="search-input"
       placeholder="Search by title, content, or tags..."
     />
   </label>
-  <img src="${settingsImg}"/>
+  <img src="${settingsImg}"class="settings-icon" />
+
+
+
 </section>
 </section>
     `;

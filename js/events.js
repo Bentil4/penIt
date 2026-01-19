@@ -3,7 +3,10 @@ import { showModal } from "./components/Modal.js";
 import { showToast } from "./components/Toast.js";
 import { render } from "./render.js";
 import { applyColorTheme, applyFontTheme } from "./themes.js";
-
+import {
+  exportNotesToJSON,
+  openImportFilePicker,
+} from "./features/exportImport.js";
 export const attachEvents = () => {
   // Create note handlers (both desktop button and mobile FAB)
   const createNoteHandler = () => {
@@ -71,13 +74,13 @@ export const attachEvents = () => {
           "Delete Note",
           () => {
             store.notes = store.notes.filter(
-              (n) => n.id !== store.activeNoteId
+              (n) => n.id !== store.activeNoteId,
             );
             store.activeNoteId = null;
             saveState();
             render();
             showToast("Note permanently deleted.");
-          }
+          },
         );
       }
     });
@@ -107,7 +110,7 @@ export const attachEvents = () => {
                 store.view = "ARCHIVED";
                 render();
               });
-            }
+            },
           );
         }
       }
@@ -251,7 +254,7 @@ export const attachEvents = () => {
         saveState();
         render();
         showToast("Note permanently deleted.");
-      }
+      },
     );
   });
 
@@ -273,7 +276,7 @@ export const attachEvents = () => {
           store.view = "ARCHIVED";
           render();
         });
-      }
+      },
     );
   });
 
@@ -302,7 +305,7 @@ export const attachEvents = () => {
       (note) =>
         note.title.toLowerCase().includes(queryLower) ||
         note.content.toLowerCase().includes(queryLower) ||
-        note.tags.some((t) => t.toLowerCase().includes(queryLower))
+        note.tags.some((t) => t.toLowerCase().includes(queryLower)),
     );
 
     // Update notes list
@@ -324,7 +327,7 @@ export const attachEvents = () => {
               ${new Date(n.lastEdited).toLocaleDateString()}
             </small>
           </div>
-        `
+        `,
         )
         .join("");
 
@@ -430,13 +433,13 @@ export const attachEvents = () => {
     document.querySelectorAll('input[name="color-theme"]').forEach((radio) => {
       radio.addEventListener("change", () => {
         const selectedOption = document.querySelector(
-          'input[name="color-theme"]:checked'
+          'input[name="color-theme"]:checked',
         );
         if (selectedOption) {
           document
             .querySelectorAll(".settings-view__option")
             .forEach((opt) =>
-              opt.classList.remove("settings-view__option--selected")
+              opt.classList.remove("settings-view__option--selected"),
             );
           selectedOption
             .closest(".settings-view__option")
@@ -449,13 +452,13 @@ export const attachEvents = () => {
     document.querySelectorAll('input[name="font-theme"]').forEach((radio) => {
       radio.addEventListener("change", () => {
         const selectedOption = document.querySelector(
-          'input[name="font-theme"]:checked'
+          'input[name="font-theme"]:checked',
         );
         if (selectedOption) {
           document
             .querySelectorAll(".settings-view__option")
             .forEach((opt) =>
-              opt.classList.remove("settings-view__option--selected")
+              opt.classList.remove("settings-view__option--selected"),
             );
           selectedOption
             .closest(".settings-view__option")
@@ -469,7 +472,7 @@ export const attachEvents = () => {
       .getElementById("apply-color-theme")
       ?.addEventListener("click", () => {
         const selectedTheme = document.querySelector(
-          'input[name="color-theme"]:checked'
+          'input[name="color-theme"]:checked',
         )?.value;
         if (selectedTheme) {
           store.settings.colorTheme = selectedTheme;
@@ -494,7 +497,7 @@ export const attachEvents = () => {
       .getElementById("apply-font-theme")
       ?.addEventListener("click", () => {
         const selectedFont = document.querySelector(
-          'input[name="font-theme"]:checked'
+          'input[name="font-theme"]:checked',
         )?.value;
         if (selectedFont) {
           store.settings.fontTheme = selectedFont;
@@ -520,5 +523,22 @@ export const attachEvents = () => {
       store.currentPage = "notes";
       render();
     }
+  });
+
+  // Export / Import – Feature 1
+  // Desktop right sidebar buttons
+  document.getElementById("export-notes")?.addEventListener("click", () => {
+    exportNotesToJSON();
+  });
+  document.getElementById("import-notes")?.addEventListener("click", () => {
+    openImportFilePicker();
+  });
+
+  // SearchBar quick actions (desktop)
+  document.getElementById("export-notes-top")?.addEventListener("click", () => {
+    exportNotesToJSON();
+  });
+  document.getElementById("import-notes-top")?.addEventListener("click", () => {
+    openImportFilePicker();
   });
 };
