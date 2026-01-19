@@ -12,6 +12,11 @@ if (document.readyState === "loading") {
   initializeTheme();
 }
 
+// Re-render on hash route changes (for share links)
+window.addEventListener("hashchange", () => {
+  render();
+});
+
 // Global event delegation for settings buttons
 document.addEventListener("click", (e) => {
   // Settings button in search bar
