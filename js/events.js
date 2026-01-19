@@ -521,4 +521,37 @@ export const attachEvents = () => {
       render();
     }
   });
+
+  // Sharing – copy link + route
+  const shareCurrentNote = async () => {
+    const note = store.notes.find((n) => n.id === store.activeNoteId);
+    if (!note) return;
+    if (!note.shareId) {
+      note.shareId = crypto.randomUUID();
+      saveState();
+    }
+    const url = `${location.origin}${location.pathname}#/share/${note.shareId}`;
+    const ok = await copyToClipboard(url);
+    showToast(
+      ok ? "Share link copied to clipboard." : "Share link ready.",
+      true,
+      "Open",
+      () => {
+        window.location.hash = `#/share/${note.shareId}`;
+      },
+    );
+  };
+  document.getElementById("share-note")?.addEventListener("click", () => {
+    shareCurrentNote();
+  });
+  document
+    .getElementById("share-note-header")
+    ?.addEventListener("click", () => {
+      shareCurrentNote();
+    });
+  // Back from share view
+  document.getElementById("share-back")?.addEventListener("click", () => {
+    window.location.hash = "";
+    render();
+  });
 };
