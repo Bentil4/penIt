@@ -45,6 +45,11 @@ export const NoteView = (note) => {
               `
                   : ""
               }
+
+              <button class="note-view__action-icon" id="share-note-header" aria-label="Share note">
+                <img src="../assets/images/icon-share.svg alt="Share" />
+              </button>
+
               <button class="note-view__action-text" id="cancel-note-header">Cancel</button>
               <button class="note-view__action-text note-view__action-text--primary" id="save-note-header">Save Note</button></div>
             </div>
@@ -119,6 +124,13 @@ export const NoteActionsSidebar = (note) => {
           id: "delete-note",
           variant: "secondary",
         })}
+
+        ${Button({
+          label: `<img src=".././assets/images/icon-share.svg" alt="Share" /> <p>Share Link</p>`,
+          id: "share-note",
+          variant: "secondary",
+        })}
+
       </div>
     </section>
   `;
