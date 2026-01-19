@@ -8,6 +8,7 @@ import { Settings } from "./components/Settings.js";
 import { store } from "./state/store.js";
 import { isDarkMode, updateLogo } from "./themes.js";
 import { attachEvents } from "./events.js";
+import { ShareView } from "./components/ShareView.js";
 import { stripHtml } from "./utils/text.js";
 
 const app = document.getElementById("app");
@@ -42,6 +43,21 @@ const getVisibleNotes = () => {
 };
 
 export const render = () => {
+  // Share route: #/share/:id -> read-only note view 
+  const hash = window.location.hash || "";
+  if (hash.startsWith("#/share/")) {
+    const id = hash.replace("#/share/", "").trim();
+    const note = (store.notes || []).find((n) => n.shareId === id);
+    app.innerHTML = `${ShareView(note)}`;
+    app.className = "";
+    attachEvents();
+
+    const currentTheme = store.settings.colorTheme || "system";
+    const darkMode = isDarkMode(currentTheme);
+    updateLogo(darkMode);
+    return;
+  }
+
   // Render settings page
   if (store.currentPage === "settings") {
     const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
@@ -88,10 +104,9 @@ export const render = () => {
       const body = stripHtml(n.content || "").toLowerCase();
       return (
         n.title.toLowerCase().includes(q) ||
-        body.includes(q) ||
-        n.tags.some((t) => t.toLowerCase().includes(q))
-      );
-    });
+        n.content.toLowerCase().includes(q) ||
+        n.tags.some((t) => t.toLowerCase().includes(q)),
+    );
   };
 
   // show SearchView if search bar is active on mobile/tablet,
