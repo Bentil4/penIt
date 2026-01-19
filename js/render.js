@@ -29,6 +29,11 @@ const getVisibleNotes = () => {
     notes = notes.filter((n) => n.tags.includes(store.tagFilter));
   }
 
+  // Filter by category
+  if (store.categoryFilter) {
+    notes = notes.filter((n) => n.category === store.categoryFilter);
+  }
+
   // Sort by last edited
   notes.sort(
     (first, last) => new Date(last.lastEdited) - new Date(first.lastEdited),
@@ -57,8 +62,9 @@ export const render = () => {
   if (store.currentPage === "settings") {
     const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
     const isTagsActive = store.showSidebarOnTablet || store.tagFilter !== null;
+    const allCategories = store.categories || [];
     app.innerHTML = `
-      ${Sidebar(allTags, store.view)}
+      ${Sidebar(allTags, store.view, allCategories, store.categoryFilter)}
       <main>
         ${SearchBar()}
         <div class="layout">
@@ -83,6 +89,7 @@ export const render = () => {
   const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
   const isMobileOrTablet = window.innerWidth < 1024;
   const isTagsActive = store.showSidebarOnTablet || store.tagFilter !== null;
+  const allCategories = store.categories || [];
 
   // Get filtered notes for search
   const getFilteredNotes = () => {
@@ -93,8 +100,9 @@ export const render = () => {
         ? store.notes.filter((n) => n.isArchived)
         : store.notes.filter((n) => !n.isArchived);
 
-    return source.filter(
-      (n) =>
+    return source.filter((n) => {
+      const body = stripHtml(n.content || "").toLowerCase();
+      return (
         n.title.toLowerCase().includes(q) ||
         n.content.toLowerCase().includes(q) ||
         n.tags.some((t) => t.toLowerCase().includes(q)),
@@ -116,7 +124,7 @@ export const render = () => {
   }
 
   app.innerHTML = `
-    ${Sidebar(allTags, store.view)}
+    ${Sidebar(allTags, store.view, allCategories, store.categoryFilter)}
     <main>
       ${!isMobileOrTablet ? SearchBar() : ""}
       <section class="layout">

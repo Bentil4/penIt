@@ -1,5 +1,5 @@
 import { Button } from "./Button.js";
-
+import { store } from "../state/store.js";
 export const NoteView = (note) => {
   if (!note) {
     return `<section class="note-view empty">Select a note</section>`;
@@ -35,6 +35,9 @@ export const NoteView = (note) => {
             <div class="note-view__action-buttons">
               <button class="note-view__action-icon" id="delete-note-header" aria-label="Delete note">
                 <img src="../assets/images/icon-delete.svg" alt="Delete" />
+              </button>
+              <button class="note-view__action-icon" id="delete-note-header" aria-label="Import note">
+                <img src="../assets/images/icon-upload.svg" alt="Upload" />
               </button>
               ${
                 !note.isArchived
@@ -73,12 +76,55 @@ export const NoteView = (note) => {
             placeholder="Add tags separated by commas (e.g. Work, Planning)"
           />
         </span>
+
+
+<span class="note-category">
+     <span class="label-with-icon">
+       <img src=".././assets/images/icon-tag.svg" alt="Category" />
+       <label for="note-category">Category</label>
+     </span>
+     ${(() => {
+       const list = Array.isArray(store.categories)
+         ? [...store.categories]
+         : [];
+       if (note.category && !list.includes(note.category)) {
+         list.unshift(note.category);
+       }
+       const options = ['<option value="">Uncategorized</option>']
+         .concat(list.map((c) => `<option value="${c}">${c}</option>`))
+         .join("");
+       return `<select id="note-category">${options}</select>`;
+     })()}
+    </span>
+
+
         <small>
           <img src=".././assets/images/icon-clock.svg" alt="Last edited" />
           Last edited <span>${new Date(note.lastEdited).toLocaleString()}</span>
         </small>
 
-        <textarea id="note-content">${note.content}</textarea>
+        
+          <!-- Rich text toolbar -->
+          <div class="rt-toolbar" role="toolbar" aria-label="Note formatting">
+            <div class="rt-group">
+              <button id="rt-bold" class="rt-btn" type="button" aria-label="Bold"><strong>B</strong></button>
+              <button id="rt-italic" class="rt-btn" type="button" aria-label="Italic"><em>I</em></button>
+              <button id="rt-underline" class="rt-btn" type="button" aria-label="Underline"><u>U</u></button>
+            </div>
+            <div class="rt-sep"></div>
+            <div class="rt-group">
+              <button id="rt-ul" class="rt-btn" type="button" aria-label="Bulleted list">• List</button>
+              <button id="rt-ol" class="rt-btn" type="button" aria-label="Numbered list">1. List</button>
+          </div>
+        </div>
+        <!-- Contenteditable editor -->
+        <div id="note-editor"
+              class="note-editor"
+              contenteditable="true"
+              aria-label="Note content (rich text)">
+          ${note.content || "<p><br></p>"}
+        </div>
+
       </section>
       ${
         !isMobileOrTablet
@@ -128,6 +174,10 @@ export const NoteActionsSidebar = (note) => {
         ${Button({
           label: `<img src=".././assets/images/icon-share.svg" alt="Share" /> <p>Share Link</p>`,
           id: "share-note",
+        
+        ${Button({
+          label: `<img src=".././assets/images/icon-upload.svg" alt="Import" /><p>Import from JSON</p>`,
+          id: "import-notes",
           variant: "secondary",
         })}
 

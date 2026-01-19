@@ -13,6 +13,7 @@ export const NoteCard = (note, isActive) => {
   <h4>${note.title || "Untitled Note"}</h4>
 
   <div class="tags">
+  
     ${note.tags.map((tag) => `<span>${tag}</span>`).join("")}
   </div>
 

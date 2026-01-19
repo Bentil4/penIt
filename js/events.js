@@ -1,9 +1,21 @@
-import { store, saveState, saveSettings } from "./state/store.js";
-import { showModal } from "./components/Modal.js";
+import {
+  store,
+  saveState,
+  saveSettings,
+  saveCategories,
+} from "./state/store.js";
+import { showModal, showInputModal } from "./components/Modal.js";
 import { showToast } from "./components/Toast.js";
 import { render } from "./render.js";
 import { applyColorTheme, applyFontTheme } from "./themes.js";
 import { copyToClipboard } from "./utils/clipboard.js";
+import { setupRichTextEditor, getEditorHtml } from "./features/richtext.js";
+import { stripHtml } from "./utils/text.js";
+
+import {
+  exportNotesToJSON,
+  openImportFilePicker,
+} from "./features/exportImport.js";
 export const attachEvents = () => {
   // Create note handlers (both desktop button and mobile FAB)
   const createNoteHandler = () => {
@@ -46,6 +58,11 @@ export const attachEvents = () => {
       render();
     };
   });
+
+  // Initialize rich text editor (if the editor is present on this render)
+  if (document.getElementById("note-editor")) {
+    setupRichTextEditor();
+  }
 
   // Note view back button for mobile/tablet viww
   document.getElementById("note-view-back")?.addEventListener("click", () => {
@@ -132,8 +149,10 @@ export const attachEvents = () => {
       if (!note) return;
 
       const title = document.getElementById("note-title")?.value || "";
-      const content = document.getElementById("note-content")?.value || "";
+      const content = getEditorHtml || "";
       const tagsInput = document.getElementById("note-tags")?.value || "";
+      const categorySel = document.getElementById("note-category");
+      const categoryVal = categorySel ? categorySel.value || null : null;
 
       note.title = title;
       note.content = content;
@@ -143,7 +162,7 @@ export const attachEvents = () => {
         .filter(Boolean);
 
       note.lastEdited = new Date().toISOString();
-
+      note.category = categoryVal;
       saveState();
       render();
       showToast("Note saved successfully!");
@@ -175,6 +194,10 @@ export const attachEvents = () => {
       store.tagFilter = span.dataset.tag;
       store.activeNoteId = null;
       store.showSidebarOnTablet = false;
+
+      // clear category filter when a tag is chosen
+      store.categoryFilter = null;
+
       render();
     });
   });
@@ -187,8 +210,10 @@ export const attachEvents = () => {
 
     // Getting current values from inputs
     const title = document.getElementById("note-title")?.value || "";
-    const content = document.getElementById("note-content")?.value || "";
+    const content = getEditorHtml() || "";
     const tagsInput = document.getElementById("note-tags")?.value || "";
+    const categorySel = document.getElementById("note-category");
+    const categoryVal = categorySel ? categorySel.value || null : null;
 
     // Updating note
     note.title = title;
@@ -199,7 +224,7 @@ export const attachEvents = () => {
       .filter(Boolean);
 
     note.lastEdited = new Date().toISOString();
-
+    note.category = categoryVal;
     saveState();
     render();
     showToast("Note saved successfully!");
@@ -298,8 +323,9 @@ export const attachEvents = () => {
         ? store.notes.filter((n) => n.isArchived)
         : store.notes.filter((n) => !n.isArchived);
 
-    const filtered = source.filter(
-      (note) =>
+    const filtered = source.filter((note) => {
+      const body = stripHtml(note.content || "").toLowerCase();
+      return (
         note.title.toLowerCase().includes(queryLower) ||
         note.content.toLowerCase().includes(queryLower) ||
         note.tags.some((t) => t.toLowerCase().includes(queryLower)),
@@ -553,5 +579,60 @@ export const attachEvents = () => {
   document.getElementById("share-back")?.addEventListener("click", () => {
     window.location.hash = "";
     render();
+  // Categories – create/select
+  document.querySelectorAll(".sidebar .category span").forEach((span) => {
+    span.addEventListener("click", () => {
+      const cat = span.dataset.category;
+      store.categoryFilter = cat || null;
+      // clear tag filter when a category is chosen
+      store.tagFilter = null;
+      store.activeNoteId = null;
+      store.showSidebarOnTablet = false;
+      render();
+    });
+  });
+
+  // Create a new category (simple prompt for now)
+  document.getElementById("add-category-btn")?.addEventListener("click", () => {
+    showInputModal({
+      title: "New Category",
+      label: "Category name",
+      placeholder: "e.g., Work",
+      icon: "../assets/images/icon-tag.svg",
+      confirmText: "Create",
+      cancelText: "Cancel",
+
+      onConfirm: (value) => {
+        const name = value.trim();
+        if (!name) return;
+        const exists = (store.categories || []).some(
+          (c) => c.toLowerCase() === name.toLowerCase(),
+        );
+        if (exists) {
+          showToast("Category already exists.");
+          return;
+        }
+
+        store.categories = [...(store.categories || []), name];
+        saveCategories();
+        showToast(`Category "${name}" created.`);
+        render();
+      },
+    });
+  // Export / Import – Feature 1
+  // Desktop right sidebar buttons
+  document.getElementById("export-notes")?.addEventListener("click", () => {
+    exportNotesToJSON();
+  });
+  document.getElementById("import-notes")?.addEventListener("click", () => {
+    openImportFilePicker();
+  });
+
+  // SearchBar quick actions (desktop)
+  document.getElementById("export-notes-top")?.addEventListener("click", () => {
+    exportNotesToJSON();
+  });
+  document.getElementById("import-notes-top")?.addEventListener("click", () => {
+    openImportFilePicker();
   });
 };
