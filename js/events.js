@@ -4,7 +4,7 @@ import {
   saveSettings,
   saveCategories,
 } from "./state/store.js";
-import { showModal } from "./components/Modal.js";
+import { showModal, showInputModal } from "./components/Modal.js";
 import { showToast } from "./components/Toast.js";
 import { render } from "./render.js";
 import { applyColorTheme, applyFontTheme } from "./themes.js";
@@ -550,18 +550,30 @@ export const attachEvents = () => {
 
   // Create a new category (simple prompt for now)
   document.getElementById("add-category-btn")?.addEventListener("click", () => {
-    const name = (window.prompt("New category name") || "").trim();
-    if (!name) return;
-    const exists = (store.categories || []).some(
-      (c) => c.toLowerCase() === name.toLowerCase(),
-    );
-    if (exists) {
-      showToast("Category already exists.");
-      return;
-    }
-    store.categories = [...(store.categories || []), name];
-    saveCategories();
-    showToast(`Category "${name}" created.`);
-    render();
+    showInputModal({
+      title: "New Category",
+      label: "Category name",
+      placeholder: "e.g., Work",
+      icon: "../assets/images/icon-tag.svg",
+      confirmText: "Create",
+      cancelText: "Cancel",
+
+      onConfirm: (value) => {
+        const name = value.trim();
+        if (!name) return;
+        const exists = (store.categories || []).some(
+          (c) => c.toLowerCase() === name.toLowerCase(),
+        );
+        if (exists) {
+          showToast("Category already exists.");
+          return;
+        }
+
+        store.categories = [...(store.categories || []), name];
+        saveCategories();
+        showToast(`Category "${name}" created.`);
+        render();
+      },
+    });
   });
 };
