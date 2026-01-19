@@ -8,7 +8,6 @@ import { Settings } from "./components/Settings.js";
 import { store } from "./state/store.js";
 import { isDarkMode, updateLogo } from "./themes.js";
 import { attachEvents } from "./events.js";
-import { Sidebar } from "./components/Siderbar.js";
 
 const app = document.getElementById("app");
 
@@ -48,7 +47,6 @@ export const render = () => {
     const isTagsActive = store.showSidebarOnTablet || store.tagFilter !== null;
     const allCategories = store.categories || [];
     app.innerHTML = `
-      ${Sidebar(allTags, store.view)}
       ${Sidebar(allTags, store.view, allCategories, store.categoryFilter)}
       <main>
         ${SearchBar()}
@@ -75,6 +73,7 @@ export const render = () => {
   const isMobileOrTablet = window.innerWidth < 1024;
   const isTagsActive = store.showSidebarOnTablet || store.tagFilter !== null;
   const allCategories = store.categories || [];
+
   // Get filtered notes for search
   const getFilteredNotes = () => {
     if (!store.searchQuery) return [];
@@ -107,7 +106,6 @@ export const render = () => {
   }
 
   app.innerHTML = `
-    ${Sidebar(allTags, store.view)}
     ${Sidebar(allTags, store.view, allCategories, store.categoryFilter)}
     <main>
       ${!isMobileOrTablet ? SearchBar() : ""}
