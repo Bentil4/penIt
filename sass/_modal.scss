@@ -20,6 +20,43 @@
   }
 }
 
+/* --- Input field styles for input-modal --- */
+.modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem 0 0.5rem;
+}
+.modal__label {
+  font-size: 0.9rem;
+  color: var(--color-foreground);
+  opacity: 0.85;
+}
+.modal__input {
+  padding: 0.7rem 0.85rem;
+  border-radius: $radius-md;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-foreground);
+  font-size: 0.95rem;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  &:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(51, 92, 255, 0.15);
+  }
+  &::placeholder {
+    color: var(--color-foreground);
+    opacity: 0.5;
+  }
+}
+.modal__input--error {
+  border-color: $color-red-500;
+  box-shadow: 0 0 0 3px rgba(251, 55, 72, 0.15);
+}
+
 .modal {
   background-color: var(--color-surface);
   border-radius: $radius-lg;
