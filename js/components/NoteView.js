@@ -36,7 +36,7 @@ export const NoteView = (note) => {
               <button class="note-view__action-icon" id="delete-note-header" aria-label="Delete note">
                 <img src="../assets/images/icon-delete.svg" alt="Delete" />
               </button>
-              <button class="note-view__action-icon" id="delete-note-header" aria-label="Import note">
+              <button class="note-view__action-icon" id="import-note-header" aria-label="Import note">
                 <img src="../assets/images/icon-upload.svg" alt="Upload" />
               </button>
               ${
@@ -50,7 +50,7 @@ export const NoteView = (note) => {
               }
 
               <button class="note-view__action-icon" id="share-note-header" aria-label="Share note">
-                <img src="../assets/images/icon-share.svg alt="Share" />
+                <img src="../assets/images/icon-share.svg" alt="Share" />
               </button>
 
               <button class="note-view__action-text" id="cancel-note-header">Cancel</button>
@@ -67,7 +67,7 @@ export const NoteView = (note) => {
 
         <span class="note-tags">
           <span class="label-with-icon">
-            <img src=".././assets/images/icon-tag.svg" alt="Tags" /> 
+            <img src="../assets/images/icon-tag.svg" alt="Tags" /> 
             <label for="note-tags">Tags</label>
           </span>
           <input
@@ -80,7 +80,7 @@ export const NoteView = (note) => {
 
 <span class="note-category">
      <span class="label-with-icon">
-       <img src=".././assets/images/icon-tag.svg" alt="Category" />
+       <img src="../assets/images/icon-tag.svg" alt="Category" />
        <label for="note-category">Category</label>
      </span>
      ${(() => {
@@ -99,7 +99,7 @@ export const NoteView = (note) => {
 
 
         <small>
-          <img src=".././assets/images/icon-clock.svg" alt="Last edited" />
+          <img src="../assets/images/icon-clock.svg" alt="Last edited" />
           Last edited <span>${new Date(note.lastEdited).toLocaleString()}</span>
         </small>
 
@@ -159,24 +159,24 @@ export const NoteActionsSidebar = (note) => {
         ${
           !note.isArchived
             ? Button({
-                label: `<img src=".././assets/images/icon-archive.svg" alt="Archive" /> <p>Archive Note</p>`,
+                label: `<img src="../assets/images/icon-archive.svg" alt="Archive" /> <p>Archive Note</p>`,
                 id: "archive-note",
                 variant: "secondary",
               })
             : ""
         }
         ${Button({
-          label: `<img src=".././assets/images/icon-delete.svg" alt="Delete" /> <p>Delete Note</p>`,
+          label: `<img src="../assets/images/icon-delete.svg" alt="Delete" /> <p>Delete Note</p>`,
           id: "delete-note",
           variant: "secondary",
         })}
 
         ${Button({
-          label: `<img src=".././assets/images/icon-share.svg" alt="Share" /> <p>Share Link</p>`,
+          label: `<img src="../assets/images/icon-share.svg" alt="Share" /> <p>Share Link</p>`,
           id: "share-note",
-        
+        })}
         ${Button({
-          label: `<img src=".././assets/images/icon-upload.svg" alt="Import" /><p>Import from JSON</p>`,
+          label: `<img src="../assets/images/icon-upload.svg" alt="Import" /><p>Import from JSON</p>`,
           id: "import-notes",
           variant: "secondary",
         })}

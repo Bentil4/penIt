@@ -43,7 +43,7 @@ const getVisibleNotes = () => {
 };
 
 export const render = () => {
-  // Share route: #/share/:id -> read-only note view 
+  // Share route: #/share/:id -> read-only note view
   const hash = window.location.hash || "";
   if (hash.startsWith("#/share/")) {
     const id = hash.replace("#/share/", "").trim();
@@ -57,7 +57,6 @@ export const render = () => {
     updateLogo(darkMode);
     return;
   }
-
   // Render settings page
   if (store.currentPage === "settings") {
     const allTags = [...new Set(store.notes.flatMap((note) => note.tags))];
@@ -104,9 +103,10 @@ export const render = () => {
       const body = stripHtml(n.content || "").toLowerCase();
       return (
         n.title.toLowerCase().includes(q) ||
-        n.content.toLowerCase().includes(q) ||
-        n.tags.some((t) => t.toLowerCase().includes(q)),
-    );
+        body.includes(q) ||
+        n.tags.some((t) => t.toLowerCase().includes(q))
+      );
+    });
   };
 
   // show SearchView if search bar is active on mobile/tablet,

@@ -1,0 +1,6 @@
+.DS_Store
+.vscode/
+.gitignogitgitre
+js/app_old.js
+js/change-pass.js
+# js/utils

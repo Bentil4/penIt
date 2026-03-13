@@ -327,9 +327,10 @@ export const attachEvents = () => {
       const body = stripHtml(note.content || "").toLowerCase();
       return (
         note.title.toLowerCase().includes(queryLower) ||
-        note.content.toLowerCase().includes(queryLower) ||
-        note.tags.some((t) => t.toLowerCase().includes(queryLower)),
-    );
+        body.includes(queryLower) ||
+        note.tags.some((t) => t.toLowerCase().includes(queryLower))
+      );
+    });
 
     // Update notes list
     const notesList = document.querySelector(".notes-list");
@@ -579,6 +580,7 @@ export const attachEvents = () => {
   document.getElementById("share-back")?.addEventListener("click", () => {
     window.location.hash = "";
     render();
+  });
   // Categories – create/select
   document.querySelectorAll(".sidebar .category span").forEach((span) => {
     span.addEventListener("click", () => {
@@ -619,6 +621,8 @@ export const attachEvents = () => {
         render();
       },
     });
+  });
+
   // Export / Import – Feature 1
   // Desktop right sidebar buttons
   document.getElementById("export-notes")?.addEventListener("click", () => {
